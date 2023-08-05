@@ -3,10 +3,12 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Navbar from "../src/components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Vehicles from "./pages/Vehicles";
+
 import TestimonialsPage from "./pages/TestimonialsPage";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
+import React from "react";
+import Vehicles from "./pages/Vehicles/Vehicles";
 
 function App() {
   return (
