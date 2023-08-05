@@ -1,4 +1,4 @@
-<div><img style="width:50%" src='https://raw.githubusercontent.com/prafaelmsantos/auto-moreira-app/main/public/images/auto.png'/></div>
+<div align="center"><img style="width:50%" src='https://raw.githubusercontent.com/prafaelmsantos/auto-moreira-app/main/public/images/auto.png'/></div>
 
 <h2>About the project</h2>
 
