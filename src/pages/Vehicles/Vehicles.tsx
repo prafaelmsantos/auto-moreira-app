@@ -12,19 +12,32 @@ import Footer from "../../components/Footer";
 import { getData } from "../../services/AutoMoreiraService";
 import { BASE_API_URL } from "../../config/variables";
 import { Vehicle } from "../../models/Vehicle";
+import AutoMoreiraLoader from "../../components/AutoMoreiraLoader";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { AiFillCar, AiFillStar, AiFillTool } from "react-icons/ai";
+import { GiCarDoor } from "react-icons/gi";
+import { BsFillFuelPumpFill } from "react-icons/bs";
 
 function Vehicles() {
   const [isLoading, setIsLoading] = useState(false);
-
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
-  const fetchVehicles = useCallback(() => {
+  useEffect(() => {
     setIsLoading(true);
     const endpoint = `${BASE_API_URL}${"api/veiculos"}`;
     getData<Vehicle[]>(`${endpoint}`)
       .then((data) => {
         setVehicles(data);
-
         setIsLoading(false);
       })
       .catch((e) => {
@@ -33,15 +46,206 @@ function Vehicles() {
       });
   }, []);
 
-  useEffect(() => {
-    fetchVehicles();
-  }, []);
-
-  console.log(vehicles);
   return (
     <>
+      <AutoMoreiraLoader open={isLoading} />
+
       <section className="models-section">
         <HeroPages id={LinkType.VEHICLES} />
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ mt: 5 }}
+        >
+          <Grid item>
+            <Typography variant="h4">
+              {vehicles.length !== 0
+                ? vehicles.length === 1
+                  ? vehicles.length + " veiculo encontrado!"
+                  : vehicles.length + " veiculos encontrados!"
+                : "Nenhum veiculo encontrado!"}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" spacing={2} sx={{ p: 15 }}>
+          <Grid item xs={6}>
+            {vehicles.map((vehicle) => (
+              <>
+                <Card sx={{ maxWidth: 345, py: 2 }}>
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    height="250"
+                    image={CarImg1}
+                  />
+                  <CardContent>
+                    <Grid container sx={{ px: 1 }}>
+                      <Grid
+                        container
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        spacing={2}
+                      >
+                        <Grid item>
+                          <Typography fontWeight={"bold"} fontSize={25}>
+                            {vehicle.marca.marcaNome +
+                              " " +
+                              vehicle.modelo.modeloNome}
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography fontWeight={"bold"} fontSize={25}>
+                            {"€ " + vehicle.preco}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid container sx={{ mt: 0.5 }}>
+                        <Grid item>
+                          <AiFillStar color={"#fbc02d"} size={18} />
+                          <AiFillStar color={"#fbc02d"} size={18} />
+                          <AiFillStar color={"#fbc02d"} size={18} />
+                          <AiFillStar color={"#fbc02d"} size={18} />
+                          <AiFillStar color={"#fbc02d"} size={18} />
+                        </Grid>
+                      </Grid>
+                      <Grid container sx={{ px: 1 }}>
+                        <Grid
+                          container
+                          direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          spacing={2}
+                          sx={{ mt: 0.3 }}
+                        >
+                          <Grid item>
+                            <Grid
+                              container
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                            >
+                              <Grid item>
+                                <Typography fontSize={20} sx={{ mt: 0.4 }}>
+                                  <AiFillCar />
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography fontSize={18}>
+                                  {vehicle.marca.marcaNome}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          <Grid item>
+                            <Grid
+                              container
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                            >
+                              <Grid item>
+                                <Typography fontSize={18}>
+                                  {vehicle.numeroPortas}
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography fontSize={20} sx={{ mt: 0.4 }}>
+                                  <GiCarDoor />
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid
+                          container
+                          direction="row"
+                          justifyContent="space-between"
+                          alignItems="center"
+                          spacing={2}
+                        >
+                          <Grid item>
+                            <Grid
+                              container
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                            >
+                              <Grid item>
+                                <Typography fontSize={20} sx={{ mt: 0.4 }}>
+                                  <AiFillTool />
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography fontSize={18}>
+                                  {vehicle.transmissao}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          <Grid item>
+                            <Grid
+                              container
+                              direction="row"
+                              alignItems="center"
+                              spacing={1}
+                            >
+                              <Grid item>
+                                <Typography fontSize={18}>
+                                  {vehicle.combustivel}
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography fontSize={20} sx={{ mt: 0.4 }}>
+                                  <BsFillFuelPumpFill />
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+
+                  <Box sx={{ px: 4 }}>
+                    <Divider />
+                  </Box>
+
+                  <CardActions>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{ mt: 1.5, px: 3 }}
+                    >
+                      <Grid item xs={12}>
+                        <Button
+                          fullWidth
+                          sx={{ bgcolor: "#ff4d30", py: 2 }}
+                          onClick={() => window.scrollTo(0, 0)}
+                        >
+                          <Typography
+                            color={"white"}
+                            fontWeight={"bold"}
+                            fontSize={16}
+                          >
+                            Book Ride
+                          </Typography>
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </CardActions>
+                </Card>
+              </>
+            ))}
+          </Grid>
+        </Grid>
+
         <div className="container">
           <div className="models-div">
             <div className="models-div__box">

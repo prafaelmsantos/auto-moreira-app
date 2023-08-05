@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "../images/logo/logo.png";
 import { useState } from "react";
 import { navLink } from "../data/link";
+import React from "react";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
