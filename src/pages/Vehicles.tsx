@@ -1,17 +1,17 @@
-import HeroPages from "../../components/HeroPages";
-import CarImg1 from "../../images/cars-big/audi-box.png";
-import CarImg2 from "../../images/cars-big/golf6-box.png";
-import CarImg3 from "../../images/cars-big/toyota-box.png";
-import CarImg4 from "../../images/cars-big/bmw-box.png";
-import CarImg5 from "../../images/cars-big/benz-box.png";
-import CarImg6 from "../../images/cars-big/passat-box.png";
+import HeroPages from "../components/HeroPages";
+import CarImg1 from "../images/cars-big/audi-box.png";
+import CarImg2 from "../images/cars-big/golf6-box.png";
+import CarImg3 from "../images/cars-big/toyota-box.png";
+import CarImg4 from "../images/cars-big/bmw-box.png";
+import CarImg5 from "../images/cars-big/benz-box.png";
+import CarImg6 from "../images/cars-big/passat-box.png";
 import { Link } from "react-router-dom";
-import { LinkType } from "../../data/link";
-import Footer from "../../components/Footer";
-import { getData } from "../../services/AutoMoreiraService";
-import { BASE_API_URL } from "../../config/variables";
-import { Vehicle } from "../../models/Vehicle";
-import AutoMoreiraLoader from "../../components/AutoMoreiraLoader";
+import { LinkType } from "../data/link";
+import Footer from "../components/Footer";
+import { getData } from "../services/AutoMoreiraService";
+import { BASE_API_URL } from "../config/variables";
+import { Vehicle } from "../models/Vehicle";
+import AutoMoreiraLoader from "../components/AutoMoreiraLoader";
 import {
   Box,
   Button,
@@ -27,10 +27,24 @@ import { AiFillCar, AiFillStar, AiFillTool } from "react-icons/ai";
 import { GiCarDoor } from "react-icons/gi";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { useState, useEffect } from "react";
+import AlertModal from "../components/AlertModal";
+import { MessageType } from "../models/enums/MessageTypeEnum";
 
 function Vehicles() {
   const [isLoading, setIsLoading] = useState(false);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  const [stateModal, setStateModal] = useState({
+    openModal: false,
+    responseContent: "",
+    responseTitle: "",
+    type: MessageType.ERROR,
+  });
+  const { responseContent, responseTitle, openModal, type } = stateModal;
+
+  const handleOkModal = () => {
+    setStateModal({ ...stateModal, openModal: false });
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,14 +57,29 @@ function Vehicles() {
       .catch((e) => {
         console.error(e);
         setIsLoading(false);
+        setStateModal({
+          ...stateModal,
+          openModal: true,
+          responseTitle: "Erro!",
+          responseContent:
+            "Erro ao carregar os veículos. Por favor tente mais tarde...",
+        });
       });
   }, []);
 
   return (
     <>
-      <AutoMoreiraLoader open={isLoading} />
+      <Box>
+        <AlertModal
+          title={responseTitle}
+          message={responseContent}
+          isOpen={openModal}
+          onOk={handleOkModal}
+          onCancel={handleOkModal}
+          type={type}
+        />
+        <AutoMoreiraLoader open={isLoading} />
 
-      <section className="models-section">
         <HeroPages id={LinkType.VEHICLES} />
 
         <Grid
@@ -245,7 +274,9 @@ function Vehicles() {
             ))}
           </Grid>
         </Grid>
+      </Box>
 
+      <section className="models-section">
         <div className="container">
           <div className="models-div">
             <div className="models-div__box">
@@ -514,7 +545,7 @@ function Vehicles() {
               <h2>Book a car by getting in touch with us</h2>
               <span>
                 <i className="fa-solid fa-phone"></i>
-                <h3>(123) 456-7869</h3>
+                <h3>+351 231472555</h3>
               </span>
             </div>
           </div>

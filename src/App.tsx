@@ -7,8 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
-import React from "react";
-import Vehicles from "./pages/Vehicles/Vehicles";
+import Vehicles from "./pages/Vehicles";
 
 function App() {
   return (

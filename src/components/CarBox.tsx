@@ -24,22 +24,22 @@ function CarBox(props: { data: any; carID: number }) {
             </div>
             <div className="pick-description__table">
               <div className="pick-description__table__col">
-                <span>Model</span>
-                <span>{car.model}</span>
-              </div>
-
-              <div className="pick-description__table__col">
-                <span>Mark</span>
+                <span>Marca</span>
                 <span>{car.mark}</span>
               </div>
 
               <div className="pick-description__table__col">
-                <span>Year</span>
+                <span>Modelo</span>
+                <span>{car.model}</span>
+              </div>
+
+              <div className="pick-description__table__col">
+                <span>Ano</span>
                 <span>{car.year}</span>
               </div>
 
               <div className="pick-description__table__col">
-                <span>Doors</span>
+                <span>Portas</span>
                 <span>{car.doors}</span>
               </div>
 
@@ -49,12 +49,12 @@ function CarBox(props: { data: any; carID: number }) {
               </div>
 
               <div className="pick-description__table__col">
-                <span>Transmission</span>
+                <span>Transmissão</span>
                 <span>{car.transmission}</span>
               </div>
 
               <div className="pick-description__table__col">
-                <span>Fuel</span>
+                <span>Combustível</span>
                 <span>{car.fuel}</span>
               </div>
             </div>
