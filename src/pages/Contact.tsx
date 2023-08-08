@@ -1,12 +1,16 @@
 import Footer from "../components/Footer";
 import HeroPages from "../components/HeroPages";
 import { LinkType } from "../data/link";
+import ContactSection from "../components/contact/ContactSection";
 
 function Contact() {
   return (
     <>
-      <section className="contact-page">
-        <HeroPages id={LinkType.CONTACT} />
+      <HeroPages id={LinkType.CONTACT} />
+      <ContactSection />
+      <Footer />
+
+      {/*   <section className="contact-page">
         <div className="container">
           <div className="contact-div">
             <div className="contact-div__text">
@@ -65,8 +69,8 @@ function Contact() {
             </div>
           </div>
         </div>
-        <Footer />
-      </section>
+        
+      </section> */}
     </>
   );
 }

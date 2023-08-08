@@ -52,11 +52,19 @@ function Navbar() {
             <li key={data.id}>
               <NavLink
                 to={data.url}
-                style={({ isActive }) => {
-                  return {
-                    color: isActive ? "#ff4d30" : "black",
-                    fontWeight: "bold",
-                  };
+                style={({ isActive, isPending }) => {
+                  if (isActive) {
+                    return {
+                      color: isActive ? "#ff4d30" : "black",
+                      fontWeight: "bold",
+                    };
+                  } else {
+                    return {
+                      "&:hover": {
+                        color: "#ff4d30",
+                      },
+                    };
+                  }
                 }}
               >
                 {data.link}
