@@ -1,24 +1,26 @@
 import { Mark } from "./Mark";
 import { Model } from "./Model";
-import { Combustivel } from "./enums/CombustivelEnum";
+import { Fuel } from "./enums/FuelEnum";
+import { Transmission } from "./enums/TransmissionEnum";
 
 export interface Vehicle {
-  veiculoId: number;
-  marcaId: number;
-  marca: Mark;
-  modeloId: number;
-  modelo: Model;
-  ano: number;
-  cor: string;
-  observacoes: string;
-  imagemURL: string;
-  preco: number;
-  combustivel: Combustivel;
-  versao: string;
-  marcaNome: string;
-  numeroPortas: number;
-  transmissao: string;
-  cilindrada: number;
-  potencia: number;
-  novidade: boolean;
+  id: number;
+  markId: number;
+  mark: Mark;
+  modelId: number;
+  model: Model;
+  year: number;
+  color: string;
+  observations: string;
+  mileage: number;
+  price: number;
+  fuelType: Fuel;
+  version: string;
+  doors: number;
+  transmission: Transmission;
+  engineSize: number;
+  power: number;
+  new: boolean;
+  opportunity: boolean;
+  sold: boolean;
 }

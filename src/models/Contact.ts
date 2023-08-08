@@ -1,8 +1,8 @@
 export interface Contact {
-  contactoId: number;
-  nome: string;
+  id: number;
+  name: string;
   email: string;
-  telefone: string;
-  mensagem: string;
-  dataHora: Date;
+  phoneNumber: string;
+  message: string;
+  dateTime: Date;
 }
