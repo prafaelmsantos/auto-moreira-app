@@ -3,6 +3,7 @@ import { AiFillCar, AiFillTool } from "react-icons/ai";
 import { VehicleCardIcon } from "../../../models/enums/VehicleCardIconEnum";
 import { BsFillFuelPumpFill } from "react-icons/bs";
 import { GiCarDoor } from "react-icons/gi";
+import { grey } from "@mui/material/colors";
 
 type IVehicleCardItem = {
   text: string | number;
@@ -26,13 +27,17 @@ function VehicleCardItem(props: IVehicleCardItem) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography fontSize={18}>{text}</Typography>
+            <Typography color={grey[700]} fontSize={18}>
+              {text}
+            </Typography>
           </Grid>
         </>
       ) : (
         <>
           <Grid item>
-            <Typography fontSize={18}>{text}</Typography>
+            <Typography color={grey[700]} fontSize={18}>
+              {text}
+            </Typography>
           </Grid>
           <Grid item>
             <Typography fontSize={20}>
