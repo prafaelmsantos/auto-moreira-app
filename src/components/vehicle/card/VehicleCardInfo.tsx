@@ -14,6 +14,7 @@ import { AiFillStar } from "react-icons/ai";
 import { Vehicle } from "../../../models/Vehicle";
 import VehicleCardRow from "./VehicleCardRow";
 import VehicleCardTitle from "./VehicleCardTitle";
+import { deepOrange } from "@mui/material/colors";
 
 type IVehicleCardInfo = {
   vehicle: Vehicle;
@@ -65,7 +66,13 @@ function VehicleCardInfo(props: IVehicleCardInfo) {
           <Grid item xs={12}>
             <Button
               fullWidth
-              sx={{ bgcolor: "#ff4d30", py: 2 }}
+              sx={{
+                bgcolor: "#ff4d30",
+                py: 2,
+                "&:hover": {
+                  backgroundColor: deepOrange[900],
+                },
+              }}
               onClick={() => window.scrollTo(0, 0)}
             >
               <Typography color={"white"} fontWeight={"bold"} fontSize={16}>
