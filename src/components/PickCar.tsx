@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CarBox from "./CarBox";
 import { CAR_DATA } from "../data/CarData";
+import { Typography } from "@mui/material";
+import { BASE_API_URL } from "../config/variables";
+import { getData } from "../services/AutoMoreiraService";
+import { Vehicle } from "../models/Vehicle";
+import { MessageType } from "../models/enums/MessageTypeEnum";
+import AlertModal from "./AlertModal";
+import AutoMoreiraLoader from "./AutoMoreiraLoader";
 
 function PickCar() {
   const [active, setActive] = useState("SecondCar");
@@ -14,8 +21,59 @@ function PickCar() {
     return colorBtn === id ? "colored-button" : "";
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  const [stateModal, setStateModal] = useState({
+    openModal: false,
+    responseContent: "",
+    responseTitle: "",
+    type: MessageType.ERROR,
+  });
+  const { responseContent, responseTitle, openModal, type } = stateModal;
+
+  const handleOkModal = () => {
+    setStateModal({ ...stateModal, openModal: false });
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    const endpoint = `${BASE_API_URL}${"api/vehicles"}`;
+    getData<Vehicle[]>(`${endpoint}`)
+      .then((data) => {
+        setVehicles(data.filter((x) => !x.opportunity));
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+        setStateModal({
+          ...stateModal,
+          openModal: true,
+          responseTitle: "Erro!",
+          responseContent:
+            "Erro ao carregar os veículos. Por favor tente mais tarde...",
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(vehicles);
+
   return (
     <>
+      <AlertModal
+        title={responseTitle}
+        message={responseContent}
+        isOpen={openModal}
+        onOk={handleOkModal}
+        onCancel={handleOkModal}
+        type={type}
+      />
+      <AutoMoreiraLoader open={isLoading} />
+      <Typography fontWeight={"bold"} fontSize={40} variant="h3">
+        Veículos
+      </Typography>
       <section className="pick-section">
         <div className="container">
           <div className="pick-container">

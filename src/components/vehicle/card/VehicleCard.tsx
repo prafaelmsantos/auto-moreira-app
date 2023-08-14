@@ -11,12 +11,18 @@ function VehicleCard(props: IVehicleCard) {
 
   return (
     <Box>
-      <Grid container direction="row" spacing={2} sx={{ p: 15 }}>
-        <Grid item xs={6}>
-          {vehicles.map((vehicle, key) => (
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        spacing={2}
+        sx={{ p: 15 }}
+      >
+        {vehicles.map((vehicle, key) => (
+          <Grid item>
             <VehicleCardInfo key={key} vehicle={vehicle} />
-          ))}
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );

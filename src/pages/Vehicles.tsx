@@ -54,6 +54,7 @@ function Vehicles() {
             "Erro ao carregar os veículos. Por favor tente mais tarde...",
         });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

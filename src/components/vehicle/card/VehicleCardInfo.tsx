@@ -15,6 +15,7 @@ import { Vehicle } from "../../../models/Vehicle";
 import VehicleCardRow from "./VehicleCardRow";
 import VehicleCardTitle from "./VehicleCardTitle";
 import { deepOrange } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 type IVehicleCardInfo = {
   vehicle: Vehicle;
@@ -22,9 +23,10 @@ type IVehicleCardInfo = {
 
 function VehicleCardInfo(props: IVehicleCardInfo) {
   const { vehicle } = props;
+  const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 345, py: 2 }}>
+    <Card sx={{ maxWidth: 400, py: 2 }}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -73,7 +75,10 @@ function VehicleCardInfo(props: IVehicleCardInfo) {
                   backgroundColor: deepOrange[900],
                 },
               }}
-              onClick={() => window.scrollTo(0, 0)}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate("/vehicles/1");
+              }}
             >
               <Typography color={"white"} fontWeight={"bold"} fontSize={16}>
                 Book Ride

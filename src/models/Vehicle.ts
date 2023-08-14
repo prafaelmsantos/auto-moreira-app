@@ -20,7 +20,6 @@ export interface Vehicle {
   transmission: Transmission;
   engineSize: number;
   power: number;
-  new: boolean;
   opportunity: boolean;
   sold: boolean;
 }

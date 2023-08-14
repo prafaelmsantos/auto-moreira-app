@@ -3,7 +3,7 @@ import { ContactIcon } from "../../../models/enums/ContactIconEnum";
 import { grey } from "@mui/material/colors";
 import ContactIconInfo from "./ContactInfoIcon";
 
-function ContactInfo() {
+export default function ContactInfo() {
   return (
     <>
       <Grid container>
@@ -12,7 +12,7 @@ function ContactInfo() {
         </Typography>
         <Typography fontSize={16} color={grey[700]} mt={3}>
           O Auto Moreira conta com mais de 15 anos de experiência no mercado de
-          venda automóvel e tem como principal missão garantir a melhor
+          venda automóvel e tem como principal missão, garantir a melhor
           Qualidade e Confiança nos seus negócios.
         </Typography>
       </Grid>
@@ -31,5 +31,3 @@ function ContactInfo() {
     </>
   );
 }
-
-export default ContactInfo;

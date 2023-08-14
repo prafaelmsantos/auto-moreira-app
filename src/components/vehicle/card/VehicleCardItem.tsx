@@ -15,7 +15,7 @@ function VehicleCardItem(props: IVehicleCardItem) {
   const { text, iconType, reverse = false } = props;
 
   return (
-    <Grid item container direction="row" spacing={1}>
+    <Grid container direction="row" spacing={1}>
       {!reverse ? (
         <>
           <Grid item>
