@@ -8,7 +8,7 @@ import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import AutoMoreiraLoader from "../AutoMoreiraLoader";
 
-function VehicleDetails() {
+export default function VehicleDetails() {
   const param = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -33,8 +33,6 @@ function VehicleDetails() {
     }
   }, [navigate, param]);
 
-  console.log(isLoading);
-
   return (
     <Box>
       <AutoMoreiraLoader open={isLoading} />
@@ -45,5 +43,3 @@ function VehicleDetails() {
     </Box>
   );
 }
-
-export default VehicleDetails;

@@ -13,7 +13,7 @@ function VehicleLenghtGrid(props: IVehicleLenghtGrid) {
       direction="row"
       justifyContent="center"
       alignItems="center"
-      sx={{ mt: 5 }}
+      sx={{ mt: 7 }}
     >
       <Grid item>
         <Typography variant="h4">

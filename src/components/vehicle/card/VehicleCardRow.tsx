@@ -7,7 +7,7 @@ type IVehicleCardRow = {
   vehicle: Vehicle;
 };
 
-function VehicleCardRow(props: IVehicleCardRow) {
+export default function VehicleCardRow(props: IVehicleCardRow) {
   const { vehicle } = props;
 
   return (
@@ -59,5 +59,3 @@ function VehicleCardRow(props: IVehicleCardRow) {
     </>
   );
 }
-
-export default VehicleCardRow;

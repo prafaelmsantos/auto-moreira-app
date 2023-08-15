@@ -6,7 +6,7 @@ type IVehicleCard = {
   vehicles: Vehicle[];
 };
 
-function VehicleCard(props: IVehicleCard) {
+export default function VehicleCard(props: IVehicleCard) {
   const { vehicles } = props;
 
   return (
@@ -15,8 +15,8 @@ function VehicleCard(props: IVehicleCard) {
         container
         direction="row"
         justifyContent="center"
-        spacing={2}
-        sx={{ p: 15 }}
+        spacing={4}
+        sx={{ px: 15, mt: 4 }}
       >
         {vehicles.map((vehicle, key) => (
           <Grid item>
@@ -27,5 +27,3 @@ function VehicleCard(props: IVehicleCard) {
     </Box>
   );
 }
-
-export default VehicleCard;

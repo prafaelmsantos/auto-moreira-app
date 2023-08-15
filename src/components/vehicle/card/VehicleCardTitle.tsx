@@ -5,7 +5,7 @@ type IVehicleCardTitle = {
   title: string;
 };
 
-function VehicleCardTitle(props: IVehicleCardTitle) {
+export default function VehicleCardTitle(props: IVehicleCardTitle) {
   const { price, title } = props;
 
   return (
@@ -29,5 +29,3 @@ function VehicleCardTitle(props: IVehicleCardTitle) {
     </Grid>
   );
 }
-
-export default VehicleCardTitle;

@@ -21,7 +21,7 @@ type IVehicleCardInfo = {
   vehicle: Vehicle;
 };
 
-function VehicleCardInfo(props: IVehicleCardInfo) {
+export default function VehicleCardInfo(props: IVehicleCardInfo) {
   const { vehicle } = props;
   const navigate = useNavigate();
 
@@ -77,11 +77,11 @@ function VehicleCardInfo(props: IVehicleCardInfo) {
               }}
               onClick={() => {
                 window.scrollTo(0, 0);
-                navigate("/vehicles/1");
+                navigate(`/vehicles/${vehicle.id}`);
               }}
             >
               <Typography color={"white"} fontWeight={"bold"} fontSize={16}>
-                Book Ride
+                Saber Mais
               </Typography>
             </Button>
           </Grid>
@@ -90,5 +90,3 @@ function VehicleCardInfo(props: IVehicleCardInfo) {
     </Card>
   );
 }
-
-export default VehicleCardInfo;
