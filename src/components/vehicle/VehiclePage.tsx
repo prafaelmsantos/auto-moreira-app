@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import HeroPages from "../HeroPages";
 import { LinkType } from "../../data/link";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import { BASE_API_URL } from "../../config/variables";
 import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import AutoMoreiraLoader from "../global/loader/AutoMoreiraLoader";
+import VehicleDetails from "./VehicleDetails";
 
 export default function VehiclePage() {
   const param = useParams();
@@ -37,9 +38,7 @@ export default function VehiclePage() {
     <Box>
       <AutoMoreiraLoader open={isLoading} />
       <HeroPages id={LinkType.VEHICLES} />
-      <Grid container direction="row" spacing={2} sx={{ p: 15 }}>
-        DETAILS{vehicle?.mark.name}
-      </Grid>
+      {vehicle && <VehicleDetails vehicle={vehicle} />}
     </Box>
   );
 }
