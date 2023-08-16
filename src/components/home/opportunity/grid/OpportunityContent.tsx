@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import CarBox from "./CarBox";
-import { Vehicle } from "../../../models/Vehicle";
+import { Vehicle } from "../../../../models/Vehicle";
 import { useState } from "react";
 
 export default function OpportunityContent(props: { vehicles: Vehicle[] }) {

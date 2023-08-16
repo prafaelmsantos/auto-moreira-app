@@ -1,4 +1,4 @@
-function Banner() {
+export default function SupportPage() {
   return (
     <>
       <section className="banner-section">
@@ -16,5 +16,3 @@ function Banner() {
     </>
   );
 }
-
-export default Banner;

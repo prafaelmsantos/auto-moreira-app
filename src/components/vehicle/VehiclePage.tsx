@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config/variables";
 import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
-import AutoMoreiraLoader from "../AutoMoreiraLoader";
+import AutoMoreiraLoader from "../global/loader/AutoMoreiraLoader";
 
 export default function VehiclePage() {
   const param = useParams();

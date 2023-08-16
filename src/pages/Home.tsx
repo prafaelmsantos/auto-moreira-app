@@ -1,12 +1,12 @@
 import Hero from "../components/Hero";
-import BookCar from "../components/BookCar";
+import BookCar from "../components/home/search-car/BookCar";
 import PlanTrip from "../components/PlanTrip";
-import Banner from "../components/Banner";
 import ChooseUs from "../components/ChooseUs";
 import Testimonials from "../components/Testimonials";
-import Faq from "../components/Faq";
+import Faq from "../components/home/faq/Faq";
 import Footer from "../components/Footer";
-import OpportunityPage from "../components/opportunity/OpportunityPage";
+import OpportunityPage from "../components/home/opportunity/OpportunityPage";
+import SupportPage from "../components/home/support/SupportPage";
 
 function Home() {
   return (
@@ -15,7 +15,7 @@ function Home() {
       <BookCar />
       <PlanTrip />
       <OpportunityPage />
-      <Banner />
+      <SupportPage />
       <ChooseUs />
       <Testimonials />
       <Faq />

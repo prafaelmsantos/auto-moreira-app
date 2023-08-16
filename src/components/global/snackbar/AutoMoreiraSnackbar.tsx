@@ -1,7 +1,7 @@
 import { Alert, Snackbar } from "@mui/material";
 import { blue, green, red, yellow } from "@mui/material/colors";
 import { useMemo } from "react";
-import { MessageType } from "../models/enums/MessageTypeEnum";
+import { MessageType } from "../../../models/enums/MessageTypeEnum";
 
 type ISnackbar = {
   type: MessageType;
