@@ -1,9 +1,9 @@
 import { Box } from "@mui/system";
 import { Grid } from "@mui/material";
-import ContactForm from "../contact/form/ContactForm";
-import ContactInfo from "../contact/info/ContactInfo";
+import ContactForm from "./form/ContactForm";
+import ContactInfo from "./info/ContactInfo";
 
-function ContactSection() {
+export default function ContactPage() {
   return (
     <Box>
       <Grid
@@ -25,5 +25,3 @@ function ContactSection() {
     </Box>
   );
 }
-
-export default ContactSection;

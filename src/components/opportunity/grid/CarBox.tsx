@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Vehicle } from "../models/Vehicle";
-import AudiA1 from "../images/cars-big/audia1.jpg";
+import { Vehicle } from "../../../models/Vehicle";
+import AudiA1 from "../../../images/cars-big/audia1.jpg";
 import { Button, Typography } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";

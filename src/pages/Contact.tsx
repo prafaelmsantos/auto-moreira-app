@@ -1,13 +1,13 @@
 import Footer from "../components/Footer";
 import HeroPages from "../components/HeroPages";
 import { LinkType } from "../data/link";
-import ContactSection from "../components/contact/ContactSection";
+import ContactPage from "../components/contact/ContactPage";
 
-function Contact() {
+export default function Contact() {
   return (
     <>
       <HeroPages id={LinkType.CONTACT} />
-      <ContactSection />
+      <ContactPage />
       <Footer />
 
       {/*   <section className="contact-page">
@@ -74,5 +74,3 @@ function Contact() {
     </>
   );
 }
-
-export default Contact;

@@ -3,7 +3,7 @@ import HeroPages from "../components/HeroPages";
 import Testimonials from "../components/Testimonials";
 import { LinkType } from "../data/link";
 
-function TestimonialsPage() {
+export default function TestimonialsPage() {
   return (
     <>
       <section className="testimonial-page">
@@ -26,5 +26,3 @@ function TestimonialsPage() {
     </>
   );
 }
-
-export default TestimonialsPage;

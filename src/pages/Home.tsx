@@ -1,12 +1,12 @@
 import Hero from "../components/Hero";
 import BookCar from "../components/BookCar";
 import PlanTrip from "../components/PlanTrip";
-import PickCar from "../components/PickCar";
 import Banner from "../components/Banner";
 import ChooseUs from "../components/ChooseUs";
 import Testimonials from "../components/Testimonials";
 import Faq from "../components/Faq";
 import Footer from "../components/Footer";
+import OpportunityPage from "../components/opportunity/OpportunityPage";
 
 function Home() {
   return (
@@ -14,7 +14,7 @@ function Home() {
       <Hero />
       <BookCar />
       <PlanTrip />
-      <PickCar />
+      <OpportunityPage />
       <Banner />
       <ChooseUs />
       <Testimonials />

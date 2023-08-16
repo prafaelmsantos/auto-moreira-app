@@ -8,7 +8,7 @@ import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import AutoMoreiraLoader from "../AutoMoreiraLoader";
 
-export default function VehicleDetails() {
+export default function VehiclePage() {
   const param = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);

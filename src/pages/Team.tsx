@@ -8,7 +8,7 @@ import Person4 from "../images/team/4.png";
 import Person5 from "../images/team/5.png";
 import Person6 from "../images/team/6.png";
 
-function Team() {
+export default function Team() {
   const teamPpl = [
     { img: Person1, name: "Luke Miller", job: "Salesman" },
     { img: Person2, name: "Michael Diaz", job: "Business Owner" },
@@ -53,5 +53,3 @@ function Team() {
     </>
   );
 }
-
-export default Team;
