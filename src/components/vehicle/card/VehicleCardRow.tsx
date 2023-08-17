@@ -3,11 +3,7 @@ import { Vehicle } from "../../../models/Vehicle";
 import VehicleCardItem from "./VehicleCardItem";
 import { VehicleCardIcon } from "../../../models/enums/VehicleCardIconEnum";
 
-type IVehicleCardRow = {
-  vehicle: Vehicle;
-};
-
-export default function VehicleCardRow(props: IVehicleCardRow) {
+export default function VehicleCardRow(props: { vehicle: Vehicle }) {
   const { vehicle } = props;
 
   return (
