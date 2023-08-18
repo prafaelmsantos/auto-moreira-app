@@ -92,16 +92,23 @@ function Navbar() {
           <Link
             style={{ fontWeight: "bold", fontSize: 16 }}
             className="navbar__buttons__sign-in"
-            to="/login"
+            to="/user/login"
           >
             Entrar
           </Link>
           <Link
             style={{ fontWeight: "bold", fontSize: 16 }}
             className="navbar__buttons__register"
-            to="/registration"
+            to="/user/registration"
           >
             Registar
+          </Link>
+          <Link
+            style={{ fontWeight: "bold", fontSize: 16 }}
+            className="navbar__buttons__register"
+            to="/admin"
+          >
+            Admin
           </Link>
         </div>
 

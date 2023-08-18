@@ -100,7 +100,7 @@ export default function LoginForm() {
             alignItems="center"
           >
             <Grid item>
-              <NavLink to="/registration" style={{ color: "#2196f3" }}>
+              <NavLink to="/user/registration" style={{ color: "#2196f3" }}>
                 <Typography fontSize={13} fontFamily={"Rubik"}>
                   {"Não tem uma conta? Registe-se!"}
                 </Typography>

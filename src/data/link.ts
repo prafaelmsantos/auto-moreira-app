@@ -7,6 +7,7 @@ export enum LinkType {
   CONTACT = 6,
   LOGIN = 7,
   REGISTRATION = 8,
+  ADMIN = 9,
 }
 
 export const navLink = [
@@ -39,8 +40,14 @@ export const navLink = [
   { id: LinkType.LOGIN, url: "/login", link: "Entrar", showNavLink: false },
   {
     id: LinkType.REGISTRATION,
-    url: "/registration",
+    url: "/user/registration",
     link: "Registar",
+    showNavLink: false,
+  },
+  {
+    id: LinkType.ADMIN,
+    url: "/admin",
+    link: "Administração",
     showNavLink: false,
   },
 ];

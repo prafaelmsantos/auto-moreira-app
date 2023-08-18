@@ -1,7 +1,7 @@
 import Img2 from "../images/testimonials/pfp1.jpg";
 import Img3 from "../images/testimonials/pfp2.jpg";
 
-function Testimonials() {
+export default function TestimonialsPage() {
   return (
     <>
       <section className="testimonials-section">
@@ -64,5 +64,3 @@ function Testimonials() {
     </>
   );
 }
-
-export default Testimonials;

@@ -140,7 +140,7 @@ export default function RegistrationForm() {
             alignItems="center"
           >
             <Grid item>
-              <NavLink to="/login" style={{ color: "#2196f3" }}>
+              <NavLink to="/user/login" style={{ color: "#2196f3" }}>
                 <Typography fontSize={13} fontFamily={"Rubik"}>
                   {"Já sou Registado! Entrar"}
                 </Typography>
