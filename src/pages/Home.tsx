@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import BookCar from "../components/home/search-car/BookCar";
+import SearchCar from "../components/home/search-car/SearchCar";
 import PlanTrip from "../components/PlanTrip";
 import ChooseUs from "../components/ChooseUs";
 import Testimonials from "../components/Testimonials";
@@ -12,7 +12,7 @@ function Home() {
   return (
     <>
       <Hero />
-      <BookCar />
+      <SearchCar />
       <PlanTrip />
       <OpportunityPage />
       <SupportPage />

@@ -4,6 +4,8 @@ import AudiA1 from "../../../../images/cars-big/audia1.jpg";
 import { Button, Typography } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
+import { FuelTypeConverted } from "../../../../models/enums/FuelEnum";
+import { TransmissionConverted } from "../../../../models/enums/TransmissionEnum";
 
 export default function CarBox(props: { vehicle: Vehicle }) {
   const { vehicle } = props;
@@ -54,12 +56,12 @@ export default function CarBox(props: { vehicle: Vehicle }) {
 
           <div className="pick-description__table__col">
             <span>Transmissão</span>
-            <span>{vehicle.transmission}</span>
+            <span>{TransmissionConverted(vehicle.transmission)}</span>
           </div>
 
           <div className="pick-description__table__col">
             <span>Combustível</span>
-            <span>{vehicle.fuelType}</span>
+            <span>{FuelTypeConverted(vehicle.fuelType)}</span>
           </div>
         </div>
 

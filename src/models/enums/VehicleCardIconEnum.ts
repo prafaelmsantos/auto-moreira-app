@@ -3,4 +3,9 @@ export enum VehicleCardIcon {
   TRANSMISSION,
   FUELTYPE,
   DOORS,
+  YEAR,
+  MILEAGE,
+  POWER,
+  COLOR,
+  ENGINESIZE,
 }

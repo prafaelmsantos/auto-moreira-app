@@ -6,7 +6,7 @@ import CarBmw from "../../../images/cars-big/bmw320.jpg";
 import CarMercedes from "../../../images/cars-big/benz.jpg";
 import CarPassat from "../../../images/cars-big/passatcc.jpg";
 
-function BookCar() {
+export default function SearchCar() {
   const [modal, setModal] = useState(false); //  class - active-modal
 
   // booking car
@@ -461,5 +461,3 @@ function BookCar() {
     </>
   );
 }
-
-export default BookCar;

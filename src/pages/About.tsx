@@ -6,8 +6,9 @@ import Box1 from "../images/about/icon1.png";
 import Box2 from "../images/about/icon2.png";
 import Box3 from "../images/about/icon3.png";
 import { LinkType } from "../data/link";
+import BookCar from "../components/vehicle/book-car/BookCar";
 
-function About() {
+export default function About() {
   return (
     <>
       <section className="about-page">
@@ -57,21 +58,8 @@ function About() {
           <PlanTrip />
         </div>
       </section>
-      <div className="book-banner">
-        <div className="book-banner__overlay"></div>
-        <div className="container">
-          <div className="text-content">
-            <h2>Book a car by getting in touch with us</h2>
-            <span>
-              <i className="fa-solid fa-phone"></i>
-              <h3>+351 231472555</h3>
-            </span>
-          </div>
-        </div>
-      </div>
+      <BookCar />
       <Footer />
     </>
   );
 }
-
-export default About;

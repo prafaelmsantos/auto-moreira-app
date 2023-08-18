@@ -1,5 +1,18 @@
 export enum Fuel {
-  Petrol,
-  Diesel,
-  Hybrid,
+  PETROl = "Petrol",
+  DIESEL = "Diesel",
+  HYBRID = "Hybrid",
+}
+
+export function FuelTypeConverted(fuelType: Fuel) {
+  switch (fuelType) {
+    case Fuel.PETROl:
+      return "Gasolina";
+    case Fuel.DIESEL:
+      return "Gasóleo";
+    case Fuel.HYBRID:
+      return "Híbrido";
+    default:
+      return "Híbrido";
+  }
 }

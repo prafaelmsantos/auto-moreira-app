@@ -8,6 +8,8 @@ import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import AutoMoreiraLoader from "../global/loader/AutoMoreiraLoader";
 import VehicleDetails from "./VehicleDetails";
+import Footer from "../Footer";
+import BookCar from "./book-car/BookCar";
 
 export default function VehiclePage() {
   const param = useParams();
@@ -37,8 +39,17 @@ export default function VehiclePage() {
   return (
     <Box>
       <AutoMoreiraLoader open={isLoading} />
-      <HeroPages id={LinkType.VEHICLES} />
+      <HeroPages
+        id={LinkType.VEHICLES}
+        title={
+          vehicle &&
+          vehicle.mark.name + " " + vehicle.model.name + " " + vehicle.version
+        }
+      />
       {vehicle && <VehicleDetails vehicle={vehicle} />}
+
+      <BookCar />
+      <Footer />
     </Box>
   );
 }

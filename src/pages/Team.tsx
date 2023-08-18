@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeroPages from "../components/HeroPages";
+import BookCar from "../components/vehicle/book-car/BookCar";
 import { LinkType } from "../data/link";
 import Person1 from "../images/team/1.png";
 import Person2 from "../images/team/2.png";
@@ -36,18 +37,7 @@ export default function Team() {
             ))}
           </div>
         </div>
-        <div className="book-banner">
-          <div className="book-banner__overlay"></div>
-          <div className="container">
-            <div className="text-content">
-              <h2>Book a car by getting in touch with us</h2>
-              <span>
-                <i className="fa-solid fa-phone"></i>
-                <h3>+351 231472555</h3>
-              </span>
-            </div>
-          </div>
-        </div>
+        <BookCar />
         <Footer />
       </section>
     </>

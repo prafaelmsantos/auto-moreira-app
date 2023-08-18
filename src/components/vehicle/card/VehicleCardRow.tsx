@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import { Vehicle } from "../../../models/Vehicle";
 import VehicleCardItem from "./VehicleCardItem";
 import { VehicleCardIcon } from "../../../models/enums/VehicleCardIconEnum";
+import { FuelTypeConverted } from "../../../models/enums/FuelEnum";
 
 export default function VehicleCardRow(props: { vehicle: Vehicle }) {
   const { vehicle } = props;
@@ -46,7 +47,7 @@ export default function VehicleCardRow(props: { vehicle: Vehicle }) {
         </Grid>
         <Grid item>
           <VehicleCardItem
-            text={vehicle.fuelType}
+            text={FuelTypeConverted(vehicle.fuelType)}
             iconType={VehicleCardIcon.FUELTYPE}
             reverse={true}
           />
