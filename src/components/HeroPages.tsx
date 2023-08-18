@@ -10,14 +10,15 @@ export default function HeroPages(props: { id: LinkType; title?: string }) {
         <div className="hero-pages__overlay"></div>
         <div className="container">
           <div className="hero-pages__text">
-            <h3>{page?.link}</h3>
+            <h3>{title ?? page?.link}</h3>
             <p>
-              <Link to="/">Início</Link> /
+              <Link to="/">Início</Link> {" / "}
               {!title ? (
                 page?.link
               ) : (
                 <>
-                  <Link to={page?.url ?? "/"}>{page?.link}</Link> / {title}
+                  <Link to={page?.url ?? "/"}>{page?.link}</Link> {" / "}
+                  {title}
                 </>
               )}
             </p>

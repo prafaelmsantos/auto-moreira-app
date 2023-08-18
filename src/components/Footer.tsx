@@ -9,8 +9,8 @@ function Footer() {
                 <span>Auto Moreira</span>
               </li>
               <li>
-                We offers a big range of vehicles for all your driving needs. We
-                have the perfect car to meet your needs.
+                O Auto Moreira tem como principal missão, garantir a melhor
+                Qualidade e Confiança nos seus negócios.
               </li>
               <li>
                 <a href="tel:123456789">
