@@ -5,17 +5,42 @@ export enum LinkType {
   TESTIMONIALS = 4,
   TEAM = 5,
   CONTACT = 6,
+  LOGIN = 7,
+  REGISTRATION = 8,
 }
 
 export const navLink = [
-  { id: LinkType.HOME, url: "/", link: "Início" },
-  { id: LinkType.ABOUT, url: "/about", link: "Sobre Nós" },
-  { id: LinkType.VEHICLES, url: "/vehicles", link: "Veículos" },
+  { id: LinkType.HOME, url: "/", link: "Início", showNavLink: true },
+  { id: LinkType.ABOUT, url: "/about", link: "Sobre Nós", showNavLink: true },
+  {
+    id: LinkType.VEHICLES,
+    url: "/vehicles",
+    link: "Veículos",
+    showNavLink: true,
+  },
   {
     id: LinkType.TESTIMONIALS,
     url: "/testimonials",
     link: "Testemunhos",
+    showNavLink: true,
   },
-  { id: LinkType.TEAM, url: "/team", link: "A Nossa Equipa" },
-  { id: LinkType.CONTACT, url: "/contact", link: "Contactos" },
+  {
+    id: LinkType.TEAM,
+    url: "/team",
+    link: "A Nossa Equipa",
+    showNavLink: true,
+  },
+  {
+    id: LinkType.CONTACT,
+    url: "/contact",
+    link: "Contactos",
+    showNavLink: true,
+  },
+  { id: LinkType.LOGIN, url: "/login", link: "Entrar", showNavLink: false },
+  {
+    id: LinkType.REGISTRATION,
+    url: "/registration",
+    link: "Registar",
+    showNavLink: false,
+  },
 ];

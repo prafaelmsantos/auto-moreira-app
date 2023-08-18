@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/shared/footer/Footer";
 import HeroPages from "../components/HeroPages";
 import BookCar from "../components/vehicle/book-car/BookCar";
 import { LinkType } from "../data/link";

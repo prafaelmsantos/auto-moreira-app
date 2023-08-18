@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config/variables";
 import { Vehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
-import AutoMoreiraLoader from "../global/loader/AutoMoreiraLoader";
+import AutoMoreiraLoader from "../shared/loader/AutoMoreiraLoader";
 import VehicleDetails from "./VehicleDetails";
-import Footer from "../Footer";
+import Footer from "../shared/footer/Footer";
 import BookCar from "./book-car/BookCar";
 
 export default function VehiclePage() {

@@ -1,13 +1,13 @@
 import HeroPages from "../components/HeroPages";
 import { LinkType } from "../data/link";
-import Footer from "../components/Footer";
+import Footer from "../components/shared/footer/Footer";
 import { getData } from "../services/AutoMoreiraService";
 import { BASE_API_URL } from "../config/variables";
 import { Vehicle } from "../models/Vehicle";
-import AutoMoreiraLoader from "../components/global/loader/AutoMoreiraLoader";
+import AutoMoreiraLoader from "../components/shared/loader/AutoMoreiraLoader";
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import AlertModal from "../components/global/modal/AlertModal";
+import AlertModal from "../components/shared/modal/AlertModal";
 import { MessageType } from "../models/enums/MessageTypeEnum";
 import VehicleCard from "../components/vehicle/card/VehicleCard";
 import VehicleLenghtGrid from "../components/vehicle/grid/VehicleLenghtGrid";

@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/shared/footer/Footer";
 import HeroPages from "../components/HeroPages";
 import PlanTrip from "../components/PlanTrip";
 import AboutMain from "../images/about/about-main.jpg";

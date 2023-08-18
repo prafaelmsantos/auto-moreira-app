@@ -3,8 +3,8 @@ import { BASE_API_URL } from "../../../config/variables";
 import { getData } from "../../../services/AutoMoreiraService";
 import { Vehicle } from "../../../models/Vehicle";
 import { MessageType } from "../../../models/enums/MessageTypeEnum";
-import AlertModal from "../../global/modal/AlertModal";
-import AutoMoreiraLoader from "../../global/loader/AutoMoreiraLoader";
+import AlertModal from "../../shared/modal/AlertModal";
+import AutoMoreiraLoader from "../../shared/loader/AutoMoreiraLoader";
 import OpportunityTitle from "./grid/OpportunityTitle";
 import OpportunityContent from "./grid/OpportunityContent";
 

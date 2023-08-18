@@ -1,5 +1,5 @@
 import "../src/dist/styles.css";
-import Navbar from "../src/components/Navbar";
+import Navbar from "./components/shared/navbar/Navbar";
 
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
 

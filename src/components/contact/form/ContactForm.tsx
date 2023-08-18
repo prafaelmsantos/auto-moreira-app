@@ -72,6 +72,7 @@ function ContactForm() {
             color={"white"}
             fontWeight={"bold"}
             fontSize={16}
+            fontFamily={"Rubik"}
             sx={{ mt: 0.5 }}
           >
             Enviar mensagem

@@ -6,6 +6,8 @@ import TestimonialsPage from "../pages/TestimonialsPage";
 import Vehicles from "../pages/Vehicles";
 import Home from "../pages/Home";
 import VehiclePage from "../components/vehicle/VehiclePage";
+import LoginPage from "../components/user/login/LoginPage";
+import RegistrationPage from "../components/user/registration/RegistrationPage";
 
 export default function AutoMoreiraRouter() {
   const element = useRoutes([
@@ -35,6 +37,14 @@ export default function AutoMoreiraRouter() {
     {
       path: "/contact",
       element: <Contact />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
+    {
+      path: "/registration",
+      element: <RegistrationPage />,
     },
     {
       path: "/*",
