@@ -43,6 +43,7 @@ export default function AdminListItem(props: IAdminListItem) {
         <>
           <ListItemButton
             sx={{
+              mt: 1,
               "&.Mui-selected": {
                 backgroundColor: "#ff4d30",
                 color: "white",
@@ -91,7 +92,15 @@ export default function AdminListItem(props: IAdminListItem) {
                 </Typography>
               }
             />
-            {collapse && <Box> {open ? <ExpandLess /> : <ExpandMore />}</Box>}
+            {collapse && (
+              <Box>
+                {open ? (
+                  <ExpandLess sx={{ fontSize: 22, mt: 1 }} />
+                ) : (
+                  <ExpandMore sx={{ fontSize: 22, mt: 1 }} />
+                )}
+              </Box>
+            )}
           </ListItemButton>
           {collapse && (
             <Collapse in={open} timeout="auto" unmountOnExit>

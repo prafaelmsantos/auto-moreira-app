@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
-import HeroPages from "../../HeroPages";
-import { LinkType } from "../../../data/link";
-import AdminNavbar from "../../shared/navbar/admin/AdminNavbar";
+import HeroPages from "../../components/HeroPages";
+import { LinkType } from "../../data/link";
+import AdminNavbar from "../../components/shared/navbar/admin/AdminNavbar";
 
 export default function AdminHome() {
   return (

@@ -8,9 +8,12 @@ import Home from "../pages/Home";
 import VehiclePage from "../components/vehicle/VehiclePage";
 import Login from "../pages/user/Login";
 import Registration from "../pages/user/Registration";
-import AdminHome from "../components/admin/home/AdminHome";
-import AdminVehicle from "../components/admin/vehicle/AdminVehicle";
-import AdminUser from "../components/admin/user/AdminUser";
+import AdminHome from "../pages/admin/AdminHome";
+import AdminVehicle from "../pages/admin/AdminVehicle";
+import AdminUser from "../pages/admin/AdminUser";
+import AdminMark from "../pages/admin/AdminMark";
+import AdminModel from "../pages/admin/AdminModel";
+import AdminInfo from "../pages/admin/AdminInfo";
 
 export default function AutoMoreiraRouter() {
   const element = useRoutes([
@@ -54,8 +57,11 @@ export default function AutoMoreiraRouter() {
       path: "/admin",
       children: [
         { index: true, element: <AdminHome /> },
+        { path: "mark", element: <AdminMark /> },
+        { path: "model", element: <AdminModel /> },
         { path: "user", element: <AdminUser /> },
         { path: "vehicle", element: <AdminVehicle /> },
+        { path: "info", element: <AdminInfo /> },
       ],
     },
     {
