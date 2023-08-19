@@ -10,6 +10,7 @@ import Login from "../pages/user/Login";
 import Registration from "../pages/user/Registration";
 import AdminHome from "../components/admin/home/AdminHome";
 import AdminVehicle from "../components/admin/vehicle/AdminVehicle";
+import AdminUser from "../components/admin/user/AdminUser";
 
 export default function AutoMoreiraRouter() {
   const element = useRoutes([
@@ -53,7 +54,7 @@ export default function AutoMoreiraRouter() {
       path: "/admin",
       children: [
         { index: true, element: <AdminHome /> },
-        { path: "home", element: <AdminHome /> },
+        { path: "user", element: <AdminUser /> },
         { path: "vehicle", element: <AdminVehicle /> },
       ],
     },

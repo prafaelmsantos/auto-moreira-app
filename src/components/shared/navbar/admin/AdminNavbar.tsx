@@ -1,11 +1,10 @@
 import { List, ListSubheader, Typography } from "@mui/material";
-import { useState } from "react";
-import { AdminListType } from "../../../../models/enums/AdminListType";
-import AdminListItem from "./AdminListItem";
+
+import AdminListItem from "./utils/AdminListItem";
+import { LinkType, navLink } from "../../../../data/link";
+import AdminList from "./utils/AdminList";
 
 export default function AdminNavbar() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   return (
     <List
       sx={{ bgcolor: "background.paper" }}
@@ -22,60 +21,31 @@ export default function AdminNavbar() {
         </ListSubheader>
       }
     >
-      <AdminListItem
-        id={0}
-        title={"Início"}
-        iconType={AdminListType.HOME}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-      />
-      <AdminListItem
-        id={1}
-        title={"Utilizadores"}
-        iconType={AdminListType.USER}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-      />
-      <AdminListItem
-        id={2}
-        title={"Veículos"}
-        iconType={AdminListType.VEHICLE}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-        collapse
-        children={
-          <>
-            <AdminListItem
-              id={3}
-              title={"Marcas"}
-              iconType={AdminListType.MARK}
-              selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
-            />
-            <AdminListItem
-              id={4}
-              title={"Modelos"}
-              iconType={AdminListType.MODEL}
-              selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
-            />
-            <AdminListItem
-              id={5}
-              title={"Veículos"}
-              iconType={AdminListType.VEHICLE}
-              selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
-            />
-          </>
-        }
-      />
-      <AdminListItem
-        id={6}
-        title={"Pedidos de Informação de Clientes"}
-        iconType={AdminListType.INFO}
-        selectedIndex={selectedIndex}
-        setSelectedIndex={setSelectedIndex}
-      />
+      {navLink
+        .filter((x) => x.showAdminNavLink)
+        .map((x) => {
+          if (x.id === LinkType.ADMIN_GERAL_VEHICLE) {
+            return (
+              <AdminListItem
+                title={x.subTitle}
+                iconType={x.id}
+                url={x.url}
+                collapse
+                children={
+                  <>
+                    {AdminList(LinkType.ADMIN_MARK)}
+                    {AdminList(LinkType.ADMIN_MODEL)}
+                    {AdminList(LinkType.ADMIN_VEHICLE)}
+                  </>
+                }
+              />
+            );
+          } else {
+            return (
+              <AdminListItem title={x.subTitle} url={x.url} iconType={x.id} />
+            );
+          }
+        })}
     </List>
   );
 }

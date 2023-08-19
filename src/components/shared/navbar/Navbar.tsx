@@ -3,7 +3,7 @@ import Logo from "../../../images/logo/logo.png";
 import { useState } from "react";
 import { navLink } from "../../../data/link";
 
-function Navbar() {
+export default function Navbar() {
   const [nav, setNav] = useState(false);
 
   const openNav = () => {
@@ -42,7 +42,7 @@ function Navbar() {
                     }
                   }}
                 >
-                  {data.link}
+                  {data.title}
                 </NavLink>
               </li>
             ))}
@@ -82,7 +82,7 @@ function Navbar() {
                     }
                   }}
                 >
-                  {data.link}
+                  {data.title}
                 </NavLink>
               </li>
             ))}
@@ -120,5 +120,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

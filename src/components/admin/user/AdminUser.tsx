@@ -3,16 +3,16 @@ import HeroPages from "../../HeroPages";
 import { LinkType } from "../../../data/link";
 import AdminNavbar from "../../shared/navbar/admin/AdminNavbar";
 
-export default function AdminVehicle() {
+export default function AdminUser() {
   return (
     <Box>
-      <HeroPages id={LinkType.ADMIN_VEHICLE} />
+      <HeroPages id={LinkType.ADMIN_USER} />
       <Grid container direction="row" sx={{ px: 20 }}>
         <Grid item xs={3}>
           <AdminNavbar />
         </Grid>
         <Grid item xs={9}>
-          <Box>AdminVehicle</Box>
+          <Box>USER</Box>
         </Grid>
       </Grid>
     </Box>
