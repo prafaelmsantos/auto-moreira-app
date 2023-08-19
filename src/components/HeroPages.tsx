@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { LinkType, navLink } from "../data/link";
 
-export default function HeroPages(props: { id: LinkType; title?: string }) {
-  const { id, title } = props;
+export default function HeroPages(props: {
+  id: LinkType;
+  title?: string;
+  titleUrl?: string;
+}) {
+  const { id, title, titleUrl } = props;
   const page = navLink.find((x) => x.id === id);
   return (
     <>
@@ -17,7 +21,8 @@ export default function HeroPages(props: { id: LinkType; title?: string }) {
                 page?.title
               ) : (
                 <>
-                  <Link to={page?.url ?? "/"}>{page?.title}</Link> {" / "}
+                  <Link to={titleUrl ?? page?.url ?? "/"}>{page?.title}</Link>{" "}
+                  {" / "}
                   {title}
                 </>
               )}

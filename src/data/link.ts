@@ -84,7 +84,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN,
     url: "/admin",
-    title: "Admin Início",
+    title: "Admin",
     subTitle: "Início",
     showNavLink: false,
     showAdminNavLink: true,
@@ -92,7 +92,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN_USER,
     url: "/admin/user",
-    title: "Admin Utilizadores",
+    title: "Admin",
     subTitle: "Utilizadores",
     showNavLink: false,
     showAdminNavLink: true,
@@ -108,7 +108,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN_VEHICLE,
     url: "/admin/vehicle",
-    title: "Admin Veículos",
+    title: "Admin",
     subTitle: "Veículos",
     showNavLink: false,
     showAdminNavLink: false,
@@ -116,7 +116,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN_MARK,
     url: "/admin/mark",
-    title: "Admin Marcas",
+    title: "Admin",
     subTitle: "Marcas",
     showNavLink: false,
     showAdminNavLink: false,
@@ -124,7 +124,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN_MODEL,
     url: "/admin/model",
-    title: "Admin Modelos",
+    title: "Admin",
     subTitle: "Modelos",
     showNavLink: false,
     showAdminNavLink: false,
@@ -132,7 +132,7 @@ export const navLink = [
   {
     id: LinkType.ADMIN_INFO,
     url: "/admin/info",
-    title: "Admin Info de Clientes",
+    title: "Admin",
     subTitle: "Info de Clientes",
     showNavLink: false,
     showAdminNavLink: true,

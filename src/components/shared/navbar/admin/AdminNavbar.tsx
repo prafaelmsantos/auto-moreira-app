@@ -1,4 +1,4 @@
-import { List, ListSubheader, Typography } from "@mui/material";
+import { List } from "@mui/material";
 
 import AdminListItem from "./utils/AdminListItem";
 import { LinkType, navLink } from "../../../../data/link";
@@ -6,21 +6,7 @@ import AdminList from "./utils/AdminList";
 
 export default function AdminNavbar() {
   return (
-    <List
-      sx={{ bgcolor: "background.paper" }}
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          <Typography
-            fontWeight={"bold"}
-            fontSize={30}
-            fontFamily={"Rubik"}
-            sx={{ mt: 5, mb: 5 }}
-          >
-            Admin
-          </Typography>
-        </ListSubheader>
-      }
-    >
+    <List sx={{ bgcolor: "background.paper", mt: 6 }}>
       {navLink
         .filter((x) => x.showAdminNavLink)
         .map((x) => {
