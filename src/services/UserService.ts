@@ -1,5 +1,8 @@
+import { AnyAction, Dispatch, ThunkDispatch } from "@reduxjs/toolkit";
 import { BASE_API_URL } from "../config/variables";
-import { IUser, UserLogin } from "../models/identity/User";
+import { IUser, IUserLogin } from "../models/identity/User";
+import { removeUser, setUser } from "../redux/userSlice";
+import { NavigateFunction } from "react-router-dom";
 
 class UserService {
   static async createUser(user: IUser): Promise<Response | undefined> {
@@ -17,7 +20,7 @@ class UserService {
     }
   }
 
-  static async login(userLogin: UserLogin): Promise<Response | undefined> {
+  static async login(userLogin: IUserLogin): Promise<Response | undefined> {
     const endpoint = `${BASE_API_URL}${"api/users/login"}`;
     try {
       const response = await fetch(endpoint, {
@@ -32,8 +35,37 @@ class UserService {
     }
   }
 
-  static setCurrentUser(user: IUser): void {
+  static setCurrentUser(
+    user: IUser,
+    dispatch: ThunkDispatch<
+      {
+        currentUser: IUser | null;
+      },
+      undefined,
+      AnyAction
+    > &
+      Dispatch<AnyAction>,
+    navigate: NavigateFunction
+  ): void {
+    dispatch(setUser(user));
     localStorage.setItem("user", JSON.stringify(user));
+    navigate("/admin");
+  }
+
+  static logout(
+    dispatch: ThunkDispatch<
+      {
+        currentUser: IUser | null;
+      },
+      undefined,
+      AnyAction
+    > &
+      Dispatch<AnyAction>,
+    navigate: NavigateFunction
+  ): void {
+    dispatch(removeUser());
+    localStorage.removeItem("user");
+    navigate("/user");
   }
 }
 

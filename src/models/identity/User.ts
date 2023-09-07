@@ -9,12 +9,12 @@ export interface IUser {
   token: string;
 }
 
-export interface UserLogin {
+export interface IUserLogin {
   userName: string;
   password: string;
 }
 
-export interface UserUpdate {
+export interface IUserUpdate {
   id?: number;
   userName: string;
   firstName: string;

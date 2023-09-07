@@ -14,6 +14,7 @@ export enum LinkType {
   ADMIN_MODEL,
   ADMIN_INFO,
   ADMIN_USER,
+  PROFILE,
 }
 
 export const navLink = [
