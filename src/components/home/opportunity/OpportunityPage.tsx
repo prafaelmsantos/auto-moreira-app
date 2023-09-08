@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../../config/variables";
 import { getData } from "../../../services/AutoMoreiraService";
-import { Vehicle } from "../../../models/Vehicle";
+import { IVehicle } from "../../../models/Vehicle";
 import { MessageType } from "../../../models/enums/MessageTypeEnum";
 import AlertModal from "../../shared/modal/AlertModal";
 import AutoMoreiraLoader from "../../shared/loader/AutoMoreiraLoader";
@@ -10,7 +10,7 @@ import OpportunityContent from "./grid/OpportunityContent";
 
 export default function OpportunityPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 
   const [stateModal, setStateModal] = useState({
     openModal: false,
@@ -27,7 +27,7 @@ export default function OpportunityPage() {
   useEffect(() => {
     setIsLoading(true);
     const endpoint = `${BASE_API_URL}${"api/vehicles"}`;
-    getData<Vehicle[]>(`${endpoint}`)
+    getData<IVehicle[]>(`${endpoint}`)
       .then((data) => {
         setVehicles(data.filter((x) => !x.opportunity));
         setIsLoading(false);

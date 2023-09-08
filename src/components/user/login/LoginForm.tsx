@@ -70,6 +70,7 @@ export default function LoginForm() {
       userName: String(data.get("email")),
       password: String(data.get("password")),
     });
+    window.scrollTo(0, 0);
   };
 
   const InputLabelStyle = {

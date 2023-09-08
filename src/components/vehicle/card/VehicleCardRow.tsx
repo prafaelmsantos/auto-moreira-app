@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
-import { Vehicle } from "../../../models/Vehicle";
+import { IVehicle } from "../../../models/Vehicle";
 import VehicleCardItem from "./VehicleCardItem";
 import { VehicleCardIcon } from "../../../models/enums/VehicleCardIconEnum";
 import { FuelTypeConverted } from "../../../models/enums/FuelEnum";
 
-export default function VehicleCardRow(props: { vehicle: Vehicle }) {
+export default function VehicleCardRow(props: { vehicle: IVehicle }) {
   const { vehicle } = props;
 
   return (

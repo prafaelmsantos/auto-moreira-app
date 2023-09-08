@@ -14,20 +14,23 @@ import AdminUser from "../pages/admin/AdminUser";
 import AdminMark from "../pages/admin/AdminMark";
 import AdminModel from "../pages/admin/AdminModel";
 import AdminInfo from "../pages/admin/AdminInfo";
+import { getCurrentUser } from "../components/local/LocalStorage";
 
 export default function AutoMoreiraRouter() {
-  const element = useRoutes([
+  const routes = [
     {
       path: "/",
       element: <Home />,
-      id: "name",
+      id: "home",
     },
     {
       path: "/about",
       element: <About />,
+      id: "about",
     },
     {
       path: "/vehicles",
+      id: "vehicles",
       children: [
         { index: true, element: <Vehicles /> },
         { path: ":id", element: <VehiclePage /> },
@@ -36,17 +39,21 @@ export default function AutoMoreiraRouter() {
     {
       path: "/testimonials",
       element: <Testimonials />,
+      id: "testimonials",
     },
     {
       path: "/team",
       element: <Team />,
+      id: "team",
     },
     {
       path: "/contact",
       element: <Contact />,
+      id: "contact",
     },
     {
       path: "/user",
+      id: "user",
       children: [
         { index: true, element: <Login /> },
         { path: "login", element: <Login /> },
@@ -54,7 +61,18 @@ export default function AutoMoreiraRouter() {
       ],
     },
     {
+      path: "/*",
+      element: <Home />,
+      id: "home",
+    },
+  ];
+
+  const user = getCurrentUser();
+
+  if (user) {
+    routes.push({
       path: "/admin",
+      id: "admin",
       children: [
         { index: true, element: <AdminHome /> },
         { path: "mark", element: <AdminMark /> },
@@ -63,12 +81,10 @@ export default function AutoMoreiraRouter() {
         { path: "vehicle", element: <AdminVehicle /> },
         { path: "info", element: <AdminInfo /> },
       ],
-    },
-    {
-      path: "/*",
-      element: <Home />,
-    },
-  ]);
+    });
+  }
+
+  const element = useRoutes(routes);
 
   return element;
 }

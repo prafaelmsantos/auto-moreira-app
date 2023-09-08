@@ -1,5 +1,5 @@
 import { Card, CardContent, Grid, TextField, Typography } from "@mui/material";
-import { Vehicle } from "../../models/Vehicle";
+import { IVehicle } from "../../models/Vehicle";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { VehicleCardIcon } from "../../models/enums/VehicleCardIconEnum";
@@ -7,7 +7,7 @@ import VehicleCardItemRow from "./card/VehicleCardItemRow";
 import { FuelTypeConverted } from "../../models/enums/FuelEnum";
 import { TransmissionConverted } from "../../models/enums/TransmissionEnum";
 
-export default function VehicleDetails(props: { vehicle: Vehicle }) {
+export default function VehicleDetails(props: { vehicle: IVehicle }) {
   const { vehicle } = props;
   const items = [
     {

@@ -1,14 +1,14 @@
-import { Mark } from "./Mark";
-import { Model } from "./Model";
+import { IMark } from "./Mark";
+import { IModel } from "./Model";
 import { Fuel } from "./enums/FuelEnum";
 import { Transmission } from "./enums/TransmissionEnum";
 
-export interface Vehicle {
+export interface IVehicle {
   id: number;
   markId: number;
-  mark: Mark;
+  mark: IMark;
   modelId: number;
-  model: Model;
+  model: IModel;
   year: number;
   color: string;
   observations: string;

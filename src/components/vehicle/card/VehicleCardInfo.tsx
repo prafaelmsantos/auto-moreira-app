@@ -11,14 +11,14 @@ import {
   Typography,
 } from "@mui/material";
 import { AiFillStar } from "react-icons/ai";
-import { Vehicle } from "../../../models/Vehicle";
+import { IVehicle } from "../../../models/Vehicle";
 import VehicleCardRow from "./VehicleCardRow";
 import VehicleCardTitle from "./VehicleCardTitle";
 import { deepOrange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 
 type IVehicleCardInfo = {
-  vehicle: Vehicle;
+  vehicle: IVehicle;
 };
 
 export default function VehicleCardInfo(props: IVehicleCardInfo) {

@@ -3,7 +3,7 @@ import { LinkType } from "../data/link";
 import Footer from "../components/shared/footer/Footer";
 import { getData } from "../services/AutoMoreiraService";
 import { BASE_API_URL } from "../config/variables";
-import { Vehicle } from "../models/Vehicle";
+import { IVehicle } from "../models/Vehicle";
 import AutoMoreiraLoader from "../components/shared/loader/AutoMoreiraLoader";
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
@@ -15,7 +15,7 @@ import BookCar from "../components/vehicle/book-car/BookCar";
 
 export default function Vehicles() {
   const [isLoading, setIsLoading] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
 
   const [stateModal, setStateModal] = useState({
     openModal: false,
@@ -32,7 +32,7 @@ export default function Vehicles() {
   useEffect(() => {
     setIsLoading(true);
     const endpoint = `${BASE_API_URL}${"api/vehicles"}`;
-    getData<Vehicle[]>(`${endpoint}`)
+    getData<IVehicle[]>(`${endpoint}`)
       .then((data) => {
         setVehicles(data);
         setIsLoading(false);

@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import HeroPages from "../../components/HeroPages";
 import { LinkType, navLink } from "../../data/link";
 import AdminNavbar from "../../components/shared/navbar/admin/AdminNavbar";
@@ -11,18 +11,19 @@ import { ColDef } from "ag-grid-community";
 import AutoMoreiraLoader from "../../components/shared/loader/AutoMoreiraLoader";
 import AlertModal from "../../components/shared/modal/AlertModal";
 import { BASE_API_URL } from "../../config/variables";
-import { Vehicle } from "../../models/Vehicle";
+import { IVehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import { MessageType } from "../../models/enums/MessageTypeEnum";
 import { FuelTypeConverted } from "../../models/enums/FuelEnum";
+import Footer from "../../components/shared/footer/Footer";
 
 type GridParams = {
-  data: Vehicle;
+  data: IVehicle;
 };
 
 export default function AdminVehicle() {
   const [isLoading, setIsLoading] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [stateModal, setStateModal] = useState({
     openModal: false,
     responseContent: "",
@@ -31,9 +32,8 @@ export default function AdminVehicle() {
   });
   const { responseContent, responseTitle, openModal, type } = stateModal;
 
-  const handleOkModal = () => {
+  const handleOkModal = () =>
     setStateModal({ ...stateModal, openModal: false });
-  };
 
   const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
   const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
@@ -74,7 +74,7 @@ export default function AdminVehicle() {
   useEffect(() => {
     setIsLoading(true);
     const endpoint = `${BASE_API_URL}${"api/vehicles"}`;
-    getData<Vehicle[]>(`${endpoint}`)
+    getData<IVehicle[]>(`${endpoint}`)
       .then((data) => {
         setVehicles(data);
         setIsLoading(false);
@@ -108,7 +108,6 @@ export default function AdminVehicle() {
         message={responseContent}
         isOpen={openModal}
         onOk={handleOkModal}
-        onCancel={handleOkModal}
         type={type}
       />
       <AutoMoreiraLoader open={isLoading} />
@@ -117,17 +116,14 @@ export default function AdminVehicle() {
         title={navLink.find((x) => x.id === LinkType.ADMIN_VEHICLE)?.subTitle}
         titleUrl={navLink.find((x) => x.id === LinkType.ADMIN)?.url}
       />
-      <Grid container direction="row" sx={{ px: 20 }}>
+      <Grid container direction="row" sx={{ px: 20, mb: 10 }}>
         <Grid item xs={3}>
           <AdminNavbar />
         </Grid>
-        <Grid item xs={9} sx={{ px: 10 }}>
-          <Container>
-            <Box sx={{ mb: 6 }}>AdminVehicle</Box>
-          </Container>
+        <Grid item xs={9} sx={{ px: 12, mt: 7 }}>
           <div style={containerStyle}>
             <div style={gridStyle} className="ag-theme-alpine">
-              <AgGridReact<Vehicle>
+              <AgGridReact<IVehicle>
                 rowData={vehicles}
                 columnDefs={columnDefs}
                 pagination
@@ -138,6 +134,7 @@ export default function AdminVehicle() {
           </div>
         </Grid>
       </Grid>
+      <Footer />
     </Box>
   );
 }

@@ -1,9 +1,9 @@
 import { Box, Grid } from "@mui/material";
-import { Vehicle } from "../../../models/Vehicle";
+import { IVehicle } from "../../../models/Vehicle";
 import VehicleCardInfo from "./VehicleCardInfo";
 
 type IVehicleCard = {
-  vehicles: Vehicle[];
+  vehicles: IVehicle[];
 };
 
 export default function VehicleCard(props: IVehicleCard) {

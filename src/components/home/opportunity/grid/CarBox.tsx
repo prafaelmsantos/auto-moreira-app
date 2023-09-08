@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Vehicle } from "../../../../models/Vehicle";
+import { IVehicle } from "../../../../models/Vehicle";
 import AudiA1 from "../../../../images/cars-big/audia1.jpg";
 import { Button, Typography } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { FuelTypeConverted } from "../../../../models/enums/FuelEnum";
 import { TransmissionConverted } from "../../../../models/enums/TransmissionEnum";
 
-export default function CarBox(props: { vehicle: Vehicle }) {
+export default function CarBox(props: { vehicle: IVehicle }) {
   const { vehicle } = props;
   const [carLoad, setCarLoad] = useState(true);
   const navigate = useNavigate();

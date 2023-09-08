@@ -2,6 +2,7 @@ import { Box, Container, Grid } from "@mui/material";
 import HeroPages from "../../components/HeroPages";
 import { LinkType } from "../../data/link";
 import AdminNavbar from "../../components/shared/navbar/admin/AdminNavbar";
+import Footer from "../../components/shared/footer/Footer";
 
 export default function AdminHome() {
   return (
@@ -17,6 +18,7 @@ export default function AdminHome() {
           </Container>
         </Grid>
       </Grid>
+      <Footer />
     </Box>
   );
 }

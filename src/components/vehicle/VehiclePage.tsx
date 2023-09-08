@@ -4,7 +4,7 @@ import { LinkType } from "../../data/link";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BASE_API_URL } from "../../config/variables";
-import { Vehicle } from "../../models/Vehicle";
+import { IVehicle } from "../../models/Vehicle";
 import { getData } from "../../services/AutoMoreiraService";
 import AutoMoreiraLoader from "../shared/loader/AutoMoreiraLoader";
 import VehicleDetails from "./VehicleDetails";
@@ -15,13 +15,13 @@ export default function VehiclePage() {
   const param = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [vehicle, setVehicle] = useState<Vehicle>();
+  const [vehicle, setVehicle] = useState<IVehicle>();
 
   useEffect(() => {
     if (Number(param.id)) {
       setIsLoading(true);
       const endpoint = `${BASE_API_URL}${"api/vehicles/"}${Number(param.id)}`;
-      getData<Vehicle>(`${endpoint}`)
+      getData<IVehicle>(`${endpoint}`)
         .then((data) => {
           setVehicle(data);
           setIsLoading(false);

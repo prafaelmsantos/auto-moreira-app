@@ -1,9 +1,9 @@
 import { Box, Grid, Typography } from "@mui/material";
 import CarBox from "./CarBox";
-import { Vehicle } from "../../../../models/Vehicle";
+import { IVehicle } from "../../../../models/Vehicle";
 import { useState } from "react";
 
-export default function OpportunityContent(props: { vehicles: Vehicle[] }) {
+export default function OpportunityContent(props: { vehicles: IVehicle[] }) {
   const { vehicles } = props;
 
   const [activeVehicleId, setActiveVehicleId] = useState(1);

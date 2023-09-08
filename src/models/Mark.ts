@@ -1,4 +1,4 @@
-export interface Mark {
+export interface IMark {
   id: number;
   name: string;
 }
