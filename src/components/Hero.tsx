@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import BgShape from "../images/hero/hero-bg.png";
 import HeroCar from "../images/hero/main-car.png";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { MdArrowUpward } from "react-icons/md";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 function Hero() {
   const [goUp, setGoUp] = useState(false);
@@ -31,52 +34,48 @@ function Hero() {
     };
   }, []);
   return (
-    <>
-      <section id="home" className="hero-section">
-        <div className="container">
-          <img className="bg-shape" src={BgShape} alt="bg-shape" />
-          <div className="hero-content">
-            <div className="hero-content__text">
-              <h4>Plan your trip now</h4>
-              <h1>
-                Save <span>big</span> with our car rental
-              </h1>
-              <p>
-                Rent the car of your dreams. Unbeatable prices, unlimited miles,
-                flexible pick-up options and much more.
-              </p>
-              <div className="hero-content__text__btns">
-                <Link
-                  onClick={bookBtn}
-                  className="hero-content__text__btns__book-ride"
-                  to="/"
-                >
-                  Book Ride &nbsp; <i className="fa-solid fa-circle-check"></i>
-                </Link>
-                <Link className="hero-content__text__btns__learn-more" to="/">
-                  Learn More &nbsp; <i className="fa-solid fa-angle-right"></i>
-                </Link>
-              </div>
-            </div>
+    <Box id="home" className="hero-section" sx={{ px: 6 }}>
+      <Box className="container">
+        <img className="bg-shape" src={BgShape} alt="bg-shape" />
+        <Box className="hero-content">
+          <Box className="hero-content__text">
+            <h4>Bem-vindo ao</h4>
+            <h1>
+              Auto <span>Moreira</span>
+            </h1>
+            <p>
+              O Auto Moreira conta com mais de 15 anos de experiência no mercado
+              de venda automóvel sempre como principal missão, garantir a melhor
+              Qualidade e Confiança nos seus negócios.
+            </p>
+            <Box className="hero-content__text__btns">
+              <Link
+                onClick={bookBtn}
+                className="hero-content__text__btns__book-ride"
+                to="/"
+              >
+                Encontrar veículo &nbsp;
+                <i className="fa-solid fa-circle-check"></i>
+              </Link>
+              <Link className="hero-content__text__btns__learn-more" to="/">
+                Sobre Nós &nbsp; <i className="fa-solid fa-angle-right"></i>
+              </Link>
+            </Box>
+          </Box>
 
-            {/* img */}
-            <img
-              src={HeroCar}
-              alt="car-img"
-              className="hero-content__car-img"
-            />
-          </div>
-        </div>
+          {/* img */}
+          <img src={HeroCar} alt="car-img" className="hero-content__car-img" />
+        </Box>
+      </Box>
 
-        {/* page up */}
-        <div
-          onClick={scrollToTop}
-          className={`scroll-up ${goUp ? "show-scroll" : ""}`}
-        >
-          <i className="fa-solid fa-angle-up"></i>
-        </div>
-      </section>
-    </>
+      {/* page up */}
+      <Box
+        onClick={scrollToTop}
+        className={`scroll-up ${goUp ? "show-scroll" : ""}`}
+      >
+        <ArrowUpwardIcon sx={{ fontSize: 35 }} />
+      </Box>
+    </Box>
   );
 }
 

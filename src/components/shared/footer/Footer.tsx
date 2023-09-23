@@ -1,71 +1,41 @@
+import { Box, Divider, Grid, Typography } from "@mui/material";
+
+import AutoMoreira from "./utils/AutoMoreira";
+import SiteMap from "./utils/SiteMap";
+import Schedule from "./utils/Schedule";
+import DataProtection from "./utils/DataProtection";
+
 export default function Footer() {
   return (
-    <>
-      <footer>
-        <div className="container">
-          <div className="footer-content">
-            <ul className="footer-content__1">
-              <li>
-                <span>Auto Moreira</span>
-              </li>
-              <li>
-                O Auto Moreira tem como principal missão, garantir a melhor
-                Qualidade e Confiança nos seus negócios.
-              </li>
-              <li>
-                <a href="tel:123456789">
-                  <i className="fa-solid fa-phone"></i> &nbsp; +351 231472555
-                </a>
-              </li>
-              <li>
-                <a href="mailto:automoreira@gmail.com">
-                  <i className="fa-solid fa-envelope"></i>
-                  &nbsp; automoreira@gmail.com
-                </a>
-              </li>
-            </ul>
-
-            <ul className="footer-content__2">
-              <li>Company</li>
-              <li>
-                <a href="#home">New York</a>
-              </li>
-              <li>
-                <a href="#home">Careers</a>
-              </li>
-              <li>
-                <a href="#home">Mobile</a>
-              </li>
-              <li>
-                <a href="#home">Blog</a>
-              </li>
-              <li>
-                <a href="#home">How we work</a>
-              </li>
-            </ul>
-
-            <ul className="footer-content__2">
-              <li>Horário</li>
-              <li>Seg. a Sex.: 9:00 - 18:00</li>
-              <li>Sábado: 9:30 - 18:00</li>
-              <li>Domingo: 9:30 - 15:00</li>
-            </ul>
-
-            <ul className="footer-content__2">
-              <li>Subscription</li>
-              <li>
-                <p>Subscribe your Email address for latest news & updates.</p>
-              </li>
-              <li>
-                <input type="email" placeholder="Enter Email Address"></input>
-              </li>
-              <li>
-                <button className="submit-email">Enviar</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </>
+    <Box sx={{ mt: 5 }}>
+      <Grid
+        container
+        spacing={2}
+        className="container"
+        justifyContent="space-between"
+      >
+        <AutoMoreira />
+        <Grid item container xs={7}>
+          <SiteMap />
+          <Schedule />
+          <DataProtection />
+        </Grid>
+        <Divider sx={{ mt: 1, mb: 1, color: "black" }} />
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          mt={4}
+          mb={4}
+        >
+          <Grid item>
+            <Typography variant="h6" fontFamily={"Rubik"}>
+              2023 @Copyright | Todos os Direitos Reservados.
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

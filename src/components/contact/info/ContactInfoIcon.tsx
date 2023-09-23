@@ -7,13 +7,15 @@ import { ContactIcon } from "../../../models/enums/ContactIconEnum";
 type IContactInfoIcon = {
   type: ContactIcon;
   text: string;
+  isFooter?: boolean;
 };
 function ContactIconInfo(props: IContactInfoIcon) {
-  const { text, type } = props;
+  const { text, type, isFooter } = props;
 
   const iconStyle = {
-    fontSize: 20,
-    mt: 0.2,
+    fontSize: isFooter ? 30 : 20,
+    mt: isFooter ? -0.3 : 0.2,
+    color: "black",
   };
 
   return (
@@ -24,7 +26,11 @@ function ContactIconInfo(props: IContactInfoIcon) {
         {type === ContactIcon.LOCATION && <LocationOnIcon sx={iconStyle} />}
       </Grid>
       <Grid item>
-        <Typography fontWeight={"bold"} fontSize={16}>
+        <Typography
+          fontWeight={"bold"}
+          color={"black"}
+          fontSize={isFooter ? 18 : 16}
+        >
           {text}
         </Typography>
       </Grid>

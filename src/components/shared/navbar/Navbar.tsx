@@ -56,7 +56,7 @@ export default function Navbar() {
                   style={({ isActive }) => {
                     if (isActive) {
                       return {
-                        color: isActive ? "#ff4d30" : "black",
+                        color: "#ff4d30",
                         fontWeight: "bold",
                         fontSize: 18,
                       };
@@ -82,7 +82,7 @@ export default function Navbar() {
       <div className="navbar">
         <div>
           <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>
-            <img src={Logo} alt="logo" width={180} height={140} />
+            <img src={Logo} alt="logo" width={220} height={160} />
           </NavLink>
         </div>
 
@@ -93,17 +93,17 @@ export default function Navbar() {
               <li key={data.id}>
                 <NavLink
                   to={data.url}
-                  style={({ isActive, isPending }) => {
+                  style={({ isActive }) => {
                     if (isActive) {
                       return {
-                        color: isActive ? "#ff4d30" : "black",
+                        color: "#ff4d30",
                         fontWeight: "bold",
-                        fontSize: 18,
+                        fontSize: 22,
                       };
                     } else {
                       return {
-                        fontSize: 16,
-                        "&:hover": {
+                        fontSize: 18,
+                        "nav a:hover": {
                           color: "#ff4d30",
                         },
                       };
@@ -212,14 +212,14 @@ export default function Navbar() {
           ) : (
             <>
               <Link
-                style={{ fontWeight: "bold", fontSize: 16 }}
+                style={{ fontWeight: "bold", fontSize: 18 }}
                 className="navbar__buttons__sign-in"
                 to="/user/login"
               >
                 {"Entrar"}
               </Link>
               <Link
-                style={{ fontWeight: "bold", fontSize: 16 }}
+                style={{ fontWeight: "bold", fontSize: 18 }}
                 className="navbar__buttons__register"
                 to="/user/registration"
               >

@@ -5,9 +5,9 @@ export default function SupportPage() {
         <div className="container">
           <div className="banner-content">
             <div className="banner-content__text">
-              <h2>Save big with our cheap car rental!</h2>
+              <h2>Economize com as nossas viaturas!</h2>
               <p>
-                Top Airports. Local Suppliers. <span>24/7</span> Support.
+                Suporte <span>24/7</span>
               </p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { IMark } from "./Mark";
 
 export interface IModel {
-  Id: number;
+  id: number;
   name: string;
   markId: number;
   mark: IMark;

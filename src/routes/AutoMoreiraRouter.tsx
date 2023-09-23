@@ -14,7 +14,7 @@ import AdminUser from "../pages/admin/AdminUser";
 import AdminMark from "../pages/admin/AdminMark";
 import AdminModel from "../pages/admin/AdminModel";
 import AdminInfo from "../pages/admin/AdminInfo";
-import { getCurrentUser } from "../components/local/LocalStorage";
+import { useAppSelector } from "../redux/hooks";
 
 export default function AutoMoreiraRouter() {
   const routes = [
@@ -66,8 +66,7 @@ export default function AutoMoreiraRouter() {
       id: "home",
     },
   ];
-
-  const user = getCurrentUser();
+  const user = useAppSelector((state) => state.userSlice.user);
 
   if (user) {
     routes.push({

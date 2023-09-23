@@ -1,12 +1,12 @@
 export enum Fuel {
-  PETROl = "Petrol",
+  PETROL = "Petrol",
   DIESEL = "Diesel",
   HYBRID = "Hybrid",
 }
 
 export function FuelTypeConverted(fuelType: Fuel) {
   switch (fuelType) {
-    case Fuel.PETROl:
+    case Fuel.PETROL:
       return "Gasolina";
     case Fuel.DIESEL:
       return "Gasóleo";

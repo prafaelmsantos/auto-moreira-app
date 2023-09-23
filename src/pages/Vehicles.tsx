@@ -7,27 +7,39 @@ import { IVehicle } from "../models/Vehicle";
 import AutoMoreiraLoader from "../components/shared/loader/AutoMoreiraLoader";
 import { Box } from "@mui/material";
 import { useState, useEffect } from "react";
-import AlertModal from "../components/shared/modal/AlertModal";
-import { MessageType } from "../models/enums/MessageTypeEnum";
 import VehicleCard from "../components/vehicle/card/VehicleCard";
 import VehicleLenghtGrid from "../components/vehicle/grid/VehicleLenghtGrid";
 import BookCar from "../components/vehicle/book-car/BookCar";
+import { IMark } from "../models/Mark";
+import { IModel } from "../models/Model";
+import VehicleFilters from "../components/home/search-vehicle/SearchVehicle";
+import {
+  ISelectedFilters,
+  maxKms,
+  maxPrice,
+  maxYear,
+  minKms,
+  minPrice,
+  minYear,
+} from "../models/Filter";
+import { Filter } from "../components/home/search-vehicle/utils/Filter";
 
 export default function Vehicles() {
   const [isLoading, setIsLoading] = useState(false);
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-
-  const [stateModal, setStateModal] = useState({
-    openModal: false,
-    responseContent: "",
-    responseTitle: "",
-    type: MessageType.ERROR,
+  const [marks, setMarks] = useState<IMark[]>([]);
+  const [models, setModels] = useState<IModel[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<ISelectedFilters>({
+    markId: null,
+    modelId: null,
+    fuelType: null,
+    minYear: minYear,
+    maxYear: maxYear,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+    minKms: minKms,
+    maxKms: maxKms,
   });
-  const { responseContent, responseTitle, openModal, type } = stateModal;
-
-  const handleOkModal = () => {
-    setStateModal({ ...stateModal, openModal: false });
-  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -40,31 +52,51 @@ export default function Vehicles() {
       .catch((e) => {
         console.error(e);
         setIsLoading(false);
-        setStateModal({
-          ...stateModal,
-          openModal: true,
-          responseTitle: "Erro!",
-          responseContent:
-            "Erro ao carregar os veículos. Por favor tente mais tarde...",
-        });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+    const endpoint = `${BASE_API_URL}${"api/marks"}`;
+    getData<IMark[]>(`${endpoint}`)
+      .then((data) => {
+        setMarks(data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const endpoint = `${BASE_API_URL}${"api/models"}`;
+    getData<IModel[]>(`${endpoint}`)
+      .then((data) => {
+        setModels(data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (event: number | string | null | number[], id: string) =>
+    setSelectedFilters((old) => ({ ...old, [id]: event }));
+
+  console.log(Filter(selectedFilters, vehicles));
+
   return (
     <Box>
-      <AlertModal
-        title={responseTitle}
-        message={responseContent}
-        isOpen={openModal}
-        onOk={handleOkModal}
-        onCancel={handleOkModal}
-        type={type}
-      />
       <AutoMoreiraLoader open={isLoading} />
 
       <HeroPages id={LinkType.VEHICLES} />
-
+      <VehicleFilters {...{ handleChange, marks, models, selectedFilters }} />
       <VehicleLenghtGrid length={vehicles.length} />
 
       <VehicleCard vehicles={vehicles} />

@@ -16,7 +16,7 @@ function VehicleLenghtGrid(props: IVehicleLenghtGrid) {
       sx={{ mt: 7 }}
     >
       <Grid item>
-        <Typography variant="h4">
+        <Typography variant="h5">
           {length !== 0
             ? length === 1
               ? length + " veiculo encontrado!"
