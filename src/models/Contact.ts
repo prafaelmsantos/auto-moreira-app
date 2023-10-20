@@ -2,7 +2,7 @@ export interface IContact {
   id: number;
   name: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber: number;
   message: string;
   dateTime: Date;
 }

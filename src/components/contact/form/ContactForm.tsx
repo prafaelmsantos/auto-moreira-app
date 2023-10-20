@@ -1,50 +1,110 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { IContact } from "../../../models/Contact";
 
 function ContactForm() {
-  const InputLabelStyle = {
-    style: {
-      fontSize: 16,
-    },
-  };
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("O nome completo obrigatório!"),
+    email: Yup.string()
+      .required("O email é obrigatório!")
+      .email("O email é inválido!"),
+    phoneNumber: Yup.number()
+      .required("O numero de telemóvel/telefone é obrigatório!")
+      .min(200000000, "O numero não é válido!")
+      .max(999999999, "O numero não é válido!")
+      .typeError("O numero não é válido!"),
+    message: Yup.string().required("A menssagem obrigatória!"),
+    dateTime: Yup.date().default(new Date()),
+    id: Yup.number().default(0),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit = (data: IContact) => {
+    console.log(data);
+
+    if (data) {
+      console.log("top");
+    }
+    alert(JSON.stringify(data));
+  }; // your form submit function which will invoke after successful validation
+
+  console.log(errors);
 
   return (
     <Grid container direction="row">
+      <Grid item xs={12} sm={12}></Grid>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit(onSubmit)}
+      >
+        Register
+      </Button>
       <Grid item xs={12}>
         <TextField
           fullWidth
-          id="Nome Completo"
+          id="name"
           label="Nome Completo"
           required
-          InputProps={InputLabelStyle}
-          InputLabelProps={InputLabelStyle}
+          {...register("name")}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+      </Grid>
+      <Grid item xs={12} sx={{ mt: 2 }}>
+        <TextField
+          required
+          id="fullname"
+          label="Telefone/Telemóvel"
+          fullWidth
+          margin="dense"
+          {...register("phoneNumber")}
+          error={!!errors.phoneNumber}
+          helperText={errors.phoneNumber?.message}
+          InputProps={{
+            inputProps: { min: 100000000, max: 999999999 },
+            startAdornment: (
+              <Typography sx={{ mt: 0.1, mx: 0.5 }}>+351</Typography>
+            ),
+          }}
+          type="Number"
+          defaultValue={100000000}
         />
       </Grid>
       <Grid item xs={12} sx={{ mt: 2 }}>
         <TextField
           fullWidth
-          id="Email"
+          id="email"
           label="Email"
           required
-          InputProps={InputLabelStyle}
-          InputLabelProps={InputLabelStyle}
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email?.message}
         />
       </Grid>
       <Grid item xs={12} sx={{ mt: 2 }}>
         <TextField
           fullWidth
-          id="Mensagem"
+          id="message"
           label="Mensagem"
           required
           multiline
           rows={8}
-          InputProps={InputLabelStyle}
-          InputLabelProps={{
-            style: {
-              fontSize: 16,
-            },
-          }}
+          {...register("message")}
+          error={!!errors.message}
+          helperText={errors.message?.message}
         />
       </Grid>
       <Grid item xs={12} sx={{ mt: 3 }}>
