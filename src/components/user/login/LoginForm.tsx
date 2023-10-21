@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -15,6 +8,10 @@ import AutoMoreiraSnackbar from "../../shared/snackbar/AutoMoreiraSnackbar";
 import { useAppDispatch } from "../../../redux/hooks";
 import AlertModal from "../../shared/modal/AlertModal";
 import UserService from "../../../services/UserService";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import TextFieldValidation from "../../shared/form/TextFieldValidation";
 
 export default function LoginForm() {
   const [stateModal, setStateModal] = useState({
@@ -23,11 +20,26 @@ export default function LoginForm() {
     responseTitle: "",
     type: MessageType.INFO,
   });
+  const { responseContent, responseTitle, openModal, type } = stateModal;
+
+  const [stateToast, setStateToast] = useState({
+    openToast: false,
+    toastMessage: "",
+  });
+
+  const { openToast, toastMessage } = stateToast;
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const login = async (user: IUserLogin) => {
+  const validationSchema = Yup.object().shape({
+    userName: Yup.string().required(
+      "O email/nome de utilizador é obrigatório!"
+    ),
+    password: Yup.string().required("A palavra-passe é obrigatória!"),
+  });
+
+  const onSubmit = async (user: IUserLogin) => {
     const response = await UserService.login(user);
     if (response) {
       if (response.ok) {
@@ -41,43 +53,27 @@ export default function LoginForm() {
           dispatch,
           navigate
         );
-
+        window.scrollTo(0, 0);
         return Promise.resolve();
       } else {
         setStateModal({
           openModal: true,
           responseTitle: "Erro!",
           responseContent:
-            "Lamentamos mas os dados inseridos não estão corretos. Por favor, verifique o username ou a password.",
+            "Lamentamos mas os dados inseridos não estão corretos. Por favor, verifique o email ou a password.",
           type: MessageType.ERROR,
         });
       }
     }
   };
 
-  const { responseContent, responseTitle, openModal, type } = stateModal;
-  const [stateToast, setStateToast] = useState({
-    openToast: false,
-    toastMessage: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
   });
-
-  const { openToast, toastMessage } = stateToast;
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    login({
-      userName: String(data.get("email")),
-      password: String(data.get("password")),
-    });
-    window.scrollTo(0, 0);
-  };
-
-  const InputLabelStyle = {
-    style: {
-      fontSize: 16,
-    },
-  };
 
   return (
     <>
@@ -114,40 +110,28 @@ export default function LoginForm() {
           <Typography component="h1" variant="h6" fontFamily={"Rubik"}>
             Entrar com
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              InputProps={InputLabelStyle}
-              InputLabelProps={InputLabelStyle}
+          <Box sx={{ mt: 2 }}>
+            <TextFieldValidation
+              label={"Email/Nome de utilizador"}
+              error={!!errors.userName}
+              helperText={errors.userName?.message}
+              register={register("userName")}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              InputProps={InputLabelStyle}
-              InputLabelProps={InputLabelStyle}
+
+            <TextFieldValidation
+              label={"Palavra-passe"}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              register={register("password")}
+              type={"password"}
+              sx={{ mt: 3 }}
             />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleSubmit(onSubmit)}
               sx={{
                 bgcolor: "#ff4d30",
                 mt: 3,

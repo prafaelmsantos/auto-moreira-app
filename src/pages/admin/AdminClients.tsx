@@ -16,7 +16,7 @@ import { MessageType } from "../../models/enums/MessageTypeEnum";
 import Footer from "../../components/shared/footer/Footer";
 import { IContact } from "../../models/Contact";
 
-export default function AdminInfo() {
+export default function AdminClients() {
   const [isLoading, setIsLoading] = useState(false);
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [stateModal, setStateModal] = useState({

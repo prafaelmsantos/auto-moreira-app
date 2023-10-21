@@ -40,7 +40,8 @@ export default function App() {
             return Promise.reject();
           }
         } else {
-          return [address, config];
+          config.headers.Authorization = "";
+          return Promise.reject();
         }
       },
 

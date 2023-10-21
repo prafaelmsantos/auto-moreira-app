@@ -53,7 +53,7 @@ export default function AlertModal(props: IAlertModal) {
 
   const icon = useMemo(() => {
     const styleIcon = {
-      fontSize: 50,
+      fontSize: 70,
     };
     switch (type) {
       case MessageType.ERROR:
@@ -80,7 +80,7 @@ export default function AlertModal(props: IAlertModal) {
       }}
     >
       <Card>
-        <Box sx={{ height: 75, bgcolor: color }}>
+        <Box sx={{ height: 90, bgcolor: color }}>
           <DialogTitle sx={{ m: 0, p: 2 }}>
             <Grid container spacing={1}>
               <Grid item sx={{ color: "white" }}>
@@ -100,7 +100,7 @@ export default function AlertModal(props: IAlertModal) {
 
         <Box sx={{ bgcolor: "white" }}>
           <DialogContent dividers>
-            <Typography variant="h5">{message}</Typography>
+            <Typography variant="h6">{message}</Typography>
           </DialogContent>
         </Box>
         <Box sx={{ height: 70, bgcolor: "white" }}>

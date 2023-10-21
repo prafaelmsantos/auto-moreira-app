@@ -13,7 +13,7 @@ import AdminVehicle from "../pages/admin/AdminVehicle";
 import AdminUser from "../pages/admin/AdminUser";
 import AdminMark from "../pages/admin/AdminMark";
 import AdminModel from "../pages/admin/AdminModel";
-import AdminInfo from "../pages/admin/AdminInfo";
+import AdminClients from "../pages/admin/AdminClients";
 import { useAppSelector } from "../redux/hooks";
 
 export default function AutoMoreiraRouter() {
@@ -78,7 +78,7 @@ export default function AutoMoreiraRouter() {
         { path: "model", element: <AdminModel /> },
         { path: "user", element: <AdminUser /> },
         { path: "vehicle", element: <AdminVehicle /> },
-        { path: "info", element: <AdminInfo /> },
+        { path: "info", element: <AdminClients /> },
       ],
     });
   }

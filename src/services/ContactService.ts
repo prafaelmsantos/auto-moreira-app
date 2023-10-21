@@ -2,12 +2,12 @@ import { BASE_API_URL } from "../config/variables";
 import { IContact } from "../models/Contact";
 
 class ContactService {
-  static async createUser(user: IContact): Promise<Response | undefined> {
-    const endpoint = `${BASE_API_URL}${"api/users/createUser"}`;
+  static async postContact(contact: IContact): Promise<Response | undefined> {
+    const endpoint = `${BASE_API_URL}${"api/contacts"}`;
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(contact),
         headers: { "Content-Type": "application/json" },
       });
 
