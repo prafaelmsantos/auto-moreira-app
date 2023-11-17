@@ -84,7 +84,6 @@ function ContactForm() {
 
   useEffect(() => {
     reset({ name: "", email: "", phoneNumber: 100000000, message: "" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful]);
 
   return (

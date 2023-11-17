@@ -53,7 +53,6 @@ export default function Vehicles() {
         console.error(e);
         setIsLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -68,7 +67,6 @@ export default function Vehicles() {
         console.error(e);
         setIsLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -83,13 +81,10 @@ export default function Vehicles() {
         console.error(e);
         setIsLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event: number | string | null | number[], id: string) =>
     setSelectedFilters((old) => ({ ...old, [id]: event }));
-
-  console.log(Filter(selectedFilters, vehicles));
 
   return (
     <Box>

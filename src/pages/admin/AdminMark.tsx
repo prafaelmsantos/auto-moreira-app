@@ -63,7 +63,6 @@ export default function AdminMark() {
             "Erro ao carregar as marcas. Por favor tente mais tarde...",
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const defaultColDef = useMemo<ColDef>(() => {

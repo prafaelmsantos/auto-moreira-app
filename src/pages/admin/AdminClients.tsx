@@ -76,7 +76,6 @@ export default function AdminClients() {
             "Erro ao carregar as mensagens de clientes. Por favor tente mais tarde...",
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const defaultColDef = useMemo<ColDef>(() => {

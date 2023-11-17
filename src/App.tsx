@@ -16,7 +16,6 @@ export default function App() {
 
   useEffect(() => {
     dispatch(setUser(user));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {

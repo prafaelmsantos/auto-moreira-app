@@ -90,7 +90,6 @@ export default function AdminVehicle() {
             "Erro ao carregar os veículos. Por favor tente mais tarde...",
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const defaultColDef = useMemo<ColDef>(() => {

@@ -76,7 +76,6 @@ export default function AdminUser() {
             "Erro ao carregar os models. Por favor tente mais tarde...",
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const defaultColDef = useMemo<ColDef>(() => {
