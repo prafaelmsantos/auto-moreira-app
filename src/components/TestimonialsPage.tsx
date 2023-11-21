@@ -8,13 +8,10 @@ export default function TestimonialsPage() {
         <div className="container">
           <div className="testimonials-content">
             <div className="testimonials-content__title">
-              <h4>Reviewed by People</h4>
-              <h2>Client's Testimonials</h2>
+              <h2>Avaliação de clientes</h2>
               <p>
-                Discover the positive impact we've made on the our clients by
-                reading through their testimonials. Our clients have experienced
-                our service and results, and they're eager to share their
-                positive experiences with you.
+                Os nossos clientes experimentaram os nossos serviços e viaturas
+                e estão ansiosos por compartilhar as suas experiências.
               </p>
             </div>
 
@@ -24,16 +21,16 @@ export default function TestimonialsPage() {
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
                 <p>
-                  "We rented a car from this website and had an amazing
-                  experience! The booking was easy and the rental rates were
-                  very affordable. "
+                  "Compramos um carro neste stand e tivemos uma experiência
+                  incrível! Equipa simpatica, compreensiva e preços muito
+                  acessíveis."
                 </p>
                 <div className="all-testimonials__box__name">
                   <div className="all-testimonials__box__name__profile">
                     <img src={Img2} alt="user_img" />
                     <span>
-                      <h4>Jones Mbogholi</h4>
-                      <p>Kenya</p>
+                      <h4>Criatiano Ronaldo</h4>
+                      <p>Madeira, Portugal</p>
                     </span>
                   </div>
                 </div>
@@ -43,16 +40,13 @@ export default function TestimonialsPage() {
                 <span className="quotes-icon">
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
-                <p>
-                  "The car was in great condition and made our trip even better.
-                  Highly recommend for this car rental website!"
-                </p>
+                <p>"Recomendo este stand para compra de carros!"</p>
                 <div className="all-testimonials__box__name">
                   <div className="all-testimonials__box__name__profile">
                     <img src={Img3} alt="user_img" />
                     <span>
-                      <h4>Solomon Odingo </h4>
-                      <p>South Sudan</p>
+                      <h4>Luís Figo </h4>
+                      <p>Lisboa, Portugal</p>
                     </span>
                   </div>
                 </div>

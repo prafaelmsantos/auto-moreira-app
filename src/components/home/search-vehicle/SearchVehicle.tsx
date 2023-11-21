@@ -51,7 +51,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
               alignItems="center"
               spacing={2}
             >
-              <Grid item xs={3}>
+              <Grid item lg={3} xs={12}>
                 <Autocomplete
                   fullWidth
                   onChange={(event, value) => {
@@ -76,7 +76,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   )}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item lg={3} xs={12}>
                 <Autocomplete
                   fullWidth
                   onChange={(event, value) =>
@@ -110,7 +110,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   )}
                 />
               </Grid>
-              <Grid item xs={3}>
+              <Grid item lg={3} xs={12}>
                 <Autocomplete
                   fullWidth
                   onChange={(event, value) => handleChange(value, "fuelType")}
@@ -139,7 +139,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
               spacing={9}
               mt={-4}
             >
-              <Grid item xs={3.25}>
+              <Grid item lg={3.25} xs={12}>
                 <Grid
                   container
                   direction="row"
@@ -171,7 +171,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={2.5}>
+              <Grid item lg={2.25} xs={12}>
                 <Grid
                   container
                   direction="row"
@@ -203,7 +203,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={3.25}>
+              <Grid item lg={3.25} xs={12}>
                 <Grid
                   container
                   direction="row"
@@ -247,7 +247,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
               spacing={2}
               mt={8}
             >
-              <Grid item xs={1.5}>
+              <Grid item lg={1.5} xs={4}>
                 <Button
                   fullWidth
                   variant="contained"
@@ -276,7 +276,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   </Typography>
                 </Button>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item lg={2} xs={6}>
                 <Button
                   fullWidth
                   variant="contained"

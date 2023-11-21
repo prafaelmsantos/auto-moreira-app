@@ -1,7 +1,6 @@
 import Hero from "../components/Hero";
-import PlanTrip from "../components/PlanTrip";
+
 import Testimonials from "../components/TestimonialsPage";
-import Faq from "../components/home/faq/Faq";
 import Footer from "../components/shared/footer/Footer";
 import OpportunityPage from "../components/home/opportunity/OpportunityPage";
 import SupportPage from "../components/home/support/SupportPage";
@@ -41,11 +40,10 @@ function Home() {
           maxKms: maxKms,
         }}
       />
-      <PlanTrip />
+
       <OpportunityPage />
       <SupportPage />
       <Testimonials />
-      <Faq />
       <Footer />
     </>
   );

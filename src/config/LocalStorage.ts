@@ -1,4 +1,4 @@
-import { IUser } from "../../models/identity/User";
+import { IUser } from "../models/identity/User";
 
 export const getCurrentUser = () => {
   const user = localStorage.getItem("user");

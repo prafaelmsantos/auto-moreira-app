@@ -38,7 +38,7 @@ function Hero() {
       <Box className="container">
         <img className="bg-shape" src={BgShape} alt="bg-shape" />
         <Box className="hero-content">
-          <Box className="hero-content__text">
+          <Box className="hero-content__text" sx={{ px: 10 }}>
             <h4>Bem-vindo ao</h4>
             <h1>
               Auto <span>Moreira</span>

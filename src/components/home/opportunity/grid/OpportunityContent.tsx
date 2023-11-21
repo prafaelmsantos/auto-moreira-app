@@ -22,7 +22,7 @@ export default function OpportunityContent(props: { vehicles: IVehicle[] }) {
     >
       {vehicles.length !== 0 ? (
         <>
-          <Grid item>
+          <Grid item lg={2} xs={12}>
             {vehicles.map((vehicle) => {
               return (
                 <Box sx={{ mt: vehicle.id === 1 ? 0 : 1 }}>
@@ -45,14 +45,12 @@ export default function OpportunityContent(props: { vehicles: IVehicle[] }) {
               );
             })}
           </Grid>
-          <Grid item>
-            {vehicles.map((vehicle) => {
-              return vehicle.id === activeVehicleId ? (
+          <Grid item lg={9} xs={12} sx={{ mt: 2 }}>
+            {vehicles
+              .filter((vehicle) => vehicle.id === activeVehicleId)
+              .map((vehicle) => (
                 <CarBox vehicle={vehicle} />
-              ) : (
-                <></>
-              );
-            })}
+              ))}
           </Grid>
         </>
       ) : (

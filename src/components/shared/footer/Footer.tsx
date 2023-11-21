@@ -15,6 +15,7 @@ export default function Footer() {
         justifyContent="space-between"
       >
         <AutoMoreira />
+
         <Grid item container xs={7}>
           <SiteMap />
           <Schedule />
@@ -29,11 +30,9 @@ export default function Footer() {
           mt={4}
           mb={4}
         >
-          <Grid item>
-            <Typography variant="h6" fontFamily={"Rubik"}>
-              2023 @Copyright | Todos os Direitos Reservados.
-            </Typography>
-          </Grid>
+          <Typography variant="h6" fontFamily={"Rubik"}>
+            2023 @Copyright | Todos os Direitos Reservados.
+          </Typography>
         </Grid>
       </Grid>
     </Box>

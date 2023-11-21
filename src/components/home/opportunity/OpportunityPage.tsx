@@ -5,6 +5,7 @@ import { IVehicle } from "../../../models/Vehicle";
 import AutoMoreiraLoader from "../../shared/loader/AutoMoreiraLoader";
 import OpportunityTitle from "./grid/OpportunityTitle";
 import OpportunityContent from "./grid/OpportunityContent";
+import { Box } from "@mui/material";
 
 export default function OpportunityPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,12 +26,12 @@ export default function OpportunityPage() {
   }, []);
 
   return (
-    <>
+    <Box sx={{ mt: 10 }}>
       <AutoMoreiraLoader open={isLoading} />
 
       <OpportunityTitle />
 
       <OpportunityContent vehicles={vehicles} />
-    </>
+    </Box>
   );
 }

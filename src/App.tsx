@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import "../src/dist/styles.css";
-import Navbar from "./components/shared/navbar/Navbar";
+
 import { useAppDispatch } from "./redux/hooks";
 import { setUser } from "./redux/userSlice";
 import fetchIntercept from "fetch-intercept";
 
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
 import { InterceptorRequest } from "./models/Interceptor";
-import { getCurrentUser } from "./components/local/LocalStorage";
+import { getCurrentUser } from "./config/LocalStorage";
+import Navbar from "./components/shared/navbar/Navbar";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export default function App() {
     dispatch(setUser(user));
   }, [user]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     fetchIntercept.register({
       request: function (url: Request | string, config: InterceptorRequest) {
         let address: string;
@@ -56,7 +57,7 @@ export default function App() {
         return Promise.reject(error);
       },
     });
-  }, [user]);
+  }, [user]); */
 
   return (
     <>
