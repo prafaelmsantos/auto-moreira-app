@@ -1,25 +1,34 @@
-import { useEffect } from "react";
+/** @format */
+
+import {useEffect} from "react";
 import "../src/dist/styles.css";
 
-import { useAppDispatch } from "./redux/hooks";
-import { setUser } from "./redux/userSlice";
+import {useAppDispatch} from "./redux/hooks";
+import {setUser} from "./redux/userSlice";
 import fetchIntercept from "fetch-intercept";
 
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
-import { InterceptorRequest } from "./models/Interceptor";
-import { getCurrentUser } from "./config/LocalStorage";
+import {InterceptorRequest} from "./models/Interceptor";
+import {getCurrentFilters, getCurrentUser} from "./config/LocalStorage";
 import Navbar from "./components/shared/navbar/Navbar";
+import {setFilters} from "./redux/filtersSlice";
 
 export default function App() {
   const dispatch = useAppDispatch();
 
   const user = getCurrentUser();
 
+  const filters = getCurrentFilters();
+
   useEffect(() => {
-    dispatch(setUser(user));
+    user && dispatch(setUser(user));
   }, [user]);
 
-  /*  useEffect(() => {
+  useEffect(() => {
+    filters && dispatch(setFilters(filters));
+  }, [filters]);
+
+  /*   useEffect(() => {
     fetchIntercept.register({
       request: function (url: Request | string, config: InterceptorRequest) {
         let address: string;

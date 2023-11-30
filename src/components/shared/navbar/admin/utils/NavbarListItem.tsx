@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   ListItemButton,
   ListItemIcon,
@@ -5,13 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 
-import { CgProfile } from "react-icons/cg";
+import {CgProfile} from "react-icons/cg";
 
-import { MdLogout, MdOutlineAdminPanelSettings } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
-import { LinkType } from "../../../../../data/link";
+import {MdLogout, MdOutlineAdminPanelSettings} from "react-icons/md";
+import {NavLink, useNavigate} from "react-router-dom";
+import {LinkType} from "../../../../../data/link";
 import UserService from "../../../../../services/UserService";
-import { useAppDispatch } from "../../../../../redux/hooks";
+import {useAppDispatch} from "../../../../../redux/hooks";
 
 type INavbarListItem = {
   handleClose: () => void;
@@ -21,7 +23,7 @@ type INavbarListItem = {
 };
 
 export default function NavbarListItem(props: INavbarListItem) {
-  const { handleClose, title, iconType, url } = props;
+  const {handleClose, title, iconType, url} = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -33,24 +35,24 @@ export default function NavbarListItem(props: INavbarListItem) {
         iconType === LinkType.LOGIN && UserService.logout(dispatch, navigate);
       }}
       to={url}
-      style={({ isActive }) => {
+      style={({isActive}) => {
         if (isActive) {
           return {
             fontWeight: "bold",
-            fontSize: 14,
+            fontSize: 12,
             textDecoration: "none",
             color: "black",
           };
         } else {
           return {
-            fontSize: 14,
+            fontSize: 12,
             textDecoration: "none",
             color: "black",
           };
         }
       }}
     >
-      {({ isActive }) => (
+      {({isActive}) => (
         <>
           <ListItemButton
             selected={isActive}
@@ -81,7 +83,7 @@ export default function NavbarListItem(props: INavbarListItem) {
           >
             <ListItemIcon
               sx={{
-                fontSize: iconType === LinkType.LOGIN ? 24 : 28,
+                fontSize: iconType === LinkType.LOGIN ? 18 : 24,
                 color: "GrayText",
               }}
             >
@@ -90,13 +92,9 @@ export default function NavbarListItem(props: INavbarListItem) {
               {iconType === LinkType.LOGIN && <MdLogout />}
             </ListItemIcon>
             <ListItemText
-              sx={{ mt: 0.5, mx: -2 }}
+              sx={{mt: 0.5}}
               primary={
-                <Typography
-                  fontWeight={"bold"}
-                  fontSize={14}
-                  fontFamily={"Rubik"}
-                >
+                <Typography fontSize={13} fontFamily={"Rubik"}>
                   {title}
                 </Typography>
               }

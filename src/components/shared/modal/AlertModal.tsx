@@ -1,3 +1,5 @@
+/** @format */
+
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -13,9 +15,9 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useMemo } from "react";
-import { MessageType } from "../../../models/enums/MessageTypeEnum";
-import { COLORS } from "../../../utils/Colors";
+import {useMemo} from "react";
+import {MessageType} from "../../../models/enums/MessageTypeEnum";
+import {COLORS} from "../../../utils/Colors";
 
 type IAlertModal = {
   message: string;
@@ -29,10 +31,10 @@ type IAlertModal = {
 };
 
 export default function AlertModal(props: IAlertModal) {
-  const { message, title, isOpen, type, onOk, onYes, onNo, onCancel } = props;
+  const {message, title, isOpen, type, onOk, onYes, onNo, onCancel} = props;
 
   const styleItem = {
-    mt: 2,
+    mt: 1,
     color: "white",
   };
 
@@ -53,7 +55,7 @@ export default function AlertModal(props: IAlertModal) {
 
   const icon = useMemo(() => {
     const styleIcon = {
-      fontSize: 70,
+      fontSize: 45,
     };
     switch (type) {
       case MessageType.ERROR:
@@ -80,10 +82,10 @@ export default function AlertModal(props: IAlertModal) {
       }}
     >
       <Card>
-        <Box sx={{ height: 90, bgcolor: color }}>
-          <DialogTitle sx={{ m: 0, p: 2 }}>
+        <Box sx={{height: 70, bgcolor: color}}>
+          <DialogTitle sx={{m: 0, p: 2}}>
             <Grid container spacing={1}>
-              <Grid item sx={{ color: "white" }}>
+              <Grid item sx={{color: "white"}}>
                 {icon}
               </Grid>
               {!title && (
@@ -92,19 +94,19 @@ export default function AlertModal(props: IAlertModal) {
                 </Grid>
               )}
               <Grid item sx={styleItem}>
-                <Typography variant="h4">{title}</Typography>
+                <Typography variant="h5">{title}</Typography>
               </Grid>
             </Grid>
           </DialogTitle>
         </Box>
 
-        <Box sx={{ bgcolor: "white" }}>
+        <Box sx={{bgcolor: "white"}}>
           <DialogContent dividers>
-            <Typography variant="h6">{message}</Typography>
+            <Typography sx={{fontSize: 16}}>{message}</Typography>
           </DialogContent>
         </Box>
-        <Box sx={{ height: 70, bgcolor: "white" }}>
-          <DialogActions sx={{ pt: 2 }}>
+        <Box sx={{height: 70, bgcolor: "white"}}>
+          <DialogActions sx={{pt: 2}}>
             {type !== MessageType.ERROR && type !== MessageType.INFO && (
               <>
                 {onCancel && (
@@ -112,9 +114,9 @@ export default function AlertModal(props: IAlertModal) {
                     size="small"
                     onClick={onCancel}
                     variant="outlined"
-                    sx={{ color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE }}
+                    sx={{color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE}}
                   >
-                    <Typography variant="h6">Cancel</Typography>
+                    <Typography sx={{fontSize: 16}}>Cancel</Typography>
                   </Button>
                 )}
                 {onOk && (
@@ -133,10 +135,10 @@ export default function AlertModal(props: IAlertModal) {
                               COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                             borderColor: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                           }
-                        : { color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE }
+                        : {color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE}
                     }
                   >
-                    <Typography variant="h4">OK</Typography>
+                    <Typography sx={{fontSize: 16}}>OK</Typography>
                   </Button>
                 )}
               </>
@@ -155,7 +157,7 @@ export default function AlertModal(props: IAlertModal) {
                   color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                 }}
               >
-                <Typography variant="h6">OK</Typography>
+                <Typography sx={{fontSize: 16}}>OK</Typography>
               </Button>
             )}
             {type === MessageType.INFO && (
@@ -176,10 +178,10 @@ export default function AlertModal(props: IAlertModal) {
                               COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                             borderColor: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                           }
-                        : { color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE }
+                        : {color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE}
                     }
                   >
-                    <Typography variant="h6">OK</Typography>
+                    <Typography sx={{fontSize: 16}}>OK</Typography>
                   </Button>
                 )}
                 {onYes && (
@@ -196,7 +198,7 @@ export default function AlertModal(props: IAlertModal) {
                       borderColor: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE,
                     }}
                   >
-                    <Typography variant="h6">Yes</Typography>
+                    <Typography sx={{fontSize: 16}}>Yes</Typography>
                   </Button>
                 )}
 
@@ -205,9 +207,9 @@ export default function AlertModal(props: IAlertModal) {
                     size="small"
                     onClick={onNo}
                     variant={"outlined"}
-                    sx={{ color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE }}
+                    sx={{color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE}}
                   >
-                    <Typography variant="h6">No</Typography>
+                    <Typography sx={{fontSize: 16}}>No</Typography>
                   </Button>
                 )}
                 {onCancel && (
@@ -215,9 +217,9 @@ export default function AlertModal(props: IAlertModal) {
                     size="small"
                     onClick={onCancel}
                     variant={"outlined"}
-                    sx={{ color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE }}
+                    sx={{color: COLORS.AUTO_MOREIRA_ALTERNATIVE_BLUE}}
                   >
-                    <Typography variant="h6">Cancel</Typography>
+                    <Typography sx={{fontSize: 16}}>Cancel</Typography>
                   </Button>
                 )}
               </>

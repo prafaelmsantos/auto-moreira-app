@@ -34,7 +34,7 @@ export default function VehiclePage() {
     } else {
       navigate("/vehicles");
     }
-  }, [navigate, param]);
+  }, [param]);
 
   return (
     <Box>

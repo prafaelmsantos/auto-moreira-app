@@ -5,40 +5,23 @@ import Footer from "../components/shared/footer/Footer";
 import OpportunityPage from "../components/home/opportunity/OpportunityPage";
 import SupportPage from "../components/home/support/SupportPage";
 import SearchVehicle from "../components/home/search-vehicle/SearchVehicle";
-import {
-  minYear,
-  maxYear,
-  minPrice,
-  maxPrice,
-  minKms,
-  maxKms,
-} from "../models/Filter";
+import { FilterMode, ISelectedFilters, defaultFilters } from "../models/Filter";
+import { useState } from "react";
 
-function Home() {
+export default function Home() {
+  const [selectedFilters, setSelectedFilters] =
+    useState<ISelectedFilters>(defaultFilters);
+
+  const handleChange = (event: number | string | null | number[], id: string) =>
+    setSelectedFilters((old) => ({ ...old, [id]: event }));
+
   return (
     <>
       <Hero />
 
       <SearchVehicle
-        handleChange={function (
-          event: string | number | number[] | null,
-          id: string
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
-        marks={[]}
-        models={[]}
-        selectedFilters={{
-          markId: null,
-          modelId: null,
-          fuelType: null,
-          minYear: minYear,
-          maxYear: maxYear,
-          minPrice: minPrice,
-          maxPrice: maxPrice,
-          minKms: minKms,
-          maxKms: maxKms,
-        }}
+        {...{ handleChange, selectedFilters, setSelectedFilters }}
+        filterMode={FilterMode.HOME}
       />
 
       <OpportunityPage />
@@ -48,5 +31,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

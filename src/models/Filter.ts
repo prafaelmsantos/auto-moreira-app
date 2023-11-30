@@ -18,3 +18,19 @@ export const minPrice = 10000;
 export const maxPrice = 50000;
 export const minKms = 0;
 export const maxKms = 50000;
+
+export const defaultFilters: ISelectedFilters = {
+  markId: null,
+  modelId: null,
+  fuelType: null,
+  minYear: minYear,
+  maxYear: maxYear,
+  minPrice: minPrice,
+  maxPrice: maxPrice,
+  minKms: minKms,
+  maxKms: maxKms,
+};
+export enum FilterMode {
+  HOME,
+  VEHICLES,
+}

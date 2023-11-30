@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   Autocomplete,
   Box,
@@ -9,10 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 
-import { IMark } from "../../../models/Mark";
-import { IModel } from "../../../models/Model";
+import {IMark} from "../../../models/Mark";
+import {IModel} from "../../../models/Model";
 import {
+  FilterMode,
   ISelectedFilters,
+  defaultFilters,
   maxKms,
   maxPrice,
   maxYear,
@@ -20,23 +24,75 @@ import {
   minPrice,
   minYear,
 } from "../../../models/Filter";
-import { Fuel, FuelTypeConverted } from "../../../models/enums/FuelEnum";
-import { deepOrange } from "@mui/material/colors";
+import {Fuel, FuelTypeConverted} from "../../../models/enums/FuelEnum";
+import {deepOrange} from "@mui/material/colors";
+import {useEffect, useState} from "react";
+import {BASE_API_URL} from "../../../config/variables";
+import {getData} from "../../../services/AutoMoreiraService";
+import AutoMoreiraLoader from "../../shared/loader/AutoMoreiraLoader";
+import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../../../redux/hooks";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../redux/store";
+import {clearFilters, setCurrentFilters} from "../../../config/LocalStorage";
 
 type ISearchVehicle = {
   handleChange: (event: number | string | null | number[], id: string) => void;
-  marks: IMark[];
-  models: IModel[];
   selectedFilters: ISelectedFilters;
+  setSelectedFilters: React.Dispatch<React.SetStateAction<ISelectedFilters>>;
+  filterMode: FilterMode;
 };
 
 export default function SearchVehicle(props: ISearchVehicle) {
-  const { handleChange, marks, models, selectedFilters } = props;
+  const {handleChange, selectedFilters, setSelectedFilters, filterMode} = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const [marks, setMarks] = useState<IMark[]>([]);
+  const [models, setModels] = useState<IModel[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLoading(true);
+    const endpoint = `${BASE_API_URL}${"api/marks"}`;
+    getData<IMark[]>(`${endpoint}`)
+      .then((data) => {
+        setMarks(data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const endpoint = `${BASE_API_URL}${"api/models"}`;
+    getData<IModel[]>(`${endpoint}`)
+      .then((data) => {
+        setModels(data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const dispatch = useAppDispatch();
+
+  const currentFilters = useSelector(
+    (state: RootState) => state.filtersSlice.filters
+  );
+
+  useEffect(() => {
+    currentFilters && setSelectedFilters(currentFilters);
+  }, [currentFilters]);
 
   return (
     <Box className="book-section" id="booking-section">
-      <Stack sx={{ mx: 20 }}>
-        <Box className="book-content__box" sx={{ borderRadius: "10px", mt: 5 }}>
+      <AutoMoreiraLoader open={isLoading} />
+      <Stack sx={{mx: 20}}>
+        <Box className="book-content__box" sx={{borderRadius: "10px", mt: 5}}>
           <Grid
             container
             direction="row"
@@ -62,7 +118,11 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   isOptionEqualToValue={(option, value) =>
                     option.id === value.id
                   }
-                  value={marks.find((x) => x.id === selectedFilters?.markId)}
+                  value={
+                    selectedFilters?.markId
+                      ? marks.find((x) => x.id === selectedFilters.markId)
+                      : null
+                  }
                   id="tags-standard"
                   options={marks}
                   getOptionLabel={(option) => option.name}
@@ -150,7 +210,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                 >
                   <Grid item xs={12}>
                     <Slider
-                      sx={{ color: "#ff4d30" }}
+                      sx={{color: "#ff4d30"}}
                       min={minKms}
                       step={5000}
                       max={maxKms}
@@ -182,7 +242,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                 >
                   <Grid item xs={12}>
                     <Slider
-                      sx={{ color: "#ff4d30" }}
+                      sx={{color: "#ff4d30"}}
                       min={minYear}
                       step={1}
                       max={maxYear}
@@ -214,7 +274,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                 >
                   <Grid item xs={12}>
                     <Slider
-                      sx={{ color: "#ff4d30" }}
+                      sx={{color: "#ff4d30"}}
                       min={minPrice}
                       step={500}
                       max={maxPrice}
@@ -262,7 +322,10 @@ export default function SearchVehicle(props: ISearchVehicle) {
                       transition: "all 0.3s",
                     },
                   }}
-                  onClick={() => window.scrollTo(0, 0)}
+                  onClick={() => {
+                    setSelectedFilters(defaultFilters);
+                    clearFilters(dispatch);
+                  }}
                 >
                   <Typography
                     fontWeight={"bold"}
@@ -287,14 +350,18 @@ export default function SearchVehicle(props: ISearchVehicle) {
                       backgroundColor: deepOrange[900],
                     },
                   }}
-                  onClick={() => window.scrollTo(0, 0)}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    filterMode === FilterMode.HOME && navigate("/vehicles");
+                    setCurrentFilters(selectedFilters, dispatch);
+                  }}
                 >
                   <Typography
                     color={"white"}
                     fontWeight={"bold"}
                     fontSize={14}
                     fontFamily={"Rubik"}
-                    sx={{ mt: 0.5 }}
+                    sx={{mt: 0.5}}
                   >
                     Encontar
                   </Typography>

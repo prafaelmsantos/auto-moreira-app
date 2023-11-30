@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+/** @format */
+
+import {NavLink} from "react-router-dom";
 import Img1 from "../../../images/team/1.png";
 import Logo from "../../../images/logo/logo.png";
-import { useState } from "react";
-import { LinkType, navLink } from "../../../data/link";
+import {useState} from "react";
+import {LinkType, navLink} from "../../../data/link";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import {
@@ -15,20 +17,16 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  Tooltip,
   Typography,
 } from "@mui/material";
 
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
-import { RootState } from "../../../redux/store";
+import {RootState} from "../../../redux/store";
 
 import NavbarListItem from "./admin/utils/NavbarListItem";
 
 export default function Navbar() {
-  const pages = ["Products", "Pricing", "Blog"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -46,24 +44,18 @@ export default function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  ////
-  const [nav, setNav] = useState(false);
-
-  const openNav = () => {
-    setNav(!nav);
-  };
 
   const currentUser = useSelector((state: RootState) => state.userSlice.user);
 
   return (
     <>
-      <AppBar color="inherit" position="static" sx={{ px: 10 }}>
+      <AppBar color="inherit" position="static" sx={{px: 10}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box
               sx={{
                 mr: 2,
-                display: { xs: "none", md: "flex" },
+                display: {xs: "none", md: "flex"},
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
@@ -76,7 +68,7 @@ export default function Navbar() {
               </NavLink>
             </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -102,7 +94,7 @@ export default function Navbar() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: {xs: "block", md: "none"},
                 }}
               >
                 {navLink
@@ -112,7 +104,7 @@ export default function Navbar() {
                       <NavLink
                         onClick={handleCloseNavMenu}
                         to={page.url}
-                        style={({ isActive }) => {
+                        style={({isActive}) => {
                           if (isActive) {
                             return {
                               color: "#ff4d30",
@@ -139,7 +131,7 @@ export default function Navbar() {
             <Box
               sx={{
                 mr: 2,
-                display: { xs: "flex", md: "none" },
+                display: {xs: "flex", md: "none"},
                 flexGrow: 1,
                 fontFamily: "monospace",
                 fontWeight: 700,
@@ -152,19 +144,19 @@ export default function Navbar() {
                 <img src={Logo} alt="logo" width={220} height={160} />
               </NavLink>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
               {navLink
                 .filter((x) => x.showNavLink)
                 .map((page, i) => (
                   <Box
                     key={i}
                     onClick={handleCloseNavMenu}
-                    sx={{ mx: 1.5, mt: 1.5, display: "block" }}
+                    sx={{mx: 1.5, mt: 1.5, display: "block"}}
                   >
                     <NavLink
                       onClick={handleCloseNavMenu}
                       to={page.url}
-                      style={({ isActive }) => {
+                      style={({isActive}) => {
                         if (isActive) {
                           return {
                             color: "#ff4d30",
@@ -190,15 +182,15 @@ export default function Navbar() {
                 ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{flexGrow: 0}}>
               {currentUser ? (
-                <Box sx={{ flexGrow: 0 }}>
+                <Box sx={{flexGrow: 0}}>
                   <IconButton size={"large"} onClick={handleOpenUserMenu}>
                     <Avatar src={Img1} />
                   </IconButton>
 
                   <Menu
-                    sx={{ mt: "45px" }}
+                    sx={{mt: "45px"}}
                     id="menu-appbar"
                     anchorEl={anchorElUser}
                     anchorOrigin={{
@@ -213,9 +205,9 @@ export default function Navbar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem sx={{ pointerEvents: "none" }}>
+                    <MenuItem sx={{pointerEvents: "none"}}>
                       <Typography
-                        sx={{ fontSize: 14, color: "black" }}
+                        sx={{fontSize: 14, color: "black"}}
                         textAlign="center"
                       >
                         {"Bem-vindo"}
@@ -248,7 +240,7 @@ export default function Navbar() {
                       url={"/admin"}
                     />
 
-                    <Divider sx={{ mt: 1, mb: 1 }} />
+                    <Divider sx={{mt: 1, mb: 1}} />
                     <NavbarListItem
                       handleClose={handleCloseUserMenu}
                       title={"Sair"}
@@ -256,44 +248,13 @@ export default function Navbar() {
                       url={"/user"}
                     />
                   </Menu>
-
-                  <Tooltip title="Open settings">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src="/static/images/avatar/2.jpg"
-                      />
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: "45px" }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
                 </Box>
               ) : (
                 <>
                   <NavLink
                     onClick={handleCloseNavMenu}
                     to={"/user/login"}
-                    style={({ isActive }) => {
+                    style={({isActive}) => {
                       if (isActive) {
                         return {
                           color: "#ff4d30",
@@ -316,7 +277,7 @@ export default function Navbar() {
                   <NavLink
                     onClick={handleCloseNavMenu}
                     to={"/user/registration"}
-                    style={({ isActive }) => {
+                    style={({isActive}) => {
                       if (isActive) {
                         return {
                           color: "#ff4d30",

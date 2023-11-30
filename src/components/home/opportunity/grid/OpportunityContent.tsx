@@ -9,9 +9,8 @@ export default function OpportunityContent(props: { vehicles: IVehicle[] }) {
   const [activeVehicleId, setActiveVehicleId] = useState(1);
   const [colorBtn, setColorBtn] = useState(1);
 
-  const coloringButton = (id: number) => {
-    return colorBtn === id ? "colored-button" : "";
-  };
+  const coloringButton = (id: number) =>
+    colorBtn === id ? "colored-button" : "";
 
   return (
     <Grid

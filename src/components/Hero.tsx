@@ -57,7 +57,11 @@ function Hero() {
                 Encontrar veículo &nbsp;
                 <i className="fa-solid fa-circle-check"></i>
               </Link>
-              <Link className="hero-content__text__btns__learn-more" to="/">
+              <Link
+                className="hero-content__text__btns__learn-more"
+                onClick={() => window.scrollTo(0, 0)}
+                to="/about"
+              >
                 Sobre Nós &nbsp; <i className="fa-solid fa-angle-right"></i>
               </Link>
             </Box>

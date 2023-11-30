@@ -1,11 +1,11 @@
 import { AnyAction, Dispatch, ThunkDispatch } from "@reduxjs/toolkit";
 import { BASE_API_URL } from "../config/variables";
-import { IUser, IUserLogin } from "../models/identity/User";
+import { IUser, IUserLogin, IUserRegistration } from "../models/identity/User";
 import { removeUser, setUser } from "../redux/userSlice";
 import { NavigateFunction } from "react-router-dom";
 
 class UserService {
-  static async createUser(user: IUser): Promise<Response | undefined> {
+  static async registration(user: IUserRegistration): Promise<Response | undefined> {
     const endpoint = `${BASE_API_URL}${"api/users/createUser"}`;
     try {
       const response = await fetch(endpoint, {
