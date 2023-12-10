@@ -14,12 +14,28 @@ import VehicleLenghtGrid from "../components/vehicle/grid/VehicleLenghtGrid";
 import BookCar from "../components/vehicle/book-car/BookCar";
 import SearchVehicle from "../components/home/search-vehicle/SearchVehicle";
 import {FilterMode, ISelectedFilters, defaultFilters} from "../models/Filter";
+import { useQuery } from "@apollo/client";
+import { VEHICLES } from "../queries/Vehicles";
+import { vehicles } from '../queries/types/vehicles';
 
 export default function Vehicles() {
   const [isLoading, setIsLoading] = useState(false);
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [selectedFilters, setSelectedFilters] =
     useState<ISelectedFilters>(defaultFilters);
+
+  const markId = selectedFilters.markId ? { in: [selectedFilters.markId] } :{ nin: [0] };
+  const modelId = selectedFilters.modelId ? { in: [selectedFilters.modelId] } :{ nin: [0] };
+  const { data, loading, error, fetchMore } = useQuery<vehicles>(VEHICLES,{
+        variables: {
+            filter: { markId: markId, and: { modelId: modelId, and: { fuelType: { eq: "DIESEL" } } } },
+            
+        }
+    });
+
+ 
+
+    console.log(data?.vehicles?.nodes);
 
   useEffect(() => {
     setIsLoading(true);

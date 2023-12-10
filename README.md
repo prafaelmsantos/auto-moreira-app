@@ -52,3 +52,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Generate GraphQL Types
+
+Just follow the following steps:
+
+0. (Not mandatory) From time to time update graphql-schema.graphql with the following command:
+   `rover graph introspect https://automoreiraapi.onrender.com/graphql > graphql-schema.graphql`
+1. Create a new query file (use existing queries as examples) inside _src/Queries_.
+2. The following packages must be installed as global ex: "npm install -g apollo":
+   2.1. Apollo;
+   2.2. GraphQL;
+   2.3 rover CLI = > run the command npm install -g @apollo/rover
+   2.4 run npm install -g apollo
+3. Run `npx apollo codegen:generate --localSchemaFile=graphql-schema.graphql --target=typescript --includes=src/**/*.ts --tagName=gql --addTypename --globalTypesFile=src/models/graphql-global-types.ts types` (_don't forget to use_ `noglob`_for shells like zsh that consume wildcard symbols_).
+4. All done !

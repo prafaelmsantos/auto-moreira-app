@@ -12,6 +12,8 @@ import {InterceptorRequest} from "./models/Interceptor";
 import {getCurrentFilters, getCurrentUser} from "./config/LocalStorage";
 import Navbar from "./components/shared/navbar/Navbar";
 import {setFilters} from "./redux/filtersSlice";
+import {ApolloProvider} from "@apollo/client";
+import {graphQLClient} from "./services/GraphQLService";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -70,8 +72,10 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
-      <AutoMoreiraRouter />
+      <ApolloProvider client={graphQLClient()}>
+        <Navbar />
+        <AutoMoreiraRouter />{" "}
+      </ApolloProvider>
     </>
   );
 }
