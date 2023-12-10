@@ -2,6 +2,7 @@
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "editor.formatOnSave": true,
   "editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-  "vs-code-prettier-eslint.prettierLast": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vs-code-prettier-eslint.prettierLast": true,
+  "reactSnippets.settings.prettierEnabled": true
 }
