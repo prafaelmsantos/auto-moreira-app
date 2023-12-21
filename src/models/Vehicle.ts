@@ -1,7 +1,8 @@
 import { IMark } from "./Mark";
 import { IModel } from "./Model";
-import { Fuel } from "./enums/FuelEnum";
-import { Transmission } from "./enums/TransmissionEnum";
+import { Fuel, FuelTypeGraphQLConverted } from "./enums/FuelEnum";
+import { Transmission, TransmissionGraphQLConverted } from "./enums/TransmissionEnum";
+import { vehicles_vehicles_nodes as vehiclesGraphQL } from "../queries/types/vehicles";
 
 export interface IVehicle {
   id: number;
@@ -22,4 +23,27 @@ export interface IVehicle {
   power: number;
   opportunity: boolean;
   sold: boolean;
+}
+
+export function convertToVehicle(vehicle: vehiclesGraphQL): IVehicle {
+    return {
+        id: vehicle.id,
+        markId: vehicle.markId,
+         mark:  { id: vehicle.markId, name: vehicle.mark?.name ?? ''},
+         modelId: vehicle.modelId,
+         model: { id: vehicle.modelId, name: vehicle.model?.name ?? '', markId: vehicle.markId, mark: { id: vehicle.markId, name: vehicle.mark?.name ?? ''}},
+         year: vehicle.year,
+         color: vehicle?.color ?? '',
+         observations: vehicle?.observations ?? '',
+         mileage: vehicle.mileage,
+         price: vehicle.price,
+         fuelType: FuelTypeGraphQLConverted(vehicle.fuelType),
+         version: vehicle.version ?? '',
+         doors: vehicle.doors,
+         transmission: TransmissionGraphQLConverted(vehicle.transmission),
+         engineSize: vehicle.engineSize,
+         power: vehicle.power,
+         opportunity: vehicle.opportunity,
+         sold: vehicle.sold
+    };
 }

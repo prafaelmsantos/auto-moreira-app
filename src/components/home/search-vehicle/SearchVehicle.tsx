@@ -41,10 +41,19 @@ type ISearchVehicle = {
   selectedFilters: ISelectedFilters;
   setSelectedFilters: React.Dispatch<React.SetStateAction<ISelectedFilters>>;
   filterMode: FilterMode;
+  handleClear?: () => void;
+  handleSubmit?: () => void;
 };
 
 export default function SearchVehicle(props: ISearchVehicle) {
-  const {handleChange, selectedFilters, setSelectedFilters, filterMode} = props;
+  const {
+    handleChange,
+    selectedFilters,
+    setSelectedFilters,
+    filterMode,
+    handleClear,
+    handleSubmit,
+  } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [marks, setMarks] = useState<IMark[]>([]);
   const [models, setModels] = useState<IModel[]>([]);
@@ -325,6 +334,7 @@ export default function SearchVehicle(props: ISearchVehicle) {
                   onClick={() => {
                     setSelectedFilters(defaultFilters);
                     clearFilters(dispatch);
+                    handleClear && handleClear();
                   }}
                 >
                   <Typography
@@ -351,9 +361,9 @@ export default function SearchVehicle(props: ISearchVehicle) {
                     },
                   }}
                   onClick={() => {
-                    window.scrollTo(0, 0);
                     filterMode === FilterMode.HOME && navigate("/vehicles");
                     setCurrentFilters(selectedFilters, dispatch);
+                    handleSubmit && handleSubmit();
                   }}
                 >
                   <Typography

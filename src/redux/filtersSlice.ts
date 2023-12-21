@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ISelectedFilters } from "../models/Filter";
+import { defaultFilters, ISelectedFilters } from "../models/Filter";
 
 interface IFilterState {
-  filters: ISelectedFilters | null;
+  filters: ISelectedFilters;
 }
 
 const initialState: IFilterState = {
-  filters: null,
+  filters: defaultFilters,
 };
 
 export const filtersSlice = createSlice({
@@ -15,7 +15,7 @@ export const filtersSlice = createSlice({
   name: "filtersSlice",
   reducers: {
     removeFilters: () => initialState,
-    setFilters: (state, action: PayloadAction<ISelectedFilters | null>) => {
+    setFilters: (state, action: PayloadAction<ISelectedFilters>) => {
       state.filters = action.payload;
     },
   },

@@ -5,7 +5,7 @@ import {LinkType} from "../data/link";
 import Footer from "../components/shared/footer/Footer";
 import {getData} from "../services/AutoMoreiraService";
 import {BASE_API_URL} from "../config/variables";
-import {IVehicle} from "../models/Vehicle";
+import {convertToVehicle, IVehicle} from "../models/Vehicle";
 import AutoMoreiraLoader from "../components/shared/loader/AutoMoreiraLoader";
 import {Box} from "@mui/material";
 import {useState, useEffect} from "react";
@@ -16,79 +16,107 @@ import SearchVehicle from "../components/home/search-vehicle/SearchVehicle";
 import {FilterMode, ISelectedFilters, defaultFilters} from "../models/Filter";
 import {useQuery} from "@apollo/client";
 import {VEHICLES} from "../queries/Vehicles";
-import {vehicles} from "../queries/types/vehicles";
+import {vehicles, vehicles_vehicles_nodes} from "../queries/types/vehicles";
+import {Fuel} from "../models/enums/FuelEnum";
+import {useSelector} from "react-redux";
+import {useAppDispatch} from "../redux/hooks";
+import {RootState} from "../redux/store";
+import {setCurrentFilters} from "../config/LocalStorage";
 
 export default function Vehicles() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const currentFilters = useSelector(
+    (state: RootState) => state.filtersSlice.filters
+  );
+
   const [selectedFilters, setSelectedFilters] =
     useState<ISelectedFilters>(defaultFilters);
 
-  const markId = selectedFilters.markId
-    ? {in: [selectedFilters.markId]}
+  const [selectedFinalFilters, setSelectedFinalFilters] =
+    useState<ISelectedFilters>(currentFilters ?? defaultFilters);
+
+  const markId = selectedFinalFilters.markId
+    ? {in: [selectedFinalFilters.markId]}
     : {nin: [0]};
 
-  const modelId = selectedFilters.modelId
-    ? {in: [selectedFilters.modelId]}
+  const modelId = selectedFinalFilters.modelId
+    ? {in: [selectedFinalFilters.modelId]}
     : {nin: [0]};
 
-  const {data, loading, error, fetchMore} = useQuery<vehicles>(VEHICLES, {
+  const fuelType = selectedFinalFilters.fuelType
+    ? {
+        eq:
+          selectedFinalFilters.fuelType === Fuel.DIESEL
+            ? "DIESEL"
+            : selectedFinalFilters.fuelType === Fuel.PETROL
+              ? "PETROL"
+              : "HYBRID",
+      }
+    : {in: ["PETROL", "DIESEL", "HYBRID"]};
+
+  const year = {
+    gt: selectedFinalFilters.minYear,
+    lt: selectedFinalFilters.maxYear,
+  };
+
+  const price = {
+    gt: selectedFinalFilters.minPrice,
+    lt: selectedFinalFilters.maxPrice,
+  };
+
+  const kms = {
+    gt: selectedFinalFilters.minKms,
+    lt: selectedFinalFilters.maxKms,
+  };
+
+  const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
       filter: {
         markId: markId,
-        and: {modelId: modelId, and: {fuelType: {eq: "DIESEL"}}},
+        and: {
+          modelId: modelId,
+          and: {
+            fuelType: fuelType,
+            and: {year: year, and: {price: price, and: {mileage: kms}}},
+          },
+        },
       },
     },
   });
 
-  console.log(data?.vehicles?.nodes);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const endpoint = `${BASE_API_URL}${"api/vehicles"}`;
-    getData<IVehicle[]>(`${endpoint}`)
-      .then((data) => {
-        setVehicles(data);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.error(e);
-        setIsLoading(false);
-      });
-  }, []);
-
   const handleChange = (event: number | string | null | number[], id: string) =>
     setSelectedFilters((old) => ({...old, [id]: event}));
 
-  /*   const handleSubmit = useCallback(() => {
-    
-    setVehicles(
-      vehicles.filter(
-        (x) =>
-          (!!selectedFilters.markId
-            ? x.markId === selectedFilters.markId
-            : x.markId !== 0) &&
-          (!!selectedFilters.modelId
-            ? x.modelId === selectedFilters.modelId
-            : x.modelId !== 0) &&
-          (!!selectedFilters.fuelType
-            ? x.fuelType === selectedFilters.fuelType
-            : x.fuelType === Fuel.DIESEL ||
-              x.fuelType === Fuel.HYBRID ||
-              x.fuelType === Fuel.PETROL) &&
-          x.year >= selectedFilters.minYear &&
-          x.year <= selectedFilters.maxYear &&
-          x.price >= selectedFilters.minPrice &&
-          x.price <= selectedFilters.maxPrice &&
-          x.mileage >= selectedFilters.minKms &&
-          x.mileage <= selectedFilters.maxKms
-      )
-    );
-  }, [selectedFilters, vehicles]); */
+  const handleClear = () => {
+    setSelectedFilters(defaultFilters);
+    setSelectedFinalFilters(defaultFilters);
+  };
+  const handleSubmit = () => {
+    setCurrentFilters(selectedFilters, dispatch);
+    setSelectedFinalFilters(selectedFilters);
+  };
+
+  const dispatch = useAppDispatch();
+
+  /*   useEffect(() => {
+    currentFilters && setSelectedFilters(currentFilters);
+  }, [currentFilters]); */
+
+  /*   useEffect(() => {
+    currentFilters && setSelectedFilters(currentFilters);
+  }, [currentFilters]); */
+
+  useEffect(() => {
+    currentFilters !== selectedFinalFilters &&
+      setSelectedFinalFilters(currentFilters);
+  }, [loading]);
+
+  console.log(data?.vehicles?.nodes);
+
+  console.log(selectedFinalFilters);
 
   return (
     <Box>
-      <AutoMoreiraLoader open={isLoading} />
+      <AutoMoreiraLoader open={loading} />
       <HeroPages id={LinkType.VEHICLES} />
 
       <SearchVehicle
@@ -97,10 +125,18 @@ export default function Vehicles() {
           handleChange,
           selectedFilters,
           setSelectedFilters,
+          handleClear,
+          handleSubmit,
         }}
       />
-      <VehicleLenghtGrid length={vehicles.length} />
-      <VehicleCard vehicles={vehicles} />
+      <VehicleLenghtGrid length={data?.vehicles?.nodes?.length ?? 0} />
+      <VehicleCard
+        vehicles={
+          data?.vehicles?.nodes?.map((vehicle) =>
+            convertToVehicle(vehicle as vehicles_vehicles_nodes)
+          ) ?? []
+        }
+      />
       <BookCar />
       <Footer />
     </Box>

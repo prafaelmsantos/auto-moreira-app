@@ -1,3 +1,5 @@
+import { FUEL } from "../graphql-global-types";
+
 export enum Fuel {
   PETROL = "Petrol",
   DIESEL = "Diesel",
@@ -5,14 +7,10 @@ export enum Fuel {
 }
 
 export function FuelTypeConverted(fuelType: Fuel) {
-  switch (fuelType) {
-    case Fuel.PETROL:
-      return "Gasolina";
-    case Fuel.DIESEL:
-      return "Gasóleo";
-    case Fuel.HYBRID:
-      return "Híbrido";
-    default:
-      return "Híbrido";
-  }
+  return fuelType === Fuel.PETROL ? "Gasolina": fuelType === Fuel.DIESEL ? "Gasóleo" : "Híbrido";
 }
+
+export function FuelTypeGraphQLConverted(fuelType: FUEL) {
+  return fuelType === FUEL.PETROL ? Fuel.PETROL: fuelType === FUEL.DIESEL ? Fuel.DIESEL : Fuel.HYBRID;
+}
+

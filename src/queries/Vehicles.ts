@@ -6,6 +6,29 @@ export const VEHICLES = gql`
             totalCount
             nodes {
                 id
+                markId
+                mark {
+                  id
+                  name
+                }
+                modelId
+                model {
+                  id
+                  name
+                }
+                year
+                color
+                observations
+                mileage
+                price
+                fuelType
+                version
+                doors
+                transmission
+                engineSize
+                power
+                opportunity
+                sold
             }
         }
     }
