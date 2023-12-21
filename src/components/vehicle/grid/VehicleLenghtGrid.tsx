@@ -1,11 +1,13 @@
-import { Grid, Typography } from "@mui/material";
+/** @format */
+
+import {Grid, Typography} from "@mui/material";
 
 type IVehicleLenghtGrid = {
   length: number;
 };
 
 function VehicleLenghtGrid(props: IVehicleLenghtGrid) {
-  const { length } = props;
+  const {length} = props;
 
   return (
     <Grid
@@ -13,15 +15,15 @@ function VehicleLenghtGrid(props: IVehicleLenghtGrid) {
       direction="row"
       justifyContent="center"
       alignItems="center"
-      sx={{ mt: 7 }}
+      sx={{mt: 7}}
     >
       <Grid item>
-        <Typography variant="h5">
+        <Typography variant="h5" mt={1}>
           {length !== 0
             ? length === 1
               ? length + " veiculo encontrado!"
               : length + " veiculos encontrados!"
-            : "Nenhum veiculo encontrado!"}
+            : "Não foram encontrados resultados para a sua pesquisa."}
         </Typography>
       </Grid>
     </Grid>

@@ -118,7 +118,6 @@ export default function Vehicles() {
     <Box>
       <AutoMoreiraLoader open={loading} />
       <HeroPages id={LinkType.VEHICLES} />
-
       <SearchVehicle
         filterMode={FilterMode.VEHICLES}
         {...{
@@ -137,6 +136,7 @@ export default function Vehicles() {
           ) ?? []
         }
       />
+
       <BookCar />
       <Footer />
     </Box>
