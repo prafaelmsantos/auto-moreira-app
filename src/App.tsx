@@ -1,7 +1,7 @@
 /** @format */
 
 import {useEffect} from "react";
-import "../src/dist/styles.css";
+import "./App.css";
 
 import {useAppDispatch} from "./redux/hooks";
 import {setUser} from "./redux/userSlice";
@@ -9,11 +9,22 @@ import fetchIntercept from "fetch-intercept";
 
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
 import {InterceptorRequest} from "./models/Interceptor";
-import {getCurrentFilters, getCurrentUser} from "./config/LocalStorage";
-import Navbar from "./components/shared/navbar/Navbar";
+import {getCurrentFilters, getCurrentUser} from "./config/localStorage";
+
 import {setFilters} from "./redux/filtersSlice";
-import {ApolloProvider} from "@apollo/client";
-import {graphQLClient} from "./services/GraphQLService";
+
+import MobileNavbar from "./components/shared/navbar/MobileNavbar";
+import Header from "./components/shared/navbar/Header";
+import ToTop from "./components/shared/ToTop";
+import GetTouch from "./components/shared/GetTouch";
+import Footer from "./components/shared/Footer";
+import AutoMoreiraLoader from "./components/shared/AutoMoreiraLoader";
+import {useSelector} from "react-redux";
+import {RootState} from "./redux/store";
+import AlertModal from "./components/shared/AlertModal";
+import {closeModal} from "./redux/modalSlice";
+import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
+import {closeSnackBar, setSnackBar} from "./redux/snackBarSlice";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -70,12 +81,37 @@ export default function App() {
     });
   }, [user]); */
 
+  const currentLoader = useSelector(
+    (state: RootState) => state.loaderSlice.loader
+  );
+
+  const currentModal = useSelector((state: RootState) => state.modalSlice);
+  const currentSnackBar = useSelector(
+    (state: RootState) => state.snackBarSlice
+  );
+
   return (
     <>
-      <ApolloProvider client={graphQLClient()}>
-        <Navbar />
-        <AutoMoreiraRouter />{" "}
-      </ApolloProvider>
+      <AutoMoreiraLoader open={currentLoader} />
+      <AlertModal
+        title={currentModal.modal.title}
+        message={currentModal.modal.message}
+        isOpen={currentModal.modal.open}
+        onOk={() => dispatch(closeModal())}
+        type={currentModal.modal.type}
+      />
+      <AutoMoreiraSnackbar
+        type={currentSnackBar.snackBar.type}
+        message={currentSnackBar.snackBar.message}
+        open={currentSnackBar.snackBar.open}
+        onClose={() => dispatch(closeSnackBar())}
+      />
+      <Header />
+      <MobileNavbar />
+      <ToTop />
+      <AutoMoreiraRouter />
+      <GetTouch />
+      <Footer />
     </>
   );
 }

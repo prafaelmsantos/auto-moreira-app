@@ -1,20 +1,23 @@
-import { useRoutes } from "react-router-dom";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
-import Team from "../pages/Team";
-import Testimonials from "../pages/Testimonials";
-import Vehicles from "../pages/Vehicles";
-import Home from "../pages/Home";
-import VehiclePage from "../components/vehicle/VehiclePage";
-import Login from "../pages/user/Login";
-import Registration from "../pages/user/Registration";
+/** @format */
+
+import {useRoutes} from "react-router-dom";
+import Vehicle from "../components/vehicles/vehicle/Vehicle";
+import About from "../pages/about";
+import Contact from "../pages/contact";
+import Home from "../pages/home";
+import Team from "../pages/team";
+import Testimonials from "../pages/testimonials";
+import Login from "../pages/user/login";
+import Registration from "../pages/user/registration";
+import Vehicles from "../pages/vehicles";
+/* import About from "../pages/About";
 import AdminHome from "../pages/admin/AdminHome";
 import AdminVehicle from "../pages/admin/AdminVehicle";
 import AdminUser from "../pages/admin/AdminUser";
 import AdminMark from "../pages/admin/AdminMark";
 import AdminModel from "../pages/admin/AdminModel";
-import AdminClients from "../pages/admin/AdminClients";
-import { useAppSelector } from "../redux/hooks";
+import AdminClients from "../pages/admin/AdminClients"; */
+import {useAppSelector} from "../redux/hooks";
 
 export default function AutoMoreiraRouter() {
   const routes = [
@@ -32,8 +35,8 @@ export default function AutoMoreiraRouter() {
       path: "/vehicles",
       id: "vehicles",
       children: [
-        { index: true, element: <Vehicles /> },
-        { path: ":id", element: <VehiclePage /> },
+        {index: true, element: <Vehicles />},
+        {path: ":id", element: <Vehicle />},
       ],
     },
     {
@@ -55,9 +58,9 @@ export default function AutoMoreiraRouter() {
       path: "/user",
       id: "user",
       children: [
-        { index: true, element: <Login /> },
-        { path: "login", element: <Login /> },
-        { path: "registration", element: <Registration /> },
+        {index: true, element: <Login />},
+        {path: "login", element: <Login />},
+        {path: "registration", element: <Registration />},
       ],
     },
     {
@@ -66,9 +69,10 @@ export default function AutoMoreiraRouter() {
       id: "home",
     },
   ];
+
   const user = useAppSelector((state) => state.userSlice.user);
 
-  if (user) {
+  /* if (user) {
     routes.push({
       path: "/admin",
       id: "admin",
@@ -81,7 +85,7 @@ export default function AutoMoreiraRouter() {
         { path: "info", element: <AdminClients /> },
       ],
     });
-  }
+  } */
 
   const element = useRoutes(routes);
 

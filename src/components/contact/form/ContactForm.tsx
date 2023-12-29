@@ -1,32 +1,23 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
+/** @format */
+
+import {Button, Grid, Typography} from "@mui/material";
+import {deepOrange} from "@mui/material/colors";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { IContact } from "../../../models/Contact";
+import {IContact} from "../../../models/Contact";
 import ContactService from "../../../services/ContactService";
-import { MessageType } from "../../../models/enums/MessageTypeEnum";
-import { useEffect, useState } from "react";
-import AlertModal from "../../shared/modal/AlertModal";
-import AutoMoreiraSnackbar from "../../shared/snackbar/AutoMoreiraSnackbar";
-import TextFieldValidation from "../../shared/form/TextFieldValidation";
+import {MessageType} from "../../../models/enums/MessageTypeEnum";
+import {useEffect} from "react";
+import TextFieldValidation from "../../shared/TextFieldValidation";
+import {useAppDispatch} from "../../../redux/hooks";
+import {setModal} from "../../../redux/modalSlice";
+import {setSnackBar} from "../../../redux/snackBarSlice";
+import {setLoader} from "../../../redux/loaderSlice";
 
 function ContactForm() {
-  const [stateModal, setStateModal] = useState({
-    openModal: false,
-    responseContent: "",
-    responseTitle: "",
-    type: MessageType.INFO,
-  });
-  const { responseContent, responseTitle, openModal, type } = stateModal;
-
-  const [stateToast, setStateToast] = useState({
-    openToast: false,
-    toastMessage: "",
-  });
-
-  const { openToast, toastMessage } = stateToast;
+  const dispatch = useAppDispatch();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("O nome completo é obrigatório!"),
@@ -47,7 +38,7 @@ function ContactForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: {errors, isSubmitSuccessful},
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
@@ -57,125 +48,108 @@ function ContactForm() {
       const response = await ContactService.postContact(contact);
       if (response) {
         if (response.ok) {
-          setStateToast({
-            openToast: true,
-            toastMessage: "Mensagem enviada com sucesso!",
-          });
+          dispatch(
+            setSnackBar({
+              open: true,
+              message: "Mensagem enviada com sucesso!",
+              type: MessageType.SUCCESS,
+            })
+          );
+
           window.scrollTo(0, 0);
+          isSubmitSuccessful &&
+            reset({
+              name: "",
+              email: "",
+              phoneNumber: 100000000,
+              message: "",
+            });
           return Promise.resolve();
         } else {
           const messageError = response
             .json()
             .then((response) => response.message)
             .then((x) => x as string);
-
-          setStateModal({
-            openModal: true,
-            responseTitle: "Erro do Servidor Interno",
-            responseContent: (await messageError).toString(),
-            type: MessageType.ERROR,
-          });
-
+          dispatch(
+            setModal({
+              title: "Erro do Servidor Interno",
+              message: (await messageError).toString(),
+              type: MessageType.ERROR,
+              open: true,
+            })
+          );
           return Promise.reject();
         }
       }
     }
   }; // your form submit function which will invoke after successful validation
 
-  useEffect(() => {
-    reset({ name: "", email: "", phoneNumber: 100000000, message: "" });
-  }, [isSubmitSuccessful]);
-
   return (
-    <>
-      <AlertModal
-        title={responseTitle}
-        message={responseContent}
-        isOpen={openModal}
-        onOk={() => setStateModal({ ...stateModal, openModal: false })}
-        type={type}
-      />
-      <AutoMoreiraSnackbar
-        type={MessageType.SUCCESS}
-        message={toastMessage}
-        open={openToast}
-        onClose={() => setStateToast({ ...stateToast, openToast: false })}
-      />
-      <Grid container direction="row">
-        <Grid item xs={12}>
-          <TextFieldValidation
-            label={"Nome Completo"}
-            error={!!errors.name}
-            helperText={errors.name?.message}
-            register={register("name")}
-          />
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <TextFieldValidation
-            label={"Telefone/Telemóvel"}
-            error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber?.message}
-            inputProps={{
-              inputProps: { min: 100000000, max: 999999999 },
-              startAdornment: (
-                <Typography sx={{ mt: 0.1, mx: 0.5 }}>+351</Typography>
-              ),
-            }}
-            type="Number"
-            defaultValue={100000000}
-            register={register("phoneNumber")}
-          />
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <TextFieldValidation
-            label={"Email"}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            register={register("email")}
-          />
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 2 }}>
-          <TextFieldValidation
-            label={"Mensagem"}
-            error={!!errors.message}
-            helperText={errors.message?.message}
-            register={register("message")}
-          />
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 3 }}>
-          <Button
-            fullWidth
-            variant="contained"
-            sx={{
-              bgcolor: "#ff4d30",
-              py: 2,
-              "&:hover": {
-                backgroundColor: deepOrange[900],
-              },
-            }}
-            onClick={handleSubmit(onSubmit)}
-          >
-            <ForwardToInboxIcon
-              sx={{
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 25,
-                mx: 1,
-              }}
-            />
-            <Typography
-              color={"white"}
-              fontWeight={"bold"}
-              fontSize={16}
-              fontFamily={"Rubik"}
-              sx={{ mt: 0.5 }}
-            >
-              Enviar mensagem
-            </Typography>
-          </Button>
-        </Grid>
+    <Grid container direction="row">
+      <Grid item xs={12}>
+        <TextFieldValidation
+          label={"Nome Completo"}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+          register={register("name")}
+        />
       </Grid>
-    </>
+      <Grid item xs={12} sx={{mt: 2}}>
+        <TextFieldValidation
+          label={"Telefone/Telemóvel"}
+          error={!!errors.phoneNumber}
+          helperText={errors.phoneNumber?.message}
+          inputProps={{
+            inputProps: {min: 100000000, max: 999999999},
+            startAdornment: (
+              <Typography sx={{mt: 0.1, mx: 0.5}}>+351</Typography>
+            ),
+          }}
+          type="Number"
+          defaultValue={100000000}
+          register={register("phoneNumber")}
+        />
+      </Grid>
+      <Grid item xs={12} sx={{mt: 2}}>
+        <TextFieldValidation
+          label={"Email"}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          register={register("email")}
+        />
+      </Grid>
+      <Grid item xs={12} sx={{mt: 2}}>
+        <TextFieldValidation
+          label={"Mensagem"}
+          error={!!errors.message}
+          helperText={errors.message?.message}
+          register={register("message")}
+        />
+      </Grid>
+      <Grid item xs={12} sx={{mt: 3}}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            bgcolor: "#ff4d30",
+            py: 2,
+            "&:hover": {
+              backgroundColor: deepOrange[900],
+            },
+          }}
+          onClick={handleSubmit(onSubmit)}
+        >
+          <Typography
+            color={"white"}
+            fontWeight={"bold"}
+            fontSize={16}
+            sx={{mt: 0.5}}
+          >
+            Enviar mensagem
+          </Typography>
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
 
