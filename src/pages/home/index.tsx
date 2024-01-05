@@ -4,7 +4,7 @@
 
 import Hero from "../../components/home/Hero";
 import Booking from "../../components/home/Booking";
-import RentalFleet from "../../components/home/opportunity/Opportunity";
+import Opportunity from "../../components/home/opportunity/Opportunity";
 
 import Testimonials from "../../components/testimonials/Testimonials";
 import SaveBig from "../../components/home/SaveBig";
@@ -14,7 +14,7 @@ function index() {
     <main>
       <Hero />
       <Booking />
-      <RentalFleet />
+      <Opportunity />
       <SaveBig />
       <Testimonials />
     </main>

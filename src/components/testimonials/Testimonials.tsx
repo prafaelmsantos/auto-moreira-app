@@ -1,8 +1,6 @@
 /** @format */
 
 import {ImQuotesRight} from "react-icons/im";
-import img1 from "../../images/parry-hotter.jpg";
-import img2 from "../../images/noah-rizzly.jpg";
 
 function Testimonials() {
   return (
@@ -32,7 +30,7 @@ function Testimonials() {
               <div className="flex items-center justify-center gap-4">
                 <div>
                   <img
-                    src={img1}
+                    src={require("../../images/parry-hotter.jpg")}
                     alt="Harry Potter"
                     width={80}
                     height={80}
@@ -51,7 +49,7 @@ function Testimonials() {
               </div>
             </div>
           </div>
-          <div className="hidden lg:flex flex-col justify-between p-8 lg:p-12 bg-white rounded shadow-white-box">
+          <div className="lg:flex flex-col justify-between p-8 lg:p-12 rounded shadow-white-box">
             <div>
               <p className="font-medium text-xl lg:text-[1.35rem] lg:leading-relaxed">
                 "Recomendo este stand para compra de carros!"
@@ -61,7 +59,7 @@ function Testimonials() {
               <div className="flex items-center justify-center gap-4">
                 <div>
                   <img
-                    src={img2}
+                    src={require("../../images/noah-rizzly.jpg")}
                     alt="noah rizzly"
                     width={80}
                     height={80}

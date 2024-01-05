@@ -1,6 +1,5 @@
 /** @format */
 
-import React from "react";
 import {bookingInputs} from "../../data/input";
 import {AiFillCalendar} from "react-icons/ai";
 

@@ -4,6 +4,7 @@ import {BsFillTelephoneFill} from "react-icons/bs";
 import {GrMail} from "react-icons/gr";
 import {NavLink} from "react-router-dom";
 import {navLink} from "../../data/link";
+import {NavType} from "../../models/enums/NavLinkType";
 
 function Footer() {
   return (
@@ -47,24 +48,26 @@ function Footer() {
         <div className="space-y-3">
           <h1 className="font-bold text-2xl">Mapa do Site</h1>
           <ul className="space-y-2">
-            {navLink.map((data) => (
-              <li key={data.id}>
-                <NavLink
-                  className="hover:text-custom-orange transition-all duration-300 ease-linear"
-                  to={data.url}
-                  style={({isActive}) => {
-                    if (isActive) {
-                      return {
-                        color: "#ff4d30",
-                      };
-                    }
-                  }}
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  {data.link}
-                </NavLink>
-              </li>
-            ))}
+            {navLink
+              .filter((x) => x.navType === NavType.MAIN)
+              .map((data) => (
+                <li key={data.id}>
+                  <NavLink
+                    className="hover:text-custom-orange transition-all duration-300 ease-linear"
+                    to={data.url}
+                    style={({isActive}) => {
+                      if (isActive) {
+                        return {
+                          color: "#ff4d30",
+                        };
+                      }
+                    }}
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    {data.link}
+                  </NavLink>
+                </li>
+              ))}
           </ul>
         </div>
         <div className="space-y-3">
