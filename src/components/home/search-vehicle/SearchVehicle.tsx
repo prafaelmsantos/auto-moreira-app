@@ -1,7 +1,5 @@
 /** @format */
 
-import {bookingInputs} from "../../../data/input";
-import {AiFillCalendar} from "react-icons/ai";
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {BASE_API_URL} from "../../../config/variables";
@@ -96,6 +94,7 @@ export default function SearchVehicle({
 
   useEffect(() => {
     currentFilters && setSelectedFilters(currentFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFilters]);
 
   return (
@@ -103,7 +102,7 @@ export default function SearchVehicle({
       <div className="mx-8 my-16 p-6 lg:p-12 lg:mx-28 bg-white bg-book-bg rounded shadow-white-box space-y-8">
         {filterMode === FilterMode.HOME && (
           <div>
-            <h1 className="text-2xl font-bold">Encontrar veículo</h1>
+            <h1 className="text-2xl font-bold">Encontrar veículo...</h1>
           </div>
         )}
 
