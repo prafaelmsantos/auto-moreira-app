@@ -5,7 +5,11 @@ import {GiCarDoor} from "react-icons/gi";
 import {BsFillFuelPumpFill} from "react-icons/bs";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {defaultFilters, ISelectedFilters} from "../../models/Filter";
+import {
+  defaultFilters,
+  FilterMode,
+  ISelectedFilters,
+} from "../../models/Filter";
 import {useQuery} from "@apollo/client";
 import {useEffect, useState} from "react";
 import {Fuel, FuelTypeConverted} from "../../models/enums/FuelEnum";
@@ -17,6 +21,9 @@ import {useAppDispatch} from "../../redux/hooks";
 import {setLoader} from "../../redux/loaderSlice";
 import {useNavigate} from "react-router-dom";
 import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
+import SearchVehicle from "../home/search-vehicle/SearchVehicle";
+import {setCurrentFilters} from "../../config/localStorage";
+import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
 
 function Vehicles() {
   const navigate = useNavigate();
@@ -91,12 +98,36 @@ function Vehicles() {
       convertToVehicle(vehicle as vehicles_vehicles_nodes)
     ) ?? [];
 
+  const handleChange = (event: number | string | null | number[], id: string) =>
+    setSelectedFilters((old) => ({...old, [id]: event}));
+
+  const handleClear = () => {
+    setSelectedFilters(defaultFilters);
+    setSelectedFinalFilters(defaultFilters);
+  };
+  const handleSubmit = () => {
+    setCurrentFilters(selectedFilters, dispatch);
+    setSelectedFinalFilters(selectedFilters);
+  };
+
   return (
     <section id="models-main">
+      <SearchVehicle
+        filterMode={FilterMode.VEHICLES}
+        {...{
+          handleChange,
+          selectedFilters,
+          setSelectedFilters,
+          handleClear,
+          handleSubmit,
+        }}
+      />
+      <VehicleSelectedFilters {...{selectedFinalFilters, vehicles}} />
+
       <VehicleLenghtGrid length={vehicles.length} />
 
       <div className="py-8 px-8 lg:px-48 lg:py-16 my-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 d-flex justify-content-center">
           {vehicles.map((vehicle) => (
             <div
               key={vehicle.id}

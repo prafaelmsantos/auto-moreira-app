@@ -4,7 +4,7 @@ import {useRoutes} from "react-router-dom";
 import Vehicle from "../components/vehicles/vehicle/Vehicle";
 import About from "../pages/about";
 import Contact from "../pages/contact";
-import Home from "../pages/home";
+import Home from "../pages/home/Home";
 import Team from "../pages/team";
 import Testimonials from "../pages/testimonials";
 import Login from "../pages/user/login";
