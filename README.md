@@ -1,10 +1,10 @@
-<div><img style="width:50%" src='https://raw.githubusercontent.com/prafaelmsantos/auto-moreira-app/main/src/images/logo/auto.png'/></div>
+<div><img style="width:50%" src='https://raw.githubusercontent.com/prafaelmsantos/auto-moreira-app/main/src/images/logo.png'/></div>
 
 <h2>About the project</h2>
 
   <p><b>Auto Moreira</b> is an online platform that allows users to rent cars for personal or business use. The website provides an easy-to-use interface for searching, comparing, and reserving cars from a wide selection of vehicles that vary in make, model, size, and price.</p>
 
-👉 Live Demo: <a href='https://darrellrahan-carrental.vercel.app/'>Live Demo</a>
+👉 Live Demo: <a href='https://auto-moreira-app.onrender.com/'>Live Demo</a>
 
 # Getting Started with Create React App
 
