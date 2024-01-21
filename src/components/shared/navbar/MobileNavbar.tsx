@@ -30,10 +30,7 @@ function MobileNavbar() {
         <ul className="flex flex-col items-center gap-8 font-medium text-2xl">
           {navLink
             .filter(
-              (x) =>
-                x.navType !== NavType.ADMIN &&
-                x.navType !== NavType.ADMIN_AVATAR &&
-                x.navType !== NavType.USER
+              (x) => x.navType !== NavType.ADMIN && x.navType !== NavType.USER
             )
             .map((data) => (
               <li key={data.id}>

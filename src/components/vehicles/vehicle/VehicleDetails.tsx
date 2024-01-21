@@ -47,7 +47,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
         >
           <Grid item>
             <Typography variant="h4">
-              {vehicle.mark.name +
+              {vehicle.model.mark.name +
                 " " +
                 vehicle.model.name +
                 " " +

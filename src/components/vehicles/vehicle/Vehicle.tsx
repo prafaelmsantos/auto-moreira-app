@@ -49,7 +49,11 @@ export default function VehiclePage() {
         type={NavLinkType.VEHICLES}
         page={
           vehicle &&
-          vehicle.mark.name + " " + vehicle.model.name + " " + vehicle.version
+          vehicle.model.mark.name +
+            " " +
+            vehicle.model.name +
+            " " +
+            vehicle.version
         }
       />
 

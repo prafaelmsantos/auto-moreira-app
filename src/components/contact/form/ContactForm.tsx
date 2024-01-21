@@ -19,7 +19,7 @@ import {setLoader} from "../../../redux/loaderSlice";
 function ContactForm() {
   const dispatch = useAppDispatch();
 
-  const validationSchema = Yup.object().shape({
+  const validationSchema: Yup.ObjectSchema<IContact> = Yup.object().shape({
     name: Yup.string().required("O nome completo é obrigatório!"),
     email: Yup.string()
       .required("O email é obrigatório!")
@@ -39,7 +39,7 @@ function ContactForm() {
     handleSubmit,
     reset,
     formState: {errors, isSubmitSuccessful},
-  } = useForm({
+  } = useForm<IContact>({
     resolver: yupResolver(validationSchema),
   });
 

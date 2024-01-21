@@ -24,7 +24,7 @@ function VehicleSelectedFilters({
       <Typography variant="h5" fontWeight={"bold"}>
         {selectedFinalFilters?.markId
           ? vehicles[0]
-            ? vehicles[0].mark?.name + " - "
+            ? vehicles[0].model.mark?.name + " - "
             : ""
           : ""}
         {selectedFinalFilters?.modelId

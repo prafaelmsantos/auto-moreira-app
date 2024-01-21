@@ -74,7 +74,7 @@ function Vehicles() {
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
       filter: {
-        markId: markId,
+        model: {markId: markId},
         and: {
           modelId: modelId,
           and: {
@@ -147,7 +147,7 @@ function Vehicles() {
                   <div className="space-y-1">
                     <div>
                       <h1 className="font-bold text-xl lg:text-xl">
-                        {vehicle.mark.name + " " + vehicle.model.name}
+                        {vehicle.model.mark.name + " " + vehicle.model.name}
                       </h1>
                     </div>
                     <div className="text-[#ffc933] flex items-center">

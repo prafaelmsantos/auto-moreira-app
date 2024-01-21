@@ -71,16 +71,16 @@ export default function NavbarAvatar() {
               </Typography>
             </MenuItem>
             <Divider />
-
-            <NavbarListItem
-              handleClose={handleCloseUserMenu}
-              type={NavLinkType.PROFILE}
-            />
-
-            <NavbarListItem
-              handleClose={handleCloseUserMenu}
-              type={NavLinkType.ADMIN}
-            />
+            {navLink
+              .filter((navLink) => navLink.navType === NavType.ADMIN)
+              .map((navLink) => {
+                return (
+                  <NavbarListItem
+                    handleClose={handleCloseUserMenu}
+                    type={navLink.type}
+                  />
+                );
+              })}
 
             <Divider sx={{mt: 1, mb: 1}} />
             <NavbarListItem

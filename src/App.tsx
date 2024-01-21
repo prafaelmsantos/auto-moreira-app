@@ -11,8 +11,6 @@ import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
 import {InterceptorRequest} from "./models/Interceptor";
 import {getCurrentFilters, getCurrentUser} from "./config/localStorage";
 
-import {setFilters} from "./redux/filtersSlice";
-
 import MobileNavbar from "./components/shared/navbar/MobileNavbar";
 import Header from "./components/shared/navbar/Header";
 import ToTop from "./components/shared/ToTop";
@@ -25,6 +23,7 @@ import AlertModal from "./components/shared/AlertModal";
 import {closeModal} from "./redux/modalSlice";
 import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
 import {closeSnackBar, setSnackBar} from "./redux/snackBarSlice";
+import {setFilters} from "./redux/filtersSlice";
 
 export default function App() {
   const dispatch = useAppDispatch();

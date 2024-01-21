@@ -1,6 +1,6 @@
 /** @format */
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {convertToVehicle} from "../../../models/Vehicle";
 import {useQuery} from "@apollo/client";
 import {VEHICLES} from "../../../queries/Vehicles";
@@ -10,17 +10,9 @@ import {
 } from "../../../queries/types/vehicles";
 import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import {FuelTypeConverted} from "../../../models/enums/FuelEnum";
-import {useAppDispatch} from "../../../redux/hooks";
-import {setLoader} from "../../../redux/loaderSlice";
 
 function Opportunity() {
-  const {data, loading} = useQuery<vehicles>(VEHICLES);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setLoader(loading));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading]);
+  const {data} = useQuery<vehicles>(VEHICLES);
 
   const vehicles =
     data?.vehicles?.nodes?.map((vehicle) =>
@@ -56,7 +48,7 @@ function Opportunity() {
                 } text-left p-4 text-xl font-semibold hover:bg-custom-orange hover:text-white transition-all duration-300 ease-linear`}
                 onClick={() => setActiveVehicleId(vehicle.id)}
               >
-                {vehicle.mark.name +
+                {vehicle.model.mark.name +
                   " " +
                   vehicle.model.name +
                   " " +
@@ -84,7 +76,7 @@ function Opportunity() {
                     Marca
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.mark.name}
+                    {carDetail.model.mark.name}
                   </td>
                 </tr>
                 <tr>

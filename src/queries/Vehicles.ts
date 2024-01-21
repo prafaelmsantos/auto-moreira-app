@@ -5,30 +5,30 @@ export const VEHICLES = gql`
         vehicles(where: $filter, order: $order, first: $first, last: $last) {
             totalCount
             nodes {
+              id
+              modelId
+              model {
                 id
+                name
                 markId
                 mark {
                   id
                   name
                 }
-                modelId
-                model {
-                  id
-                  name
-                }
-                year
-                color
-                observations
-                mileage
-                price
-                fuelType
-                version
-                doors
-                transmission
-                engineSize
-                power
-                opportunity
-                sold
+              }
+              year
+              color
+              observations
+              mileage
+              price
+              fuelType
+              version
+              doors
+              transmission
+              engineSize
+              power
+              opportunity
+              sold
             }
         }
     }

@@ -7,14 +7,18 @@ export enum NavLinkType {
   CONTACT,
   LOGIN,
   REGISTRATION,
-  PROFILE,
-  ADMIN,
-  LOGOUT
+  LOGOUT,
+  ADMIN_PROFILE,
+  ADMIN_HOME,
+  ADMIN_USERS,
+  ADMIN_MARKS,
+  ADMIN_MODELS,
+  ADMIN_VEHICLES,
+  ADMIN_CLIENTS,
 }
 
 export enum NavType {
   MAIN,
   USER,
-  ADMIN_AVATAR,
   ADMIN
 }

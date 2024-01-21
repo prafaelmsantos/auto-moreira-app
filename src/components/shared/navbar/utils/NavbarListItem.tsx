@@ -8,8 +8,10 @@ import {
 } from "@mui/material";
 
 import {CgProfile} from "react-icons/cg";
-
-import {MdLogout, MdOutlineAdminPanelSettings} from "react-icons/md";
+import {IoCarSport} from "react-icons/io5";
+import {SiMercedes, SiThemodelsresource} from "react-icons/si";
+import {MdLogout, MdOutlineRateReview} from "react-icons/md";
+import {FaHome, FaUsers} from "react-icons/fa";
 import {NavLink, useNavigate} from "react-router-dom";
 import {navLink} from "../../../../data/link";
 import {NavLinkType} from "../../../../models/enums/NavLinkType";
@@ -32,9 +34,9 @@ export default function NavbarListItem(props: INavbarListItem) {
     <>
       {bannerLink && (
         <NavLink
+          end
           onClick={() => {
             void handleClose();
-            type !== NavLinkType.LOGIN && navigate(bannerLink.url);
             type === NavLinkType.LOGIN &&
               UserService.logout(dispatch, navigate);
           }}
@@ -91,10 +93,16 @@ export default function NavbarListItem(props: INavbarListItem) {
                     color: "GrayText",
                   }}
                 >
-                  {type === NavLinkType.ADMIN && (
-                    <MdOutlineAdminPanelSettings />
+                  {type === NavLinkType.ADMIN_PROFILE && <CgProfile />}
+                  {type === NavLinkType.ADMIN_HOME && <FaHome />}
+                  {type === NavLinkType.ADMIN_USERS && <FaUsers />}
+                  {type === NavLinkType.ADMIN_MARKS && <SiMercedes />}
+                  {type === NavLinkType.ADMIN_MODELS && <SiThemodelsresource />}
+                  {type === NavLinkType.ADMIN_VEHICLES && <IoCarSport />}
+                  {type === NavLinkType.ADMIN_CLIENTS && (
+                    <MdOutlineRateReview />
                   )}
-                  {type === NavLinkType.PROFILE && <CgProfile />}
+
                   {type === NavLinkType.LOGIN && <MdLogout />}
                 </ListItemIcon>
                 <ListItemText
