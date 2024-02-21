@@ -1,13 +1,8 @@
 import { ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
 import { ISelectedFilters, defaultFilters } from "../models/Filter";
-import { IUser } from "../models/identity/User";
-import { setFilters } from "../redux/filtersSlice";
 
-export const getCurrentUser = () => {
-  const user = localStorage.getItem("user");
-  return user ? (JSON.parse(user) as IUser) : null;
-};
+import { setFilters } from "../redux/filtersSlice";
 
 export const getCurrentFilters = () => {
   const filters = localStorage.getItem("filters");

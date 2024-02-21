@@ -5,7 +5,6 @@ import {AiOutlineClose} from "react-icons/ai";
 import {navLink} from "../../../data/link";
 import {useTogglersContext} from "../../../context/togglers";
 import {NavLink} from "react-router-dom";
-import {NavType} from "../../../models/enums/NavLinkType";
 
 function MobileNavbar() {
   const {mobileNavbar, setMobileNavbar} = useTogglersContext();
@@ -28,28 +27,24 @@ function MobileNavbar() {
           <AiOutlineClose />
         </button>
         <ul className="flex flex-col items-center gap-8 font-medium text-2xl">
-          {navLink
-            .filter(
-              (x) => x.navType !== NavType.ADMIN && x.navType !== NavType.USER
-            )
-            .map((data) => (
-              <li key={data.id}>
-                <NavLink
-                  to={data.url}
-                  style={({isActive}) => {
-                    if (isActive) {
-                      return {
-                        color: "#ff4d30",
-                        fontWeight: "bold",
-                      };
-                    }
-                  }}
-                  onClick={() => setMobileNavbar(false)}
-                >
-                  {data.link}
-                </NavLink>
-              </li>
-            ))}
+          {navLink.map((data) => (
+            <li key={data.id}>
+              <NavLink
+                to={data.url}
+                style={({isActive}) => {
+                  if (isActive) {
+                    return {
+                      color: "#ff4d30",
+                      fontWeight: "bold",
+                    };
+                  }
+                }}
+                onClick={() => setMobileNavbar(false)}
+              >
+                {data.link}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </section>

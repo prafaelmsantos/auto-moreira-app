@@ -3,7 +3,7 @@ import { IContact } from "../models/Contact";
 
 class ContactService {
   static async postContact(contact: IContact): Promise<Response | undefined> {
-    const endpoint = `${BASE_API_URL}${"api/contacts"}`;
+    const endpoint = `${BASE_API_URL}${"api/clientMessages"}`;
     try {
       const response = await fetch(endpoint, {
         method: "POST",

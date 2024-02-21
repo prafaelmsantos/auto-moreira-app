@@ -2,7 +2,7 @@
 
 import {NavLink} from "react-router-dom";
 import {navLink} from "../../data/link";
-import {NavLinkType, NavType} from "../../models/enums/NavLinkType";
+import {NavLinkType} from "../../models/enums/NavLinkType";
 
 function BannerHero({page, type}: {type: NavLinkType; page?: string}) {
   const bannerLink = navLink.find((x) => x.type === type);
@@ -18,28 +18,6 @@ function BannerHero({page, type}: {type: NavLinkType; page?: string}) {
                 <h1 className="font-bold text-4xl">{bannerLink.link}</h1>
               </div>
               <div className="flex items-center gap-1 font-semibold">
-                {bannerLink.navType !== NavType.ADMIN ? (
-                  <>
-                    <NavLink
-                      className="hover:text-custom-orange transition-all duration-300 ease-linear"
-                      to="/"
-                    >
-                      Home
-                    </NavLink>
-                    <span>/</span>
-                  </>
-                ) : (
-                  <>
-                    <NavLink
-                      className="hover:text-custom-orange transition-all duration-300 ease-linear"
-                      to="/admin"
-                    >
-                      Administração
-                    </NavLink>
-                    <span>/</span>
-                  </>
-                )}
-
                 {page ? (
                   <NavLink
                     className="hover:text-custom-orange transition-all duration-300 ease-linear"
