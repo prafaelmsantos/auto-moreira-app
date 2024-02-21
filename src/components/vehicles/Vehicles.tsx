@@ -24,6 +24,7 @@ import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
 import SearchVehicle from "../home/search-vehicle/SearchVehicle";
 import {setCurrentFilters} from "../../config/localStorage";
 import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
+import {CurrencyFormatter} from "../../utils/CurrencyFormatter";
 
 function Vehicles() {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ function Vehicles() {
                   </div>
                   <div className="text-right">
                     <h1 className="font-bold text-xl lg:text-2xl">
-                      € {vehicle.price}
+                      {CurrencyFormatter.format(vehicle.price)}
                     </h1>
                   </div>
                 </div>

@@ -9,6 +9,7 @@ import {VehicleCardIcon} from "../../../models/enums/VehicleCardIconEnum";
 import {FuelTypeConverted} from "../../../models/enums/FuelEnum";
 import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import VehicleCardItemRow from "./utils/VehicleCardItemRow";
+import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 
 export default function VehicleDetails(props: {vehicle: IVehicle}) {
   const {vehicle} = props;
@@ -55,7 +56,9 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h5">{vehicle.price + " €"}</Typography>
+            <Typography variant="h5">
+              {CurrencyFormatter.format(vehicle.price)}
+            </Typography>
           </Grid>
         </Grid>
         <Card sx={{px: 8, py: 5}}>
