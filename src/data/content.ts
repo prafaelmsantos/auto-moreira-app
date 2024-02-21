@@ -67,17 +67,6 @@ export const faq = [
   },
 ];
 
-export const aboutGrid = [
-  { id: 1, img: require("../images/car-type.png"), amount: 20, text: "Car Types" },
-  {
-    id: 2,
-    img: require("../images/rental-outlets.png"),
-    amount: 85,
-    text: "Rental Outlets",
-  },
-
-  { id: 3, img: require("../images/repair-shop.png"), amount: 75, text: "Repair Shop" },
-];
 
 export const team = [
   {

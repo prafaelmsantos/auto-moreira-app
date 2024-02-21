@@ -1,6 +1,5 @@
 /** @format */
 
-import {aboutGrid} from "../../data/content";
 import Img1 from "../../images/about-main.jpg";
 
 function About() {
@@ -35,23 +34,6 @@ function About() {
                 negócios.
               </p>
             </div>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:w-fit">
-            {aboutGrid.map((data) => (
-              <div key={data.id} className="flex flex-col gap-4 lg:gap-6">
-                <img
-                  src={data.img}
-                  alt={data.text}
-                  width={data.id === 3 ? 50 : 70}
-                  height={data.id === 3 ? 50 : 70}
-                  className="m-auto lg:m-0"
-                />
-                <div className="flex flex-col gap-4 lg:flex-row lg:gap-2 lg:items-center">
-                  <h1 className="font-bold text-5xl">{data.amount}</h1>
-                  <p className="text-custom-grey text-1.1rem">{data.text}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
