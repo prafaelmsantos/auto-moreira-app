@@ -42,3 +42,14 @@ export async function postData<T>(endpoint: string, body: T): Promise<T> {
   }
   return (await response.json()) as Promise<T>;
 }
+
+export async function postWithoutData<T>(endpoint: string): Promise<T> {
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: getSessionHeaders()
+  });
+  if (!response.ok) {
+    throw new Error(await getErrorMessage(response));
+  }
+  return (await response.json()) as Promise<T>;
+}

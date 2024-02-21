@@ -1,8 +1,7 @@
 /** @format */
 
-import {useEffect} from "react";
 import "./App.css";
-
+import {useEffect} from "react";
 import {useAppDispatch} from "./redux/hooks";
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
 import {getCurrentFilters} from "./config/localStorage";

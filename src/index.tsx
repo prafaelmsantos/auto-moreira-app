@@ -15,17 +15,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <TogglersProvider>
-      <Provider store={store}>
-        <ApolloProvider client={graphQLClient()}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ApolloProvider>
-      </Provider>
-    </TogglersProvider>
-  </React.StrictMode>
+  <TogglersProvider>
+    <Provider store={store}>
+      <ApolloProvider client={graphQLClient()}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ApolloProvider>
+    </Provider>
+  </TogglersProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
