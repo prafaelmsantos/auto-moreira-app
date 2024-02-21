@@ -26,8 +26,7 @@ export default function VehiclePage() {
   useEffect(() => {
     if (vehicleId) {
       dispatch(setLoader(true));
-      const endpoint = `${BASE_API_URL}${"api/vehicles/"}${Number(param.id)}`;
-      getData<IVehicle>(`${endpoint}`)
+      getData<IVehicle>(`${BASE_API_URL}${"api/vehicles/"}${Number(param.id)}`)
         .then((data) => {
           setVehicle(data);
           dispatch(setToInitialLoader());

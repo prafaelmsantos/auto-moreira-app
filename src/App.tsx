@@ -19,6 +19,8 @@ import {closeModal} from "./redux/modalSlice";
 import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
 import {closeSnackBar} from "./redux/snackBarSlice";
 import {setFilters} from "./redux/filtersSlice";
+import {setLoader, setToInitialLoader} from "./redux/loaderSlice";
+import {createVisitor} from "./services/AutoMoreiraConectors";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -37,6 +39,18 @@ export default function App() {
   const currentSnackBar = useSelector(
     (state: RootState) => state.snackBarSlice
   );
+
+  useEffect(() => {
+    dispatch(setLoader(true));
+    createVisitor()
+      .then(() => dispatch(setToInitialLoader()))
+      .catch((e) => {
+        console.error(e);
+        dispatch(setToInitialLoader());
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

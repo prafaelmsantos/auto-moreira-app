@@ -57,8 +57,7 @@ export default function SearchVehicle({
 
   useEffect(() => {
     setLoading(true);
-    const endpoint = `${BASE_API_URL}${"api/marks"}`;
-    getData<IMark[]>(`${endpoint}`)
+    getData<IMark[]>(`${BASE_API_URL}${"api/marks"}`)
       .then((data) => {
         setMarks(data);
         setLoading(false);
@@ -71,8 +70,7 @@ export default function SearchVehicle({
 
   useEffect(() => {
     setLoading(true);
-    const endpoint = `${BASE_API_URL}${"api/models"}`;
-    getData<IModel[]>(`${endpoint}`)
+    getData<IModel[]>(`${BASE_API_URL}${"api/models"}`)
       .then((data) => {
         setModels(data);
         setLoading(false);
