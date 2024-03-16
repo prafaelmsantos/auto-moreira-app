@@ -29,6 +29,10 @@ export const VEHICLES = gql`
               power
               opportunity
               sold
+              vehicleImages {
+                id
+                url
+              }
             }
         }
     }

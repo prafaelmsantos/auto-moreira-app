@@ -13,8 +13,7 @@ import {
 import {useQuery} from "@apollo/client";
 import {useEffect, useState} from "react";
 import {Fuel, FuelTypeConverted} from "../../models/enums/FuelEnum";
-import {vehicles, vehicles_vehicles_nodes} from "../../queries/types/vehicles";
-import {VEHICLES} from "../../queries/Vehicles";
+import {VEHICLES} from "../../models/GraphQL/Vehicles";
 import {convertToVehicle} from "../../models/Vehicle";
 import {TransmissionConverted} from "../../models/enums/TransmissionEnum";
 import {useAppDispatch} from "../../redux/hooks";
@@ -25,6 +24,11 @@ import SearchVehicle from "../home/search-vehicle/SearchVehicle";
 import {setCurrentFilters} from "../../config/localStorage";
 import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
 import {CurrencyFormatter} from "../../utils/CurrencyFormatter";
+import {
+  vehicles_vehicles_nodes,
+  vehicles,
+} from "../../models/GraphQL/types/vehicles";
+import defaultVehicle from "../../images/defaultVehicle.jpg";
 
 function Vehicles() {
   const navigate = useNavigate();
@@ -58,18 +62,18 @@ function Vehicles() {
     : {in: ["PETROL", "DIESEL", "HYBRID"]};
 
   const year = {
-    gt: selectedFinalFilters.minYear,
-    lt: selectedFinalFilters.maxYear,
+    gte: selectedFinalFilters.minYear,
+    lte: selectedFinalFilters.maxYear,
   };
 
   const price = {
-    gt: selectedFinalFilters.minPrice,
-    lt: selectedFinalFilters.maxPrice,
+    gte: selectedFinalFilters.minPrice,
+    lte: selectedFinalFilters.maxPrice,
   };
 
   const kms = {
-    gt: selectedFinalFilters.minKms,
-    lt: selectedFinalFilters.maxKms,
+    gte: selectedFinalFilters.minKms,
+    lte: selectedFinalFilters.maxKms,
   };
 
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
@@ -123,6 +127,7 @@ function Vehicles() {
           handleSubmit,
         }}
       />
+
       <VehicleSelectedFilters {...{selectedFinalFilters, vehicles}} />
 
       <VehicleLenghtGrid length={vehicles.length} />
@@ -136,11 +141,15 @@ function Vehicles() {
             >
               <div>
                 <img
-                  src={require(`../../images/box-Audi A1.png`)}
-                  alt={"box-Audi A1"}
-                  width={800}
-                  height={800}
-                  className="w-full h-full lg:h-60 object-cover rounded-t"
+                  src={
+                    vehicle.vehicleImages.length !== 0
+                      ? vehicle.vehicleImages[0].url
+                      : defaultVehicle
+                  }
+                  alt={`${vehicle.model.mark.name} ${vehicle.model.name}`}
+                  width={600}
+                  height={600}
+                  className="w-full h-full lg:h-60 rounded-t"
                 />
               </div>
               <div className="p-6 space-y-6">
@@ -148,7 +157,7 @@ function Vehicles() {
                   <div className="space-y-1">
                     <div>
                       <h1 className="font-bold text-xl lg:text-xl">
-                        {vehicle.model.mark.name + " " + vehicle.model.name}
+                        {`${vehicle.model.mark.name} ${vehicle.model.name}`}
                       </h1>
                     </div>
                     <div className="text-[#ffc933] flex items-center">

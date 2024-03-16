@@ -27,18 +27,20 @@ function Footer() {
                   <span>
                     <BsFillTelephoneFill />
                   </span>
-                  <span className="font-semibold">(+351) 231472555</span>
+                  <span className="font-semibold">(+351) 231 472 555</span>
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="mailto:automoreira@gmail.com"
+                  to="mailto:automoreiraportugal@gmail.com"
                   className="flex items-center justify-center lg:justify-start gap-2 hover:text-custom-orange transition-all duration-300 ease-linear"
                 >
                   <span>
                     <GrMail />
                   </span>
-                  <span className="font-semibold">automoreira@gmail.com</span>
+                  <span className="font-semibold">
+                    automoreiraportugal@gmail.com
+                  </span>
                 </NavLink>
               </li>
             </ul>

@@ -22,7 +22,7 @@ function GetTouch() {
               <span>
                 <BsFillTelephoneFill />
               </span>
-              <span className="font-semibold">(+351) 231472555</span>
+              <span className="font-semibold">(+351) 231 472 555</span>
             </NavLink>
           </div>
         </div>

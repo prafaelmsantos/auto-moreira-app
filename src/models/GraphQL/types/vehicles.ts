@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { VehicleFilterInput, VehicleSortInput, FUEL, TRANSMISSION } from "./../../models/graphql-global-types";
+import { VehicleFilterInput, VehicleSortInput, FUEL, TRANSMISSION } from "./../graphql-global-types";
 
 // ====================================================
 // GraphQL query operation: vehicles
@@ -21,6 +21,12 @@ export interface vehicles_vehicles_nodes_model {
   name: string | null;
   markId: number;
   mark: vehicles_vehicles_nodes_model_mark | null;
+}
+
+export interface vehicles_vehicles_nodes_vehicleImages {
+  __typename: "VehicleImage";
+  id: number;
+  url: string | null;
 }
 
 export interface vehicles_vehicles_nodes {
@@ -41,6 +47,7 @@ export interface vehicles_vehicles_nodes {
   power: number;
   opportunity: boolean;
   sold: boolean;
+  vehicleImages: (vehicles_vehicles_nodes_vehicleImages | null)[] | null;
 }
 
 export interface vehicles_vehicles {

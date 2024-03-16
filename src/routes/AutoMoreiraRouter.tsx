@@ -26,6 +26,7 @@ export default function AutoMoreiraRouter() {
       id: "vehicles",
       children: [
         {index: true, element: <Vehicles />},
+        {path: "?markId=:id", element: <Vehicle />},
         {path: ":id", element: <Vehicle />},
       ],
     },

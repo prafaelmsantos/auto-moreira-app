@@ -1,11 +1,11 @@
-import { marks_marks_nodes as marksGraphQL } from "../queries/types/marks";
+import { marks_marks_nodes } from "./GraphQL/types/marks";
 
 export interface IMark {
   id: number;
   name: string;
 }
 
-export function convertToMark(mark: marksGraphQL): IMark {
+export function convertToMark(mark: marks_marks_nodes): IMark {
     return {
         id: mark.id,
         name: String(mark.name)

@@ -99,14 +99,8 @@ function ContactForm() {
           label={"Telefone/Telemóvel"}
           error={!!errors.phoneNumber}
           helperText={errors.phoneNumber?.message}
-          inputProps={{
-            inputProps: {min: 200000000, max: 999999999},
-            startAdornment: (
-              <Typography sx={{mt: 0.1, mx: 0.5}}>+351</Typography>
-            ),
-          }}
           type="Number"
-          defaultValue={200000000}
+          defaultValue={0}
           register={register("phoneNumber")}
         />
       </Grid>

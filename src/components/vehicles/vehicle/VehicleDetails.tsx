@@ -1,7 +1,11 @@
 /** @format */
 
 import {Card, CardContent, Grid, TextField, Typography} from "@mui/material";
-import {IVehicle} from "../../../models/Vehicle";
+import {
+  ConvertToReactImageGalleryItem,
+  defaultImage,
+  IVehicle,
+} from "../../../models/Vehicle";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {VehicleCardIcon} from "../../../models/enums/VehicleCardIconEnum";
@@ -13,20 +17,11 @@ import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 
 export default function VehicleDetails(props: {vehicle: IVehicle}) {
   const {vehicle} = props;
-  const items = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
-  ];
+
+  const images =
+    vehicle.vehicleImages.length !== 0
+      ? vehicle.vehicleImages.map((x) => ConvertToReactImageGalleryItem(x))
+      : defaultImage;
 
   const InputLabelStyle = {
     style: {
@@ -36,7 +31,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
   return (
     <Grid container direction="row" spacing={10} sx={{p: 5}}>
       <Grid item xs={12} lg={7}>
-        <ImageGallery showNav items={items} />
+        <ImageGallery showNav items={images} />
       </Grid>
       <Grid item xs={12} lg={5}>
         <Grid

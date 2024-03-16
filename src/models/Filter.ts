@@ -12,12 +12,12 @@ export interface ISelectedFilters {
   maxKms: number;
 }
 
-export const minYear = 2010;
-export const maxYear = 2023;
-export const minPrice = 10000;
-export const maxPrice = 50000;
+export const minYear = 2000;
+export const maxYear = new Date().getFullYear();
+export const minPrice = 0;
+export const maxPrice = 1000000;
 export const minKms = 0;
-export const maxKms = 50000;
+export const maxKms = 1000000;
 
 export const defaultFilters: ISelectedFilters = {
   markId: null,

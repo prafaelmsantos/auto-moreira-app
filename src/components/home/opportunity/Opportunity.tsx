@@ -1,25 +1,43 @@
 /** @format */
 
-import {useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {convertToVehicle} from "../../../models/Vehicle";
 import {useQuery} from "@apollo/client";
-import {VEHICLES} from "../../../queries/Vehicles";
-import {
-  vehicles,
-  vehicles_vehicles_nodes,
-} from "../../../queries/types/vehicles";
+import {VEHICLES} from "../../../models/GraphQL/Vehicles";
 import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import {FuelTypeConverted} from "../../../models/enums/FuelEnum";
+import {
+  vehicles_vehicles_nodes,
+  vehicles,
+} from "../../../models/GraphQL/types/vehicles";
+
+import defaultVehicle from "../../../images/defaultVehicle.jpg";
 
 function Opportunity() {
-  const {data} = useQuery<vehicles>(VEHICLES);
+  const {data} = useQuery<vehicles>(VEHICLES, {
+    variables: {
+      filter: {
+        opportunity: {eq: true},
+        and: {
+          sold: {eq: false},
+        },
+      },
+    },
+  });
 
-  const vehicles =
-    data?.vehicles?.nodes?.map((vehicle) =>
-      convertToVehicle(vehicle as vehicles_vehicles_nodes)
-    ) ?? [];
+  const vehicles = useMemo(
+    () =>
+      data?.vehicles?.nodes?.map((vehicle) =>
+        convertToVehicle(vehicle as vehicles_vehicles_nodes)
+      ) ?? [],
+    [data]
+  );
 
-  const [activeVehicleId, setActiveVehicleId] = useState(1);
+  const [activeVehicleId, setActiveVehicleId] = useState(0);
+
+  useEffect(() => {
+    setActiveVehicleId(vehicles.length !== 0 ? vehicles[0].id : 0);
+  }, [vehicles]);
 
   const carDetail = vehicles.find((data) => data.id === activeVehicleId);
 
@@ -58,10 +76,14 @@ function Opportunity() {
           </div>
           <div className="lg:basis-3/5">
             <img
-              src={require(`../../../images/Audi A1.png`)}
-              alt={"Audi A1"}
-              width={500}
-              height={500}
+              src={
+                carDetail.vehicleImages.length !== 0
+                  ? carDetail.vehicleImages[0].url
+                  : defaultVehicle
+              }
+              alt={`${carDetail.model.mark.name} ${carDetail.model.name}`}
+              width={700}
+              height={700}
               className="m-auto"
             />
           </div>
