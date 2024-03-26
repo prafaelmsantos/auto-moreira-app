@@ -2,19 +2,16 @@
 
 import {Button, Grid, Typography} from "@mui/material";
 import {deepOrange} from "@mui/material/colors";
-import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import {IContact} from "../../../models/Contact";
 import ContactService from "../../../services/ContactService";
 import {MessageType} from "../../../models/enums/MessageTypeEnum";
-import {useEffect} from "react";
 import TextFieldValidation from "../../shared/TextFieldValidation";
 import {useAppDispatch} from "../../../redux/hooks";
 import {setModal} from "../../../redux/modalSlice";
 import {setSnackBar} from "../../../redux/snackBarSlice";
-import {setLoader} from "../../../redux/loaderSlice";
 
 function ContactForm() {
   const dispatch = useAppDispatch();

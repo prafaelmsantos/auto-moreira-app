@@ -64,7 +64,7 @@ function Opportunity() {
                   activeVehicleId === vehicle.id
                     ? "bg-custom-orange text-white"
                     : "bg-lighter-grey text-black"
-                } text-left p-4 text-xl font-semibold hover:bg-custom-orange hover:text-white transition-all duration-300 ease-linear`}
+                } text-left p-4 text-md font-semibold hover:bg-custom-orange hover:text-white transition-all duration-300 ease-linear`}
                 onClick={() => setActiveVehicleId(vehicle.id)}
               >
                 {vehicle.model.mark.name +
