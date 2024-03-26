@@ -36,6 +36,7 @@ export interface IVehicle {
 export interface IVehicleImage {
   id: number;
   url: string;
+  isMain: boolean;
 }
 
 export function ConvertToReactImageGalleryItem(
@@ -53,6 +54,7 @@ export function convertToVehicleImage(
   return {
     id: vehicleImage.id,
     url: vehicleImage.url ?? "",
+    isMain: vehicleImage.isMain
   };
 }
 

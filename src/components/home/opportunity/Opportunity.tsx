@@ -12,6 +12,7 @@ import {
 } from "../../../models/GraphQL/types/vehicles";
 
 import defaultVehicle from "../../../images/defaultVehicle.jpg";
+import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 
 function Opportunity() {
   const {data} = useQuery<vehicles>(VEHICLES, {
@@ -47,9 +48,7 @@ function Opportunity() {
     <section id="rental-fleet">
       <div className="px-8 lg:px-28 py-16 text-center space-y-8 lg:space-y-16">
         <div className="font-bold space-y-2">
-          <h1 className="text-4xl leading-tight lg:text-5xl">
-            Oportunidades de veículos
-          </h1>
+          <h1 className="text-4xl leading-tight lg:text-5xl">Oportunidades</h1>
           <p className="font-normal text-custom-grey p-4 text-1.1rem">
             Os veículos selecionados criteriosamente, para si.
           </p>
@@ -78,7 +77,8 @@ function Opportunity() {
             <img
               src={
                 carDetail.vehicleImages.length !== 0
-                  ? carDetail.vehicleImages[0].url
+                  ? carDetail.vehicleImages.find((x) => x.isMain)?.url ??
+                    defaultVehicle
                   : defaultVehicle
               }
               alt={`${carDetail.model.mark.name} ${carDetail.model.name}`}
@@ -90,7 +90,9 @@ function Opportunity() {
           <div className="w-fit m-auto space-y-4 lg:space-y-6 lg:basis-1/5">
             <div>
               <h1 className="bg-custom-orange p-2 text-white flex items-center gap-2 justify-center">
-                <span className="text-2xl font-bold">€ {carDetail.price}</span>
+                <span className="text-2xl font-bold">
+                  € {CurrencyFormatter.format(carDetail.price)}
+                </span>
               </h1>
               <table>
                 <tr>

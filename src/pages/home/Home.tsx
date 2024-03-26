@@ -1,12 +1,7 @@
 /** @format */
 
-"use client";
-
 import Hero from "../../components/home/Hero";
 import Opportunity from "../../components/home/opportunity/Opportunity";
-
-import Testimonials from "../../components/testimonials/Testimonials";
-import SaveBig from "../../components/home/SaveBig";
 import SearchVehicle from "../../components/home/search-vehicle/SearchVehicle";
 import {useState} from "react";
 import {
@@ -31,8 +26,6 @@ export default function Home() {
       />
 
       <Opportunity />
-      <SaveBig />
-      <Testimonials />
     </main>
   );
 }

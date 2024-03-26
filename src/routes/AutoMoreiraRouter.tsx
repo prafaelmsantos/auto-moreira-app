@@ -6,7 +6,6 @@ import About from "../pages/about";
 import Contact from "../pages/contact";
 import Home from "../pages/home/Home";
 import Team from "../pages/team";
-import Testimonials from "../pages/testimonials";
 import Vehicles from "../pages/vehicles";
 
 export default function AutoMoreiraRouter() {
@@ -29,11 +28,6 @@ export default function AutoMoreiraRouter() {
         {path: "?markId=:id", element: <Vehicle />},
         {path: ":id", element: <Vehicle />},
       ],
-    },
-    {
-      path: "/testimonials",
-      element: <Testimonials />,
-      id: "testimonials",
     },
     {
       path: "/team",

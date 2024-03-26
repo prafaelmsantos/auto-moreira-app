@@ -1,6 +1,6 @@
 /** @format */
 
-import {AiFillCar, AiFillStar, AiFillTool} from "react-icons/ai";
+import {AiFillCar, AiFillTool} from "react-icons/ai";
 import {GiCarDoor} from "react-icons/gi";
 import {BsFillFuelPumpFill} from "react-icons/bs";
 import {useSelector} from "react-redux";
@@ -143,48 +143,32 @@ function Vehicles() {
                 <img
                   src={
                     vehicle.vehicleImages.length !== 0
-                      ? vehicle.vehicleImages[0].url
+                      ? vehicle.vehicleImages.find((x) => x.isMain)?.url ??
+                        defaultVehicle
                       : defaultVehicle
                   }
                   alt={`${vehicle.model.mark.name} ${vehicle.model.name}`}
                   width={600}
                   height={600}
-                  className="w-full h-full lg:h-60 rounded-t"
+                  className="w-full h-full lg:h-50 rounded-t"
                 />
               </div>
               <div className="p-6 space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
                     <div>
-                      <h1 className="font-bold text-xl lg:text-xl">
+                      <h1 className="font-bold text-md lg:text-md">
                         {`${vehicle.model.mark.name} ${vehicle.model.name}`}
                       </h1>
                     </div>
-                    <div className="text-[#ffc933] flex items-center">
-                      <span>
-                        <AiFillStar />
-                      </span>
-                      <span>
-                        <AiFillStar />
-                      </span>
-                      <span>
-                        <AiFillStar />
-                      </span>
-                      <span>
-                        <AiFillStar />
-                      </span>
-                      <span>
-                        <AiFillStar />
-                      </span>
-                    </div>
                   </div>
                   <div className="text-right">
-                    <h1 className="font-bold text-xl lg:text-2xl">
+                    <h1 className="font-bold text-xl lg:text-sm">
                       {CurrencyFormatter.format(vehicle.price)}
                     </h1>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-lg">
+                <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <span>
                       <AiFillCar />
@@ -198,7 +182,7 @@ function Vehicles() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-lg">
+                <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <span>
                       <AiFillTool />
@@ -221,7 +205,7 @@ function Vehicles() {
                       window.scrollTo(0, 0);
                       navigate(`/vehicles/${vehicle.id}`);
                     }}
-                    className="block text-center bg-custom-orange p-3 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
+                    className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
                   >
                     Ver mais
                   </button>

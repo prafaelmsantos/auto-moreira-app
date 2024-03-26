@@ -58,6 +58,21 @@ export interface ComparableInt32OperationFilterInput {
   nlte?: number | null;
 }
 
+export interface ComparableNullableOfDateTimeOperationFilterInput {
+  eq?: any | null;
+  neq?: any | null;
+  in?: (any | null)[] | null;
+  nin?: (any | null)[] | null;
+  gt?: any | null;
+  ngt?: any | null;
+  gte?: any | null;
+  ngte?: any | null;
+  lt?: any | null;
+  nlt?: any | null;
+  lte?: any | null;
+  nlte?: any | null;
+}
+
 export interface FUELOperationFilterInput {
   eq?: FUEL | null;
   neq?: FUEL | null;
@@ -156,6 +171,7 @@ export interface VehicleFilterInput {
   observations?: StringOperationFilterInput | null;
   opportunity?: BooleanOperationFilterInput | null;
   sold?: BooleanOperationFilterInput | null;
+  soldDate?: ComparableNullableOfDateTimeOperationFilterInput | null;
   vehicleImages?: ListFilterInputTypeOfVehicleImageFilterInput | null;
   id?: ComparableInt32OperationFilterInput | null;
 }
@@ -166,6 +182,7 @@ export interface VehicleImageFilterInput {
   url?: StringOperationFilterInput | null;
   vehicleId?: ComparableInt32OperationFilterInput | null;
   vehicle?: VehicleFilterInput | null;
+  isMain?: BooleanOperationFilterInput | null;
   id?: ComparableInt32OperationFilterInput | null;
 }
 
@@ -185,6 +202,7 @@ export interface VehicleSortInput {
   observations?: SortEnumType | null;
   opportunity?: SortEnumType | null;
   sold?: SortEnumType | null;
+  soldDate?: SortEnumType | null;
   id?: SortEnumType | null;
 }
 

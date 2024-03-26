@@ -1,13 +1,11 @@
 /** @format */
 
 import {Box} from "@mui/material";
-
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {BASE_API_URL} from "../../../config/variables";
 import {IVehicle} from "../../../models/Vehicle";
 import {getData} from "../../../services/AutoMoreiraService";
-
 import VehicleDetails from "./VehicleDetails";
 import {useAppDispatch} from "../../../redux/hooks";
 import {setLoader, setToInitialLoader} from "../../../redux/loaderSlice";

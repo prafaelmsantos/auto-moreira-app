@@ -32,6 +32,7 @@ export const VEHICLES = gql`
               vehicleImages {
                 id
                 url
+                isMain
               }
             }
         }
