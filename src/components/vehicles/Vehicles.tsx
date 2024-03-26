@@ -3,8 +3,6 @@
 import {AiFillCar, AiFillTool} from "react-icons/ai";
 import {GiCarDoor} from "react-icons/gi";
 import {BsFillFuelPumpFill} from "react-icons/bs";
-import {useSelector} from "react-redux";
-import {RootState} from "../../redux/store";
 import {
   defaultFilters,
   FilterMode,
@@ -21,7 +19,6 @@ import {setLoader} from "../../redux/loaderSlice";
 import {useNavigate} from "react-router-dom";
 import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
 import SearchVehicle from "../home/search-vehicle/SearchVehicle";
-import {setCurrentFilters} from "../../config/localStorage";
 import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
 import {CurrencyFormatter} from "../../utils/CurrencyFormatter";
 import {
@@ -32,15 +29,12 @@ import defaultVehicle from "../../images/defaultVehicle.jpg";
 
 function Vehicles() {
   const navigate = useNavigate();
-  const currentFilters = useSelector(
-    (state: RootState) => state.filtersSlice.filters
-  );
 
   const [selectedFilters, setSelectedFilters] =
     useState<ISelectedFilters>(defaultFilters);
 
   const [selectedFinalFilters, setSelectedFinalFilters] =
-    useState<ISelectedFilters>(currentFilters ?? defaultFilters);
+    useState<ISelectedFilters>(defaultFilters);
 
   const markId = selectedFinalFilters.markId
     ? {in: [selectedFinalFilters.markId]}
@@ -111,7 +105,7 @@ function Vehicles() {
     setSelectedFinalFilters(defaultFilters);
   };
   const handleSubmit = () => {
-    setCurrentFilters(selectedFilters, dispatch);
+    //setCurrentFilters(selectedFilters, dispatch);
     setSelectedFinalFilters(selectedFilters);
   };
 
@@ -203,7 +197,9 @@ function Vehicles() {
                   <button
                     onClick={() => {
                       window.scrollTo(0, 0);
-                      navigate(`/vehicles/${vehicle.id}`);
+                      navigate(
+                        `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${vehicle.id}`
+                      );
                     }}
                     className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
                   >

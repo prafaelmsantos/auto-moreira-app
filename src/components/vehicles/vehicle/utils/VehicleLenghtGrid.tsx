@@ -2,11 +2,7 @@
 
 import {Grid, Typography} from "@mui/material";
 
-type IVehicleLenghtGrid = {
-  length: number;
-};
-
-function VehicleLenghtGrid(props: IVehicleLenghtGrid) {
+function VehicleLenghtGrid(props: {length: number}) {
   const {length} = props;
 
   return (

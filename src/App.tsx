@@ -4,7 +4,6 @@ import "./App.css";
 import {useEffect} from "react";
 import {useAppDispatch} from "./redux/hooks";
 import AutoMoreiraRouter from "./routes/AutoMoreiraRouter";
-import {getCurrentFilters} from "./config/localStorage";
 import MobileNavbar from "./components/shared/navbar/MobileNavbar";
 import Header from "./components/shared/navbar/Header";
 import ToTop from "./components/shared/ToTop";
@@ -17,18 +16,11 @@ import AlertModal from "./components/shared/AlertModal";
 import {closeModal} from "./redux/modalSlice";
 import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
 import {closeSnackBar} from "./redux/snackBarSlice";
-import {setFilters} from "./redux/filtersSlice";
 import {setLoader, setToInitialLoader} from "./redux/loaderSlice";
 import {createVisitor} from "./services/AutoMoreiraConectors";
 
 export default function App() {
   const dispatch = useAppDispatch();
-
-  const filters = getCurrentFilters();
-
-  useEffect(() => {
-    filters && dispatch(setFilters(filters));
-  }, [filters]);
 
   const currentLoader = useSelector(
     (state: RootState) => state.loaderSlice.loader

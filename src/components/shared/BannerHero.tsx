@@ -4,7 +4,15 @@ import {NavLink} from "react-router-dom";
 import {navLink} from "../../data/link";
 import {NavLinkType} from "../../models/enums/NavLinkType";
 
-function BannerHero({page, type}: {type: NavLinkType; page?: string}) {
+function BannerHero({
+  page,
+  type,
+  url,
+}: {
+  type: NavLinkType;
+  page?: string;
+  url?: string;
+}) {
   const bannerLink = navLink.find((x) => x.type === type);
 
   return (
@@ -21,7 +29,7 @@ function BannerHero({page, type}: {type: NavLinkType; page?: string}) {
                 {page ? (
                   <NavLink
                     className="hover:text-custom-orange transition-all duration-300 ease-linear"
-                    to={bannerLink.url}
+                    to={url ?? bannerLink.url}
                   >
                     {bannerLink.link}
                   </NavLink>

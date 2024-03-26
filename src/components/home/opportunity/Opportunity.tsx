@@ -13,8 +13,10 @@ import {
 
 import defaultVehicle from "../../../images/defaultVehicle.jpg";
 import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
+import {useNavigate} from "react-router-dom";
 
 function Opportunity() {
+  const navigate = useNavigate();
   const {data} = useQuery<vehicles>(VEHICLES, {
     variables: {
       filter: {
@@ -154,14 +156,15 @@ function Opportunity() {
                 </tr>
               </table>
             </div>
-            <div>
-              <a
-                href="#booking"
-                className="text-xl block w-full font-bold bg-custom-orange p-2 text-white shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear rounded"
-              >
-                Saber mais
-              </a>
-            </div>
+            <button
+              onClick={() => {
+                window.scrollTo(0, 0);
+                navigate(`/vehicles/${carDetail.id}`);
+              }}
+              className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
+            >
+              Ver mais
+            </button>
           </div>
         </div>
       </div>

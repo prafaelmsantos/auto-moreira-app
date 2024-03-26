@@ -1,25 +1,17 @@
 /** @format */
 
 import {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {BASE_API_URL} from "../../../config/variables";
 import {IMark} from "../../../models/Mark";
 import {IModel} from "../../../models/Model";
 import {getData} from "../../../services/AutoMoreiraService";
 import {useAppDispatch} from "../../../redux/hooks";
 import {setLoader} from "../../../redux/loaderSlice";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../redux/store";
 import {
   defaultFilters,
   FilterMode,
   ISelectedFilters,
-  maxKms,
-  maxPrice,
-  maxYear,
-  minKms,
-  minPrice,
-  minYear,
 } from "../../../models/Filter";
 import {
   Autocomplete,
@@ -31,7 +23,6 @@ import {
 } from "@mui/material";
 import {Fuel, FuelTypeConverted} from "../../../models/enums/FuelEnum";
 import {deepOrange} from "@mui/material/colors";
-import {clearFilters, setCurrentFilters} from "../../../config/localStorage";
 
 type ISearchVehicle = {
   handleChange: (event: number | string | null | number[], id: string) => void;
@@ -86,14 +77,67 @@ export default function SearchVehicle({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
-  const currentFilters = useSelector(
-    (state: RootState) => state.filtersSlice.filters
-  );
+  const param = useParams();
+
+  const markIdParam = !isNaN(Number(param.markId))
+    ? Number(param.markId)
+    : null;
+  const modelIdParam = !isNaN(Number(param.modelId))
+    ? Number(param.modelId)
+    : null;
+  const fuelTypeParam = Object.values(Fuel).includes(param.fuelType as Fuel)
+    ? (param.fuelType as Fuel)
+    : null;
+
+  const minYearParam = !isNaN(Number(param.minYear))
+    ? Number(param.minYear)
+    : defaultFilters.minYear;
+  const maxYearParam = !isNaN(Number(param.maxYear))
+    ? Number(param.maxYear)
+    : defaultFilters.maxYear;
+  const minPriceParam = !isNaN(Number(param.minPrice))
+    ? Number(param.minPrice)
+    : defaultFilters.minPrice;
+  const maxPriceParam = !isNaN(Number(param.maxPrice))
+    ? Number(param.maxPrice)
+    : defaultFilters.maxPrice;
+  const minKmsParam = !isNaN(Number(param.minKms))
+    ? Number(param.minKms)
+    : defaultFilters.minKms;
+  const maxKmsParam = !isNaN(Number(param.maxKms))
+    ? Number(param.maxKms)
+    : defaultFilters.maxKms;
 
   useEffect(() => {
-    currentFilters && setSelectedFilters(currentFilters);
+    setSelectedFilters({
+      markId: markIdParam,
+      modelId: modelIdParam,
+      fuelType: fuelTypeParam,
+      minYear: minYearParam,
+      maxYear: maxYearParam,
+      minPrice: minPriceParam,
+      maxPrice: maxPriceParam,
+      minKms: minKmsParam,
+      maxKms: maxKmsParam,
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentFilters]);
+  }, [
+    markIdParam,
+    modelIdParam,
+    fuelTypeParam,
+    maxYearParam,
+    minYearParam,
+    minPriceParam,
+    maxPriceParam,
+    minKmsParam,
+    maxKmsParam,
+  ]);
+
+  useEffect(() => {
+    handleSubmit && void handleSubmit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFilters]);
 
   return (
     <section id="booking">
@@ -110,6 +154,16 @@ export default function SearchVehicle({
               size="small"
               fullWidth
               onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${value?.id ?? null}/${null}/${
+                      selectedFilters.fuelType
+                    }/${selectedFilters.minYear}/${selectedFilters.maxYear}/${
+                      selectedFilters.minPrice
+                    }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
+                      selectedFilters.maxKms
+                    }`
+                  );
                 handleChange(value?.id ?? null, "markId");
                 handleChange(null, "modelId");
               }}
@@ -138,9 +192,19 @@ export default function SearchVehicle({
             <Autocomplete
               disabled={!selectedFilters?.markId}
               size="small"
-              onChange={(event, value) =>
-                handleChange(value?.id ?? null, "modelId")
-              }
+              onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${selectedFilters.markId}/${value?.id ?? null}/${
+                      selectedFilters.fuelType
+                    }/${selectedFilters.minYear}/${selectedFilters.maxYear}/${
+                      selectedFilters.minPrice
+                    }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
+                      selectedFilters.maxKms
+                    }`
+                  );
+                handleChange(value?.id ?? null, "modelId");
+              }}
               isOptionEqualToValue={(option, value) => option.id === value.id}
               value={
                 selectedFilters?.modelId
@@ -169,7 +233,13 @@ export default function SearchVehicle({
           <div className="flex flex-col gap-4">
             <Autocomplete
               fullWidth
-              onChange={(event, value) => handleChange(value, "fuelType")}
+              onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}`
+                  );
+                handleChange(value, "fuelType");
+              }}
               size="small"
               isOptionEqualToValue={(option, value) => option === value}
               value={selectedFilters.fuelType}
@@ -194,12 +264,22 @@ export default function SearchVehicle({
             </Typography>
             <Slider
               sx={{color: "#ff4d30"}}
-              min={minKms}
+              min={defaultFilters.minKms}
               step={5000}
-              max={maxKms}
+              max={defaultFilters.maxKms}
               getAriaLabel={() => "Quilómetros"}
               value={[selectedFilters.minKms, selectedFilters.maxKms]}
               onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${selectedFilters.markId}/${
+                      selectedFilters.modelId
+                    }/${selectedFilters.fuelType}/${selectedFilters.minYear}/${
+                      selectedFilters.maxYear
+                    }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
+                      (value as number[])[0]
+                    }/${(value as number[])[1]}`
+                  );
                 handleChange((value as number[])[0], "minKms");
                 handleChange((value as number[])[1], "maxKms");
               }}
@@ -214,12 +294,22 @@ export default function SearchVehicle({
             </Typography>
             <Slider
               sx={{color: "#ff4d30"}}
-              min={minYear}
+              min={defaultFilters.minYear}
               step={1}
-              max={maxYear}
+              max={defaultFilters.maxYear}
               getAriaLabel={() => "Ano"}
               value={[selectedFilters.minYear, selectedFilters.maxYear]}
               onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${selectedFilters.markId}/${
+                      selectedFilters.modelId
+                    }/${selectedFilters.fuelType}/${(value as number[])[0]}/${
+                      (value as number[])[1]
+                    }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
+                      selectedFilters.minKms
+                    }/${selectedFilters.maxKms}`
+                  );
                 handleChange((value as number[])[0], "minYear");
                 handleChange((value as number[])[1], "maxYear");
               }}
@@ -234,12 +324,22 @@ export default function SearchVehicle({
             </Typography>
             <Slider
               sx={{color: "#ff4d30"}}
-              min={minPrice}
+              min={defaultFilters.minPrice}
               step={500}
-              max={maxPrice}
+              max={defaultFilters.maxPrice}
               getAriaLabel={() => "Preço"}
               value={[selectedFilters.minPrice, selectedFilters.maxPrice]}
               onChange={(event, value) => {
+                filterMode === FilterMode.VEHICLES &&
+                  navigate(
+                    `/vehicles/${selectedFilters.markId}/${
+                      selectedFilters.modelId
+                    }/${selectedFilters.fuelType}/${selectedFilters.minYear}/${
+                      selectedFilters.maxYear
+                    }/${(value as number[])[0]}/${(value as number[])[1]}/${
+                      selectedFilters.minKms
+                    }/${selectedFilters.maxKms}`
+                  );
                 handleChange((value as number[])[0], "minPrice");
                 handleChange((value as number[])[1], "maxPrice");
               }}
@@ -273,8 +373,7 @@ export default function SearchVehicle({
                 },
               }}
               onClick={() => {
-                setSelectedFilters(defaultFilters);
-                clearFilters(dispatch);
+                navigate("/vehicles");
                 handleClear && handleClear();
               }}
             >
@@ -302,8 +401,10 @@ export default function SearchVehicle({
                 },
               }}
               onClick={() => {
-                filterMode === FilterMode.HOME && navigate("/vehicles");
-                setCurrentFilters(selectedFilters, dispatch);
+                navigate(
+                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}`
+                );
+                //setCurrentFilters(selectedFilters, dispatch);
                 handleSubmit && handleSubmit();
               }}
             >
