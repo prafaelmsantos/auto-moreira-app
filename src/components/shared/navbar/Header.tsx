@@ -15,7 +15,7 @@ function Header() {
       <header className="absolute top-6 inset-x-6 lg:inset-x-28 flex items-center justify-between z-50">
         <div>
           <NavLink to="/">
-            <img src={logo} alt="logo" width={140} height={140} />
+            <img src={logo} alt="logo" width={160} height={160} />
           </NavLink>
         </div>
         <div className="hidden lg:block">

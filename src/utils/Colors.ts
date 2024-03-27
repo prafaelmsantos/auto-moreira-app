@@ -20,4 +20,6 @@ export const COLORS = {
   AUTO_MOREIRA_STRONG_YELLOW: "#f7bb05",
   // GREY
   AUTO_MOREIRA_GREY: "#c7c7c7",
+  //ORANGE
+  AUTO_MOREIRA_ORANGE: "#ff4d30"
 };

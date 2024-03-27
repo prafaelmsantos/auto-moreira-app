@@ -1,48 +1,63 @@
-import {
-  FilledInputProps,
-  InputProps,
-  OutlinedInputProps,
-  SxProps,
-  TextField,
-  Theme,
-} from "@mui/material";
-import { UseFormRegisterReturn } from "react-hook-form";
+/** @format */
 
-type ITextFieldValidation = {
-  register: UseFormRegisterReturn<string>;
-  error: boolean;
+import {TextField} from "@mui/material";
+import {Control, Controller} from "react-hook-form";
+
+type ITextFieldFormValidation = {
+  error?: boolean;
   helperText?: string;
-  inputProps?: FilledInputProps | OutlinedInputProps | InputProps;
-  defaultValue?: string | number;
-  label: string;
-  type?: React.HTMLInputTypeAttribute;
-  sx?: SxProps<Theme>;
+  label?: string;
+  control: Control<any, any>;
+  defaultValue?: string | number | null;
+  name: string;
+  required?: boolean;
+  type?: string;
+  multiline?: boolean;
+  rows?: number;
+  variant?: "outlined" | "standard" | "filled";
 };
-export default function TextFieldValidation(props: ITextFieldValidation) {
-  const {
-    register,
-    error,
-    helperText,
-    inputProps,
-    defaultValue,
-    label,
-    type,
-    sx,
-  } = props;
+
+export default function TextFieldFormValidation({
+  error,
+  helperText,
+  label,
+  control,
+  defaultValue,
+  name,
+  required,
+  type,
+  multiline,
+  rows,
+  variant,
+}: ITextFieldFormValidation) {
+  const redColor = "#d32f2f";
+
   return (
-    <TextField
-      required
-      id={register.name}
-      label={label}
-      fullWidth
-      margin="dense"
-      {...register}
-      error={error}
-      helperText={helperText}
-      InputProps={inputProps}
-      type={type}
+    <Controller
+      render={({field}) => (
+        <TextField
+          {...field}
+          required={required}
+          type={type}
+          label={label}
+          multiline={multiline}
+          rows={rows}
+          fullWidth
+          margin="dense"
+          error={error}
+          helperText={helperText}
+          defaultValue={defaultValue}
+          variant={variant}
+          InputProps={{
+            style: {
+              color: error ? redColor : undefined,
+            },
+          }}
+        />
+      )}
+      name={name}
+      control={control}
       defaultValue={defaultValue}
-      sx={sx}
     />
   );
 }

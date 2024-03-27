@@ -17,7 +17,9 @@ import {closeModal} from "./redux/modalSlice";
 import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
 import {closeSnackBar} from "./redux/snackBarSlice";
 import {setLoader, setToInitialLoader} from "./redux/loaderSlice";
-import {createVisitor} from "./services/AutoMoreiraConectors";
+import {createVisitor} from "./services/VisitorService";
+import {createTheme, ThemeProvider} from "@mui/material";
+import {COLORS} from "./utils/Colors";
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -43,8 +45,16 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: COLORS.AUTO_MOREIRA_ORANGE,
+      },
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <AutoMoreiraLoader open={currentLoader} />
       <AlertModal
         title={currentModal.modal.title}
@@ -65,6 +75,6 @@ export default function App() {
       <AutoMoreiraRouter />
       <GetTouch />
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }

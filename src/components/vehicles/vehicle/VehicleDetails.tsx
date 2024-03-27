@@ -9,7 +9,6 @@ import {
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import {VehicleCardIcon} from "../../../models/enums/VehicleCardIconEnum";
-
 import {FuelTypeConverted} from "../../../models/enums/FuelEnum";
 import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import VehicleCardItemRow from "./utils/VehicleCardItemRow";
@@ -96,6 +95,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          disabled
           fullWidth
           id="outlined-multiline-static"
           label="Observações"
