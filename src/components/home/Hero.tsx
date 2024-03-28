@@ -1,6 +1,5 @@
 /** @format */
 
-import React from "react";
 import {AiFillCheckCircle} from "react-icons/ai";
 import {IoIosArrowForward, IoIosArrowDown} from "react-icons/io";
 
@@ -59,16 +58,6 @@ function Hero() {
                 <IoIosArrowForward />
               </span>
             </Link>
-            {/* <a
-              onClick={() => window.scrollTo(0, 0)}
-              href="/about"
-              className="bg-black flex items-center gap-2 justify-center py-4 px-4 lg:px-8 transition-all duration-300 ease-linear hover:bg-transparent hover:text-black rounded border-2 border-black"
-            >
-              <span>Sobre Nós</span>
-              <span className="text-xl">
-                <IoIosArrowForward />
-              </span>
-            </a> */}
           </div>
         </div>
         <a

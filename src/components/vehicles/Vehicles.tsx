@@ -104,10 +104,7 @@ function Vehicles() {
     setSelectedFilters(defaultFilters);
     setSelectedFinalFilters(defaultFilters);
   };
-  const handleSubmit = () => {
-    //setCurrentFilters(selectedFilters, dispatch);
-    setSelectedFinalFilters(selectedFilters);
-  };
+  const handleSubmit = () => setSelectedFinalFilters(selectedFilters);
 
   return (
     <section id="models-main">

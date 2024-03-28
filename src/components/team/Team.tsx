@@ -1,6 +1,5 @@
 /** @format */
 
-import React from "react";
 import {team} from "../../data/content";
 
 function Team() {
