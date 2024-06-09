@@ -15,19 +15,26 @@ import {VEHICLES} from "../../models/GraphQL/Vehicles";
 import {convertToVehicle} from "../../models/Vehicle";
 import {TransmissionConverted} from "../../models/enums/TransmissionEnum";
 import {useAppDispatch} from "../../redux/hooks";
-import {setLoader} from "../../redux/loaderSlice";
+import {setLoader, setToInitialLoader} from "../../redux/loaderSlice";
 import {useNavigate} from "react-router-dom";
 import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
 import SearchVehicle from "../home/search-vehicle/SearchVehicle";
 import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
 import {CurrencyFormatter} from "../../utils/CurrencyFormatter";
 import {
-  vehicles_vehicles_nodes,
   vehicles,
+  vehicles_vehicles_nodes,
 } from "../../models/GraphQL/types/vehicles";
 import defaultVehicle from "../../images/defaultVehicle.jpg";
+import {Pagination} from "@mui/material";
 
 function Vehicles() {
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const [cursor, setCursor] = useState<string | null>(null);
+  const rowsPerPage = 3;
+
   const navigate = useNavigate();
 
   const [selectedFilters, setSelectedFilters] =
@@ -72,6 +79,8 @@ function Vehicles() {
 
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
+      first: rowsPerPage,
+      after: cursor,
       filter: {
         model: {markId: markId},
         and: {
@@ -84,6 +93,12 @@ function Vehicles() {
       },
     },
   });
+
+  useEffect(() => {
+    if (page === 1) {
+      setCursor(null);
+    }
+  }, [page]);
 
   const dispatch = useAppDispatch();
 
@@ -104,7 +119,24 @@ function Vehicles() {
     setSelectedFilters(defaultFilters);
     setSelectedFinalFilters(defaultFilters);
   };
-  const handleSubmit = () => setSelectedFinalFilters(selectedFilters);
+  const handleSubmit = () => {
+    setPage(1);
+    setSelectedFinalFilters(selectedFilters);
+  };
+
+  const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    if (value > 1 && data?.vehicles?.pageInfo?.hasNextPage) {
+      setCursor(data?.vehicles?.pageInfo?.endCursor ?? null);
+    }
+  };
+
+  useEffect(() => {
+    setTotalCount(data?.vehicles?.totalCount ?? 0);
+  }, [data?.vehicles?.totalCount]);
+
+  console.log(data?.vehicles);
+  console.log(cursor);
 
   return (
     <section id="models-main">
@@ -121,7 +153,7 @@ function Vehicles() {
 
       <VehicleSelectedFilters {...{selectedFinalFilters, vehicles}} />
 
-      <VehicleLenghtGrid length={vehicles.length} />
+      <VehicleLenghtGrid length={totalCount} />
 
       <div className="py-8 px-8 lg:px-48 lg:py-16 my-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 d-flex justify-content-center">
@@ -207,6 +239,19 @@ function Vehicles() {
             </div>
           ))}
         </div>
+        {totalCount > 0 && (
+          <Pagination
+            count={Math.ceil(totalCount / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px 0",
+            }}
+          />
+        )}
       </div>
     </section>
   );

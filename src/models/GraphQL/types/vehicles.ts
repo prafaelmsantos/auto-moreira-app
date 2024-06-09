@@ -9,6 +9,18 @@ import { VehicleFilterInput, VehicleSortInput, FUEL, TRANSMISSION } from "./../.
 // GraphQL query operation: vehicles
 // ====================================================
 
+export interface vehicles_vehicles_pageInfo {
+  __typename: "PageInfo";
+  /**
+   * When paginating forwards, the cursor to continue.
+   */
+  endCursor: string | null;
+  /**
+   * Indicates whether more edges exist following the set defined by the clients arguments.
+   */
+  hasNextPage: boolean;
+}
+
 export interface vehicles_vehicles_nodes_model_mark {
   __typename: "Mark";
   id: number;
@@ -55,6 +67,10 @@ export interface vehicles_vehicles {
   __typename: "VehiclesConnection";
   totalCount: number;
   /**
+   * Information to aid in pagination.
+   */
+  pageInfo: vehicles_vehicles_pageInfo;
+  /**
    * A flattened list of the nodes.
    */
   nodes: vehicles_vehicles_nodes[] | null;
@@ -65,6 +81,7 @@ export interface vehicles {
 }
 
 export interface vehiclesVariables {
+  after?: string | null;
   last?: number | null;
   first?: number | null;
   filter?: VehicleFilterInput | null;

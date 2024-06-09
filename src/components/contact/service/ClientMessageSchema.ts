@@ -5,7 +5,7 @@ export const ClientMessageSchema = z.object({
     email: z.string().min(1, 'O email é obrigatório!'),
     phoneNumber: z.coerce
         .number()
-        .int(`O numero de telemóvel/telefone é invalido!`)
+        .int('O numero de telemóvel/telefone é invalido!')
         .min(200000000, 'O numero de telemóvel/telefone é invalido!')
         .max(999999999, 'O numero de telemóvel/telefone é invalido!'),
     message: z.string().min(1, 'A mensagem é obrigatória!'),
