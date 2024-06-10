@@ -30,10 +30,8 @@ import defaultVehicle from "../../images/defaultVehicle.jpg";
 import {Pagination} from "@mui/material";
 
 function Vehicles() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState(0);
-
-  const [cursor, setCursor] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -80,8 +78,7 @@ function Vehicles() {
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
       order: {id: "ASC"},
-      first: rowsPerPage,
-      after: cursor,
+      first: 500,
       filter: {
         model: {markId: markId},
         and: {
@@ -95,12 +92,6 @@ function Vehicles() {
     },
   });
 
-  useEffect(() => {
-    if (page === 1) {
-      setCursor(null);
-    }
-  }, [page]);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -109,9 +100,9 @@ function Vehicles() {
   }, [loading]);
 
   const vehicles =
-    data?.vehicles?.nodes?.map((vehicle) =>
-      convertToVehicle(vehicle as vehicles_vehicles_nodes)
-    ) ?? [];
+    data?.vehicles?.nodes
+      ?.map((vehicle) => convertToVehicle(vehicle as vehicles_vehicles_nodes))
+      ?.slice((page - 1) * rowsPerPage, page * rowsPerPage) ?? [];
 
   const handleChange = (event: number | string | null | number[], id: string) =>
     setSelectedFilters((old) => ({...old, [id]: event}));
@@ -135,9 +126,6 @@ function Vehicles() {
     navigate(
       `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${value}`
     );
-    if (value > 1 && data?.vehicles?.pageInfo?.hasNextPage) {
-      setCursor(data?.vehicles?.pageInfo?.endCursor ?? null);
-    }
   };
 
   useEffect(() => {
