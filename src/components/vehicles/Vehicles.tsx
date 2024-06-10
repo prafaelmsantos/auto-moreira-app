@@ -15,7 +15,7 @@ import {VEHICLES} from "../../models/GraphQL/Vehicles";
 import {convertToVehicle} from "../../models/Vehicle";
 import {TransmissionConverted} from "../../models/enums/TransmissionEnum";
 import {useAppDispatch} from "../../redux/hooks";
-import {setLoader, setToInitialLoader} from "../../redux/loaderSlice";
+import {setLoader} from "../../redux/loaderSlice";
 import {useNavigate} from "react-router-dom";
 import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
 import SearchVehicle from "../home/search-vehicle/SearchVehicle";
@@ -33,7 +33,7 @@ function Vehicles() {
   const [totalCount, setTotalCount] = useState(0);
 
   const [cursor, setCursor] = useState<string | null>(null);
-  const rowsPerPage = 3;
+  const rowsPerPage = 6;
 
   const navigate = useNavigate();
 
@@ -134,9 +134,6 @@ function Vehicles() {
   useEffect(() => {
     setTotalCount(data?.vehicles?.totalCount ?? 0);
   }, [data?.vehicles?.totalCount]);
-
-  console.log(data?.vehicles);
-  console.log(cursor);
 
   return (
     <section id="models-main">
@@ -248,7 +245,7 @@ function Vehicles() {
             style={{
               display: "flex",
               justifyContent: "center",
-              margin: "20px 0",
+              margin: "60px 0 0",
             }}
           />
         )}
