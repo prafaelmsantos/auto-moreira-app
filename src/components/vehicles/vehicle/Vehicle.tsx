@@ -70,11 +70,12 @@ export default function VehiclePage() {
   const maxKmsParam = !isNaN(Number(param.maxKms))
     ? Number(param.maxKms)
     : defaultFilters.maxKms;
+  const pageParam = !isNaN(Number(param.page)) ? Number(param.page) : 1;
 
   return (
     <Box>
       <BannerHero
-        url={`/vehicles/${markIdParam}/${modelIdParam}/${fuelTypeParam}/${minYearParam}/${maxYearParam}/${minPriceParam}/${maxPriceParam}/${minKmsParam}/${maxKmsParam}`}
+        url={`/vehicles/${markIdParam}/${modelIdParam}/${fuelTypeParam}/${minYearParam}/${maxYearParam}/${minPriceParam}/${maxPriceParam}/${minKmsParam}/${maxKmsParam}/${pageParam}`}
         type={NavLinkType.VEHICLES}
         page={
           vehicle &&

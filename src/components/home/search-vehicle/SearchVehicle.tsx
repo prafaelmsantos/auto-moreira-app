@@ -12,6 +12,7 @@ import {
   defaultFilters,
   FilterMode,
   ISelectedFilters,
+  page,
 } from "../../../models/Filter";
 import {
   Autocomplete,
@@ -153,7 +154,7 @@ export default function SearchVehicle({
             <Autocomplete
               size="small"
               fullWidth
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${value?.id ?? null}/${null}/${
@@ -162,7 +163,7 @@ export default function SearchVehicle({
                       selectedFilters.minPrice
                     }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
                       selectedFilters.maxKms
-                    }`
+                    }/${page}`
                   );
                 handleChange(value?.id ?? null, "markId");
                 handleChange(null, "modelId");
@@ -192,7 +193,7 @@ export default function SearchVehicle({
             <Autocomplete
               disabled={!selectedFilters?.markId}
               size="small"
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${selectedFilters.markId}/${value?.id ?? null}/${
@@ -201,7 +202,7 @@ export default function SearchVehicle({
                       selectedFilters.minPrice
                     }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
                       selectedFilters.maxKms
-                    }`
+                    }/${page}`
                   );
                 handleChange(value?.id ?? null, "modelId");
               }}
@@ -236,7 +237,7 @@ export default function SearchVehicle({
               onChange={(event, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
-                    `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}`
+                    `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}`
                   );
                 handleChange(value, "fuelType");
               }}
@@ -269,7 +270,7 @@ export default function SearchVehicle({
               max={defaultFilters.maxKms}
               getAriaLabel={() => "Quilómetros"}
               value={[selectedFilters.minKms, selectedFilters.maxKms]}
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${selectedFilters.markId}/${
@@ -278,7 +279,7 @@ export default function SearchVehicle({
                       selectedFilters.maxYear
                     }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
                       (value as number[])[0]
-                    }/${(value as number[])[1]}`
+                    }/${(value as number[])[1]}/${page}`
                   );
                 handleChange((value as number[])[0], "minKms");
                 handleChange((value as number[])[1], "maxKms");
@@ -299,7 +300,7 @@ export default function SearchVehicle({
               max={defaultFilters.maxYear}
               getAriaLabel={() => "Ano"}
               value={[selectedFilters.minYear, selectedFilters.maxYear]}
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${selectedFilters.markId}/${
@@ -308,7 +309,7 @@ export default function SearchVehicle({
                       (value as number[])[1]
                     }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
                       selectedFilters.minKms
-                    }/${selectedFilters.maxKms}`
+                    }/${selectedFilters.maxKms}/${page}`
                   );
                 handleChange((value as number[])[0], "minYear");
                 handleChange((value as number[])[1], "maxYear");
@@ -329,7 +330,7 @@ export default function SearchVehicle({
               max={defaultFilters.maxPrice}
               getAriaLabel={() => "Preço"}
               value={[selectedFilters.minPrice, selectedFilters.maxPrice]}
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${selectedFilters.markId}/${
@@ -338,7 +339,7 @@ export default function SearchVehicle({
                       selectedFilters.maxYear
                     }/${(value as number[])[0]}/${(value as number[])[1]}/${
                       selectedFilters.minKms
-                    }/${selectedFilters.maxKms}`
+                    }/${selectedFilters.maxKms}/${page}`
                   );
                 handleChange((value as number[])[0], "minPrice");
                 handleChange((value as number[])[1], "maxPrice");
@@ -401,10 +402,9 @@ export default function SearchVehicle({
                 },
               }}
               onClick={() => {
-                navigate(
-                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}`
-                );
-                //setCurrentFilters(selectedFilters, dispatch);
+                /* navigate(
+                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}`
+                ); */
                 handleSubmit && handleSubmit();
               }}
             >

@@ -7,6 +7,7 @@ import {
   defaultFilters,
   FilterMode,
   ISelectedFilters,
+  rowsPerPage,
 } from "../../models/Filter";
 import {useQuery} from "@apollo/client";
 import {useEffect, useState} from "react";
@@ -16,7 +17,7 @@ import {convertToVehicle} from "../../models/Vehicle";
 import {TransmissionConverted} from "../../models/enums/TransmissionEnum";
 import {useAppDispatch} from "../../redux/hooks";
 import {setLoader} from "../../redux/loaderSlice";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import VehicleLenghtGrid from "./vehicle/utils/VehicleLenghtGrid";
 import SearchVehicle from "../home/search-vehicle/SearchVehicle";
 import VehicleSelectedFilters from "./vehicle/utils/VehicleFiltersSelected";
@@ -33,7 +34,6 @@ function Vehicles() {
   const [totalCount, setTotalCount] = useState(0);
 
   const [cursor, setCursor] = useState<string | null>(null);
-  const rowsPerPage = 6;
 
   const navigate = useNavigate();
 
@@ -79,6 +79,7 @@ function Vehicles() {
 
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
+      order: {id: "ASC"},
       first: rowsPerPage,
       after: cursor,
       filter: {
@@ -119,13 +120,21 @@ function Vehicles() {
     setSelectedFilters(defaultFilters);
     setSelectedFinalFilters(defaultFilters);
   };
+
+  const param = useParams();
+
+  const pageParam = !isNaN(Number(param.page)) ? Number(param.page) : 1;
+
   const handleSubmit = () => {
-    setPage(1);
+    void handleChangePage(pageParam);
     setSelectedFinalFilters(selectedFilters);
   };
 
-  const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (value: number) => {
     setPage(value);
+    navigate(
+      `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${value}`
+    );
     if (value > 1 && data?.vehicles?.pageInfo?.hasNextPage) {
       setCursor(data?.vehicles?.pageInfo?.endCursor ?? null);
     }
@@ -224,7 +233,7 @@ function Vehicles() {
                     onClick={() => {
                       window.scrollTo(0, 0);
                       navigate(
-                        `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${vehicle.id}`
+                        `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}/${vehicle.id}`
                       );
                     }}
                     className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
@@ -240,7 +249,7 @@ function Vehicles() {
           <Pagination
             count={Math.ceil(totalCount / rowsPerPage)}
             page={page}
-            onChange={handleChangePage}
+            onChange={(_, page) => handleChangePage(page)}
             color="primary"
             style={{
               display: "flex",

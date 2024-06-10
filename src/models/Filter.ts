@@ -18,6 +18,8 @@ export const minPrice = 0;
 export const maxPrice = 1000000;
 export const minKms = 0;
 export const maxKms = 1000000;
+export const page = 1;
+export const rowsPerPage = 6;
 
 export const defaultFilters: ISelectedFilters = {
   markId: null,
