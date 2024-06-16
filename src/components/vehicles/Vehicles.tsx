@@ -27,7 +27,8 @@ import {
   vehicles_vehicles_nodes,
 } from "../../models/GraphQL/types/vehicles";
 import defaultVehicle from "../../images/defaultVehicle.jpg";
-import {Pagination} from "@mui/material";
+import soldImage from "../../images/soldImage.png";
+import {Container, Pagination} from "@mui/material";
 
 function Vehicles() {
   const [page, setPage] = useState<number>(1);
@@ -157,6 +158,18 @@ function Vehicles() {
               className="border border-lighter-grey bg-white rounded"
             >
               <div>
+                {vehicle.sold && (
+                  <Container
+                    sx={{
+                      backgroundColor: "transparent",
+                      position: "absolute",
+                      width: "150px",
+                    }}
+                  >
+                    <img src={soldImage} alt="vendido" />
+                  </Container>
+                )}
+
                 <img
                   src={
                     vehicle.vehicleImages.length !== 0

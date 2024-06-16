@@ -1,6 +1,13 @@
 /** @format */
 
-import {Card, CardContent, Grid, TextField, Typography} from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import {
   ConvertToReactImageGalleryItem,
   defaultImage,
@@ -13,6 +20,7 @@ import {FuelTypeConverted} from "../../../models/enums/FuelEnum";
 import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import VehicleCardItemRow from "./utils/VehicleCardItemRow";
 import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
+import soldImage from "../../../images/soldImage.png";
 
 export default function VehicleDetails(props: {vehicle: IVehicle}) {
   const {vehicle} = props;
@@ -90,9 +98,21 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
               iconType1={VehicleCardIcon.DOORS}
               iconType2={VehicleCardIcon.COLOR}
             />
+            {vehicle.sold && (
+              <Container
+                sx={{
+                  backgroundColor: "transparent",
+                  position: "absolute",
+                  width: "250px",
+                }}
+              >
+                <img src={soldImage} alt="vendido" />
+              </Container>
+            )}
           </CardContent>
         </Card>
       </Grid>
+
       <Grid item xs={12}>
         <TextField
           disabled

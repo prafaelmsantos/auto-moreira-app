@@ -14,6 +14,8 @@ import {
 import defaultVehicle from "../../../images/defaultVehicle.jpg";
 import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 import {useNavigate} from "react-router-dom";
+import {Container} from "@mui/material";
+import soldImage from "../../../images/soldImage.png";
 
 function Opportunity() {
   const navigate = useNavigate();
@@ -21,9 +23,6 @@ function Opportunity() {
     variables: {
       filter: {
         opportunity: {eq: true},
-        and: {
-          sold: {eq: false},
-        },
       },
     },
   });
@@ -76,6 +75,20 @@ function Opportunity() {
             ))}
           </div>
           <div className="lg:basis-3/5">
+            {carDetail.sold && (
+              <Container
+                sx={{
+                  backgroundColor: "transparent",
+                  position: "absolute",
+                  width: "200px",
+                  mt: -9,
+                  mx: 2,
+                }}
+              >
+                <img src={soldImage} alt="vendido" />
+              </Container>
+            )}
+
             <img
               src={
                 carDetail.vehicleImages.length !== 0
