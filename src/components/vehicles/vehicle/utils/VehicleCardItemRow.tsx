@@ -5,8 +5,8 @@ import {VehicleCardIcon} from "../../../../models/enums/VehicleCardIconEnum";
 import VehicleCardItem from "./VehicleCardItem";
 
 type IVehicleCardItemRow = {
-  text1: string | number;
-  text2: string | number;
+  text1: string | number | null;
+  text2: string | number | null;
   title1: string;
   title2: string;
   iconType1: VehicleCardIcon;
@@ -33,12 +33,16 @@ export default function VehicleCardItemRow(props: IVehicleCardItemRow) {
       spacing={1}
       mt={!first ? 1 : 0}
     >
-      <Grid item>
-        <VehicleCardItem text={text1} title={title1} iconType={iconType1} />
-      </Grid>
-      <Grid item>
-        <VehicleCardItem text={text2} title={title2} iconType={iconType2} />
-      </Grid>
+      {text1 && (
+        <Grid item>
+          <VehicleCardItem text={text1} title={title1} iconType={iconType1} />
+        </Grid>
+      )}
+      {text2 && (
+        <Grid item>
+          <VehicleCardItem text={text2} title={title2} iconType={iconType2} />
+        </Grid>
+      )}
     </Grid>
   );
 }

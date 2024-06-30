@@ -16,6 +16,7 @@ import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 import {useNavigate} from "react-router-dom";
 import {Container} from "@mui/material";
 import soldImage from "../../../images/soldImage.png";
+import AutoMoreiraButton from "../../shared/AutoMoreiraButton";
 
 function Opportunity() {
   const navigate = useNavigate();
@@ -41,9 +42,14 @@ function Opportunity() {
     setActiveVehicleId(vehicles.length !== 0 ? vehicles[0].id : 0);
   }, [vehicles]);
 
-  const carDetail = vehicles.find((data) => data.id === activeVehicleId);
+  const vehicle = vehicles.find((data) => data.id === activeVehicleId);
 
-  if (!carDetail) return null;
+  const handleClick = (vehicleId: number) => {
+    window.scrollTo(0, 0);
+    navigate(`/vehicles/${vehicleId}`);
+  };
+
+  if (!vehicle) return null;
 
   return (
     <section id="rental-fleet">
@@ -75,7 +81,7 @@ function Opportunity() {
             ))}
           </div>
           <div className="lg:basis-3/5">
-            {carDetail.sold && (
+            {vehicle.sold && (
               <Container
                 sx={{
                   backgroundColor: "transparent",
@@ -91,12 +97,12 @@ function Opportunity() {
 
             <img
               src={
-                carDetail.vehicleImages.length !== 0
-                  ? carDetail.vehicleImages.find((x) => x.isMain)?.url ??
+                vehicle.vehicleImages.length !== 0
+                  ? vehicle.vehicleImages.find((x) => x.isMain)?.url ??
                     defaultVehicle
                   : defaultVehicle
               }
-              alt={`${carDetail.model.mark.name} ${carDetail.model.name}`}
+              alt={`${vehicle.model.mark.name} ${vehicle.model.name}`}
               width={700}
               height={700}
               className="m-auto"
@@ -106,7 +112,7 @@ function Opportunity() {
             <div>
               <h1 className="bg-custom-orange p-2 text-white flex items-center gap-2 justify-center">
                 <span className="text-2xl font-bold">
-                  € {CurrencyFormatter.format(carDetail.price)}
+                  € {CurrencyFormatter.format(vehicle.price)}
                 </span>
               </h1>
               <table>
@@ -115,7 +121,7 @@ function Opportunity() {
                     Marca
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.model.mark.name}
+                    {vehicle.model.mark.name}
                   </td>
                 </tr>
                 <tr>
@@ -123,7 +129,7 @@ function Opportunity() {
                     Modelo
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.model.name}
+                    {vehicle.model.name}
                   </td>
                 </tr>
                 <tr>
@@ -131,7 +137,9 @@ function Opportunity() {
                     Versão
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.version}
+                    {!vehicle.version || vehicle.version === ""
+                      ? " - "
+                      : vehicle.version}
                   </td>
                 </tr>
                 <tr>
@@ -139,7 +147,7 @@ function Opportunity() {
                     Ano
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.year}
+                    {vehicle.year}
                   </td>
                 </tr>
                 <tr>
@@ -147,7 +155,7 @@ function Opportunity() {
                     Portas
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {carDetail.doors}
+                    {vehicle.doors}
                   </td>
                 </tr>
 
@@ -156,7 +164,7 @@ function Opportunity() {
                     Transmissão
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {TransmissionConverted(carDetail.transmission)}
+                    {TransmissionConverted(vehicle.transmission)}
                   </td>
                 </tr>
                 <tr>
@@ -164,20 +172,15 @@ function Opportunity() {
                     Combustível
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {FuelTypeConverted(carDetail.fuelType)}
+                    {FuelTypeConverted(vehicle.fuelType)}
                   </td>
                 </tr>
               </table>
             </div>
-            <button
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate(`/vehicles/${carDetail.id}`);
-              }}
-              className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
-            >
-              Ver mais
-            </button>
+            <AutoMoreiraButton
+              onClick={() => handleClick(vehicle.id)}
+              text={"Ver mais"}
+            />
           </div>
         </div>
       </div>

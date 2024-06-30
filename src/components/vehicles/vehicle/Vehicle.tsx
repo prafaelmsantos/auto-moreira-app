@@ -83,7 +83,7 @@ export default function VehiclePage() {
             " " +
             vehicle.model.name +
             " " +
-            vehicle.version
+            (vehicle.version ?? "")
         }
       />
 

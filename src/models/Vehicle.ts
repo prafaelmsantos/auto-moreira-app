@@ -18,12 +18,12 @@ export interface IVehicle {
   modelId: number;
   model: IModel;
   year: number;
-  color: string;
+  color: string | null;
   observations: string;
   mileage: number;
   price: number;
   fuelType: Fuel;
-  version: string;
+  version: string | null;
   doors: number;
   transmission: Transmission;
   engineSize: number;
@@ -72,12 +72,12 @@ export function convertToVehicle(vehicle: vehicles_vehicles_nodes): IVehicle {
       },
     },
     year: vehicle.year,
-    color: vehicle?.color ?? "",
+    color: vehicle.color,
     observations: vehicle?.observations ?? "",
     mileage: vehicle.mileage,
     price: vehicle.price,
     fuelType: FuelTypeGraphQLConverted(vehicle.fuelType),
-    version: vehicle.version ?? "",
+    version: vehicle.version,
     doors: vehicle.doors,
     transmission: TransmissionGraphQLConverted(vehicle.transmission),
     engineSize: vehicle.engineSize,

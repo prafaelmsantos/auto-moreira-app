@@ -14,6 +14,7 @@ function ScrollTop() {
     return () => {
       window.removeEventListener("scroll", onPageScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

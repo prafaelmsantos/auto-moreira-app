@@ -29,6 +29,7 @@ import {
 import defaultVehicle from "../../images/defaultVehicle.jpg";
 import soldImage from "../../images/soldImage.png";
 import {Container, Pagination} from "@mui/material";
+import AutoMoreiraButton from "../shared/AutoMoreiraButton";
 
 function Vehicles() {
   const [page, setPage] = useState<number>(1);
@@ -125,6 +126,13 @@ function Vehicles() {
   useEffect(() => {
     setTotalCount(data?.vehicles?.totalCount ?? 0);
   }, [data?.vehicles?.totalCount]);
+
+  const handleClick = (vehicleId: number) => {
+    window.scrollTo(0, 0);
+    navigate(
+      `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}/${vehicleId}`
+    );
+  };
 
   return (
     <section id="models-main">
@@ -223,17 +231,10 @@ function Vehicles() {
                   <hr className="border border-lighter-grey" />
                 </div>
                 <div>
-                  <button
-                    onClick={() => {
-                      window.scrollTo(0, 0);
-                      navigate(
-                        `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}/${vehicle.id}`
-                      );
-                    }}
-                    className="block text-center bg-custom-orange p-2 font-bold text-white rounded shadow-orange-bottom hover:shadow-orange-bottom-hov transition-all duration-300 ease-linear w-full"
-                  >
-                    Ver mais
-                  </button>
+                  <AutoMoreiraButton
+                    onClick={() => handleClick(vehicle.id)}
+                    text={"Ver mais"}
+                  />
                 </div>
               </div>
             </div>

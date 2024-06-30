@@ -54,7 +54,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
                 " " +
                 vehicle.model.name +
                 " " +
-                vehicle.version}
+                (vehicle.version ?? " ")}
             </Typography>
           </Grid>
           <Grid item>

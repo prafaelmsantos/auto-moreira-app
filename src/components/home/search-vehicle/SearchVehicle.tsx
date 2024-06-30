@@ -141,8 +141,6 @@ export default function SearchVehicle({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters]);
 
-  console.log(selectedFilters);
-
   return (
     <section id="booking">
       <div className="mx-8 my-16 p-6 lg:p-12 lg:mx-28 bg-white bg-book-bg rounded shadow-white-box space-y-8">
@@ -405,11 +403,10 @@ export default function SearchVehicle({
                 },
               }}
               onClick={() => {
-                //handleSubmitInHome && handleSubmitInHome();
-                handleSubmit && handleSubmit();
                 navigate(
                   `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${pageParam}`
                 );
+                handleSubmit && handleSubmit();
               }}
             >
               <Typography
