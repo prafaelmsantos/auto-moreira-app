@@ -12,7 +12,7 @@ import Footer from "./components/shared/Footer";
 import AutoMoreiraLoader from "./components/shared/AutoMoreiraLoader";
 import {useSelector} from "react-redux";
 import {RootState} from "./redux/store";
-import AlertModal from "./components/shared/AlertModal";
+import AutoMoreiraModal from "./components/shared/AutoMoreiraModal";
 import {closeModal} from "./redux/modalSlice";
 import AutoMoreiraSnackbar from "./components/shared/AutoMoreiraSnackbar";
 import {closeSnackBar} from "./redux/snackBarSlice";
@@ -56,7 +56,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <AutoMoreiraLoader open={currentLoader} />
-      <AlertModal
+      <AutoMoreiraModal
         title={currentModal.modal.title}
         message={currentModal.modal.message}
         isOpen={currentModal.modal.open}

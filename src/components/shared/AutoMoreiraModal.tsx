@@ -19,7 +19,7 @@ import {useMemo} from "react";
 import {MessageType} from "../../models/enums/MessageTypeEnum";
 import {COLORS} from "../../utils/Colors";
 
-type IAlertModal = {
+type IAutoMoreiraModal = {
   message: string;
   type?: MessageType;
   title?: string;
@@ -30,7 +30,7 @@ type IAlertModal = {
   onCancel?: () => void;
 };
 
-export default function AlertModal(props: IAlertModal) {
+export default function AutoMoreiraModal(props: IAutoMoreiraModal) {
   const {message, title, isOpen, type, onOk, onYes, onNo, onCancel} = props;
 
   const styleItem = {
@@ -82,7 +82,7 @@ export default function AlertModal(props: IAlertModal) {
       }}
     >
       <Card>
-        <Box sx={{height: 70, bgcolor: color}}>
+        <Box sx={{height: 75, bgcolor: color}}>
           <DialogTitle sx={{m: 0, p: 2}}>
             <Grid container spacing={1}>
               <Grid item sx={{color: "white"}}>

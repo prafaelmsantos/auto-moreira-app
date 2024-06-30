@@ -7,7 +7,6 @@ type ITextFieldFormValidation = {
   error?: boolean;
   helperText?: string;
   label?: string;
-  control: Control<any, any>;
   defaultValue?: string | number | null;
   name: string;
   required?: boolean;
@@ -21,7 +20,7 @@ export default function TextFieldFormValidation({
   error,
   helperText,
   label,
-  control,
+
   defaultValue,
   name,
   required,
@@ -56,7 +55,6 @@ export default function TextFieldFormValidation({
         />
       )}
       name={name}
-      control={control}
       defaultValue={defaultValue}
     />
   );

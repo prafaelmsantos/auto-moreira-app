@@ -17,7 +17,13 @@ import {
 import {createClientMessage} from "../service/ClientMessageService";
 import {setLoader, setToInitialLoader} from "../../../redux/loaderSlice";
 
-function ContactForm() {
+interface IContactForm {
+  initialMessage?: string;
+  handleClose?: () => void;
+}
+function ContactForm(props: IContactForm) {
+  const {initialMessage, handleClose} = props;
+
   const dispatch = useAppDispatch();
   const methods = useForm<IClientMessageSchema>({
     resolver: async (data, context, options) =>
@@ -28,10 +34,9 @@ function ContactForm() {
   });
 
   const {
-    control,
     handleSubmit,
     reset,
-    formState: {errors},
+    formState: {errors, isValid},
   } = methods;
 
   const onSubmit = async (clientMessage: IClientMessage) => {
@@ -44,6 +49,7 @@ function ContactForm() {
           phoneNumber: 0,
           message: "",
         });
+        handleClose && handleClose();
         window.scrollTo(0, 0);
         dispatch(setToInitialLoader());
         dispatch(
@@ -65,7 +71,7 @@ function ContactForm() {
           })
         );
       });
-  }; // your form submit function which will invoke after successful validation
+  };
 
   return (
     <FormProvider {...methods}>
@@ -73,12 +79,12 @@ function ContactForm() {
         <Grid item xs={12}>
           <TextFieldValidation
             required
-            label={"Nome Completo"}
+            label={"Nome"}
             helperText={errors.name?.message}
             name={"name"}
             error={!!errors.name}
             defaultValue={""}
-            {...{errors, control}}
+            {...{errors}}
           />
         </Grid>
         <Grid item xs={12} sx={{mt: 2}}>
@@ -90,7 +96,7 @@ function ContactForm() {
             name={"phoneNumber"}
             type="Number"
             defaultValue={0}
-            {...{errors, control}}
+            {...{errors}}
           />
         </Grid>
         <Grid item xs={12} sx={{mt: 2}}>
@@ -101,7 +107,7 @@ function ContactForm() {
             helperText={errors.email?.message}
             name={"email"}
             defaultValue={""}
-            {...{errors, control}}
+            {...{errors}}
           />
         </Grid>
         <Grid item xs={12} sx={{mt: 2}}>
@@ -111,14 +117,15 @@ function ContactForm() {
             error={!!errors.message}
             helperText={errors.message?.message}
             name={"message"}
-            defaultValue={""}
+            defaultValue={initialMessage ?? ""}
             multiline
-            rows={5}
-            {...{errors, control}}
+            rows={8}
+            {...{errors}}
           />
         </Grid>
         <Grid item xs={12} sx={{mt: 3}}>
           <Button
+            disabled={!isValid}
             fullWidth
             variant="contained"
             sx={{
