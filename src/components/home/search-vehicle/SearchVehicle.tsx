@@ -108,6 +108,7 @@ export default function SearchVehicle({
   const maxKmsParam = !isNaN(Number(param.maxKms))
     ? Number(param.maxKms)
     : defaultFilters.maxKms;
+  const pageParam = !isNaN(Number(param.page)) ? Number(param.page) : 1;
 
   useEffect(() => {
     setSelectedFilters({
@@ -139,6 +140,8 @@ export default function SearchVehicle({
     handleSubmit && void handleSubmit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters]);
+
+  console.log(selectedFilters);
 
   return (
     <section id="booking">
@@ -234,7 +237,7 @@ export default function SearchVehicle({
           <div className="flex flex-col gap-4">
             <Autocomplete
               fullWidth
-              onChange={(event, value) => {
+              onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
                     `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}`
@@ -402,10 +405,11 @@ export default function SearchVehicle({
                 },
               }}
               onClick={() => {
-                /* navigate(
-                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}`
-                ); */
+                //handleSubmitInHome && handleSubmitInHome();
                 handleSubmit && handleSubmit();
+                navigate(
+                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${pageParam}`
+                );
               }}
             >
               <Typography

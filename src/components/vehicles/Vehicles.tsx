@@ -118,15 +118,8 @@ function Vehicles() {
   const pageParam = !isNaN(Number(param.page)) ? Number(param.page) : 1;
 
   const handleSubmit = () => {
-    void handleChangePage(pageParam);
+    setPage(pageParam);
     setSelectedFinalFilters(selectedFilters);
-  };
-
-  const handleChangePage = (value: number) => {
-    setPage(value);
-    navigate(
-      `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${value}`
-    );
   };
 
   useEffect(() => {
@@ -250,7 +243,7 @@ function Vehicles() {
           <Pagination
             count={Math.ceil(totalCount / rowsPerPage)}
             page={page}
-            onChange={(_, page) => handleChangePage(page)}
+            onChange={(_, page) => setPage(page)}
             color="primary"
             style={{
               display: "flex",
