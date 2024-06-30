@@ -12,8 +12,8 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import {COLORS} from "../../utils/Colors";
-import ContactForm from "../contact/form/ContactForm";
+import {COLORS} from "../../../utils/Colors";
+import ContactForm from "../../contact/form/ContactForm";
 
 interface IAutoMoreiraInfoModal {
   initialMessage: string;

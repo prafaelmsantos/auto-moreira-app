@@ -16,8 +16,8 @@ import {
   Typography,
 } from "@mui/material";
 import {useMemo} from "react";
-import {MessageType} from "../../models/enums/MessageTypeEnum";
-import {COLORS} from "../../utils/Colors";
+import {MessageType} from "../../../models/enums/MessageTypeEnum";
+import {COLORS} from "../../../utils/Colors";
 
 type IAutoMoreiraModal = {
   message: string;

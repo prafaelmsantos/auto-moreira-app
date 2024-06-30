@@ -29,7 +29,7 @@ import {
 import defaultVehicle from "../../images/defaultVehicle.jpg";
 import soldImage from "../../images/soldImage.png";
 import {Container, Pagination} from "@mui/material";
-import AutoMoreiraButton from "../shared/AutoMoreiraButton";
+import AutoMoreiraButton from "../shared/button/AutoMoreiraButton";
 
 function Vehicles() {
   const [page, setPage] = useState<number>(1);

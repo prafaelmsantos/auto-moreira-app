@@ -2,7 +2,7 @@
 
 "use client";
 
-import BannerHero from "../../components/shared/BannerHero";
+import BannerHero from "../../components/shared/banner/BannerHero";
 import Team from "../../components/team/Team";
 import {NavLinkType} from "../../models/enums/NavLinkType";
 

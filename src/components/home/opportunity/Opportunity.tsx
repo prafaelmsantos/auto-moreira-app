@@ -16,7 +16,7 @@ import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 import {useNavigate} from "react-router-dom";
 import {Container} from "@mui/material";
 import soldImage from "../../../images/soldImage.png";
-import AutoMoreiraButton from "../../shared/AutoMoreiraButton";
+import AutoMoreiraButton from "../../shared/button/AutoMoreiraButton";
 
 function Opportunity() {
   const navigate = useNavigate();

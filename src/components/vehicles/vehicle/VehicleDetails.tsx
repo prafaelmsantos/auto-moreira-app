@@ -21,8 +21,8 @@ import {TransmissionConverted} from "../../../models/enums/TransmissionEnum";
 import VehicleCardItemRow from "./utils/VehicleCardItemRow";
 import {CurrencyFormatter} from "../../../utils/CurrencyFormatter";
 import soldImage from "../../../images/soldImage.png";
-import AutoMoreiraButton from "../../shared/AutoMoreiraButton";
-import AutoMoreiraInfoModal from "../../shared/AutoMoreiraInfoModal";
+import AutoMoreiraButton from "../../shared/button/AutoMoreiraButton";
+import AutoMoreiraInfoModal from "../../shared/modal/AutoMoreiraInfoModal";
 import {useState} from "react";
 
 export default function VehicleDetails(props: {vehicle: IVehicle}) {
@@ -45,7 +45,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
 
   const handleClose = () => setOpen(false);
 
-  const initialMessage = `Pretendo saber mais informações sobre o veículo ${
+  const initialMessage = `Pretendo obter mais informações sobre o veículo ${
     vehicle.model.mark.name +
     " " +
     vehicle.model.name +

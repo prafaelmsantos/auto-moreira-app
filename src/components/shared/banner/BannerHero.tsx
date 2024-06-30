@@ -1,8 +1,8 @@
 /** @format */
 
 import {NavLink} from "react-router-dom";
-import {navLink} from "../../data/link";
-import {NavLinkType} from "../../models/enums/NavLinkType";
+import {navLink} from "../../../data/link";
+import {NavLinkType} from "../../../models/enums/NavLinkType";
 
 function BannerHero({
   page,

@@ -6,7 +6,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {IClientMessage} from "../../../models/ClientMessage";
 import {MessageType} from "../../../models/enums/MessageTypeEnum";
-import TextFieldValidation from "../../shared/TextFieldValidation";
+import TextFieldValidation from "../../shared/textfield/TextFieldValidation";
 import {useAppDispatch} from "../../../redux/hooks";
 import {setModal} from "../../../redux/modalSlice";
 import {setSnackBar} from "../../../redux/snackBarSlice";
@@ -36,7 +36,7 @@ function ContactForm(props: IContactForm) {
   const {
     handleSubmit,
     reset,
-    formState: {errors, isValid},
+    formState: {errors},
   } = methods;
 
   const onSubmit = async (clientMessage: IClientMessage) => {
@@ -125,7 +125,6 @@ function ContactForm(props: IContactForm) {
         </Grid>
         <Grid item xs={12} sx={{mt: 3}}>
           <Button
-            disabled={!isValid}
             fullWidth
             variant="contained"
             sx={{

@@ -3,7 +3,7 @@
 import {BsFillTelephoneFill} from "react-icons/bs";
 import {GrMail} from "react-icons/gr";
 import {NavLink} from "react-router-dom";
-import {navLink} from "../../data/link";
+import {navLink} from "../../../data/link";
 
 function Footer() {
   return (

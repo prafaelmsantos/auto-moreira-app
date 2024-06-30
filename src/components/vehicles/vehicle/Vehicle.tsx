@@ -9,7 +9,7 @@ import {getData} from "../../../services/AutoMoreiraService";
 import VehicleDetails from "./VehicleDetails";
 import {useAppDispatch} from "../../../redux/hooks";
 import {setLoader, setToInitialLoader} from "../../../redux/loaderSlice";
-import BannerHero from "../../shared/BannerHero";
+import BannerHero from "../../shared/banner/BannerHero";
 import {NavLinkType} from "../../../models/enums/NavLinkType";
 import {Fuel} from "../../../models/enums/FuelEnum";
 import {defaultFilters} from "../../../models/Filter";
