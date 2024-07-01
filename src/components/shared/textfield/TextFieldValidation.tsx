@@ -1,7 +1,7 @@
 /** @format */
 
 import {TextField} from "@mui/material";
-import {Control, Controller} from "react-hook-form";
+import {Controller} from "react-hook-form";
 
 type ITextFieldFormValidation = {
   error?: boolean;
@@ -20,7 +20,6 @@ export default function TextFieldFormValidation({
   error,
   helperText,
   label,
-
   defaultValue,
   name,
   required,
