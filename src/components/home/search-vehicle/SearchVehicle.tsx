@@ -12,6 +12,8 @@ import {
   defaultFilters,
   FilterMode,
   ISelectedFilters,
+  ORDER,
+  ORDER_BY,
   page,
 } from "../../../models/Filter";
 import {
@@ -80,6 +82,16 @@ export default function SearchVehicle({
 
   const param = useParams();
 
+  const orderParam = Object.values(ORDER).includes(param.order as ORDER)
+    ? (param.order as ORDER)
+    : ORDER.DESC;
+
+  const orderByParam = Object.values(ORDER_BY).includes(
+    param.orderBy as ORDER_BY
+  )
+    ? (param.orderBy as ORDER_BY)
+    : ORDER_BY.ID;
+
   const markIdParam = !isNaN(Number(param.markId))
     ? Number(param.markId)
     : null;
@@ -89,7 +101,6 @@ export default function SearchVehicle({
   const fuelTypeParam = Object.values(Fuel).includes(param.fuelType as Fuel)
     ? (param.fuelType as Fuel)
     : null;
-
   const minYearParam = !isNaN(Number(param.minYear))
     ? Number(param.minYear)
     : defaultFilters.minYear;
@@ -112,6 +123,8 @@ export default function SearchVehicle({
 
   useEffect(() => {
     setSelectedFilters({
+      order: orderParam,
+      orderBy: orderByParam,
       markId: markIdParam,
       modelId: modelIdParam,
       fuelType: fuelTypeParam,
@@ -141,6 +154,8 @@ export default function SearchVehicle({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters]);
 
+  console.log(selectedFilters);
+
   return (
     <section id="booking">
       <div className="mx-8 my-16 p-6 lg:p-12 lg:mx-28 bg-white bg-book-bg rounded shadow-white-box space-y-8">
@@ -164,6 +179,8 @@ export default function SearchVehicle({
                       selectedFilters.minPrice
                     }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
                       selectedFilters.maxKms
+                    }/${selectedFilters.orderBy}/${
+                      selectedFilters.order
                     }/${page}`
                   );
                 handleChange(value?.id ?? null, "markId");
@@ -203,6 +220,8 @@ export default function SearchVehicle({
                       selectedFilters.minPrice
                     }/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${
                       selectedFilters.maxKms
+                    }/${selectedFilters.orderBy}/${
+                      selectedFilters.order
                     }/${page}`
                   );
                 handleChange(value?.id ?? null, "modelId");
@@ -238,7 +257,7 @@ export default function SearchVehicle({
               onChange={(_, value) => {
                 filterMode === FilterMode.VEHICLES &&
                   navigate(
-                    `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}`
+                    `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${value}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${selectedFilters.orderBy}/${selectedFilters.order}/${page}`
                   );
                 handleChange(value, "fuelType");
               }}
@@ -280,7 +299,9 @@ export default function SearchVehicle({
                       selectedFilters.maxYear
                     }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
                       (value as number[])[0]
-                    }/${(value as number[])[1]}/${page}`
+                    }/${(value as number[])[1]}/${selectedFilters.orderBy}/${
+                      selectedFilters.order
+                    }/${page}`
                   );
                 handleChange((value as number[])[0], "minKms");
                 handleChange((value as number[])[1], "maxKms");
@@ -310,7 +331,9 @@ export default function SearchVehicle({
                       (value as number[])[1]
                     }/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${
                       selectedFilters.minKms
-                    }/${selectedFilters.maxKms}/${page}`
+                    }/${selectedFilters.maxKms}/${selectedFilters.orderBy}/${
+                      selectedFilters.order
+                    }/${page}`
                   );
                 handleChange((value as number[])[0], "minYear");
                 handleChange((value as number[])[1], "maxYear");
@@ -340,7 +363,9 @@ export default function SearchVehicle({
                       selectedFilters.maxYear
                     }/${(value as number[])[0]}/${(value as number[])[1]}/${
                       selectedFilters.minKms
-                    }/${selectedFilters.maxKms}/${page}`
+                    }/${selectedFilters.maxKms}/${selectedFilters.orderBy}/${
+                      selectedFilters.order
+                    }/${page}`
                   );
                 handleChange((value as number[])[0], "minPrice");
                 handleChange((value as number[])[1], "maxPrice");
@@ -404,7 +429,7 @@ export default function SearchVehicle({
               }}
               onClick={() => {
                 navigate(
-                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${pageParam}`
+                  `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${selectedFilters.orderBy}/${selectedFilters.order}/${pageParam}`
                 );
                 handleSubmit && handleSubmit();
               }}

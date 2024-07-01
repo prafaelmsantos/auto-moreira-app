@@ -19,7 +19,7 @@ export interface IVehicle {
   model: IModel;
   year: number;
   color: string | null;
-  observations: string;
+  observations: string | null;
   mileage: number;
   price: number;
   fuelType: Fuel;

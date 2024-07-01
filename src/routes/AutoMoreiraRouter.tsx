@@ -26,11 +26,11 @@ export default function AutoMoreiraRouter() {
       children: [
         {index: true, element: <Vehicles />},
         {
-          path: ":markId/:modelId/:fuelType/:minYear/:maxYear/:minPrice/:maxPrice/:minKms/:maxKms/:page",
+          path: ":markId/:modelId/:fuelType/:minYear/:maxYear/:minPrice/:maxPrice/:minKms/:maxKms/:orderBy/:order/:page",
           element: <Vehicles />,
         },
         {
-          path: ":markId/:modelId/:fuelType/:minYear/:maxYear/:minPrice/:maxPrice/:minKms/:maxKms/:page/:id",
+          path: ":markId/:modelId/:fuelType/:minYear/:maxYear/:minPrice/:maxPrice/:minKms/:maxKms/:orderBy/:order/:page/:id",
           element: <Vehicle />,
         },
         {path: ":id", element: <Vehicle />},

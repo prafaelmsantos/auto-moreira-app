@@ -7,6 +7,8 @@ import {
   defaultFilters,
   FilterMode,
   ISelectedFilters,
+  OrderOptions,
+  ORDER_BY,
   rowsPerPage,
 } from "../../models/Filter";
 import {useQuery} from "@apollo/client";
@@ -28,7 +30,13 @@ import {
 } from "../../models/GraphQL/types/vehicles";
 import defaultVehicle from "../../images/defaultVehicle.jpg";
 import soldImage from "../../images/soldImage.png";
-import {Container, Pagination} from "@mui/material";
+import {
+  Autocomplete,
+  Container,
+  Grid,
+  Pagination,
+  TextField,
+} from "@mui/material";
 import AutoMoreiraButton from "../shared/button/AutoMoreiraButton";
 
 function Vehicles() {
@@ -77,9 +85,18 @@ function Vehicles() {
     lte: selectedFinalFilters.maxKms,
   };
 
+  const order =
+    selectedFinalFilters.orderBy === ORDER_BY.ID
+      ? {id: selectedFinalFilters.order}
+      : selectedFinalFilters.orderBy === ORDER_BY.MILEAGE
+        ? {mileage: selectedFinalFilters.order}
+        : selectedFinalFilters.orderBy === ORDER_BY.PRICE
+          ? {price: selectedFinalFilters.order}
+          : {year: selectedFinalFilters.order};
+
   const {data, loading} = useQuery<vehicles>(VEHICLES, {
     variables: {
-      order: {id: "ASC"},
+      order: order,
       first: 500,
       filter: {
         model: {markId: markId},
@@ -130,7 +147,7 @@ function Vehicles() {
   const handleClick = (vehicleId: number) => {
     window.scrollTo(0, 0);
     navigate(
-      `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${page}/${vehicleId}`
+      `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${selectedFilters.orderBy}/${selectedFilters.order}/${page}/${vehicleId}`
     );
   };
 
@@ -146,6 +163,44 @@ function Vehicles() {
           handleSubmit,
         }}
       />
+      <Grid
+        container
+        direction="row"
+        alignContent={"center"}
+        justifyContent="flex-end"
+        sx={{px: 14, mt: -2}}
+      >
+        <Grid item lg={3} md={4} xs={12}>
+          <Autocomplete
+            size="small"
+            disableClearable
+            isOptionEqualToValue={(option, value) => option === value}
+            value={
+              OrderOptions.find(
+                (x) =>
+                  x.orderBy === selectedFilters.orderBy &&
+                  x.order === selectedFilters.order
+              ) ?? OrderOptions[0]
+            }
+            getOptionLabel={(option) => option.title}
+            disablePortal
+            id="combo-box-demo"
+            options={OrderOptions}
+            fullWidth
+            onChange={(_, value) => {
+              navigate(
+                `/vehicles/${selectedFilters.markId}/${selectedFilters.modelId}/${selectedFilters.fuelType}/${selectedFilters.minYear}/${selectedFilters.maxYear}/${selectedFilters.minPrice}/${selectedFilters.maxPrice}/${selectedFilters.minKms}/${selectedFilters.maxKms}/${value.orderBy}/${value.order}/${page}`
+              );
+              handleChange(value.orderBy, "orderBy");
+              handleChange(value.order, "order");
+              console.log(value);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label={"Ordenar por:"} />
+            )}
+          />
+        </Grid>
+      </Grid>
 
       <VehicleSelectedFilters {...{selectedFinalFilters, vehicles}} />
 

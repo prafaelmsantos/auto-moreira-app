@@ -12,7 +12,7 @@ import {setLoader, setToInitialLoader} from "../../../redux/loaderSlice";
 import BannerHero from "../../shared/banner/BannerHero";
 import {NavLinkType} from "../../../models/enums/NavLinkType";
 import {Fuel} from "../../../models/enums/FuelEnum";
-import {defaultFilters} from "../../../models/Filter";
+import {defaultFilters, ORDER, ORDER_BY} from "../../../models/Filter";
 
 export default function VehiclePage() {
   const param = useParams();
@@ -41,6 +41,16 @@ export default function VehiclePage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vehicleId]);
+
+  const orderParam = Object.values(ORDER).includes(param.order as ORDER)
+    ? (param.order as ORDER)
+    : ORDER.DESC;
+
+  const orderByParam = Object.values(ORDER_BY).includes(
+    param.orderBy as ORDER_BY
+  )
+    ? (param.orderBy as ORDER_BY)
+    : ORDER_BY.ID;
 
   const markIdParam = !isNaN(Number(param.markId))
     ? Number(param.markId)
@@ -75,7 +85,7 @@ export default function VehiclePage() {
   return (
     <Box>
       <BannerHero
-        url={`/vehicles/${markIdParam}/${modelIdParam}/${fuelTypeParam}/${minYearParam}/${maxYearParam}/${minPriceParam}/${maxPriceParam}/${minKmsParam}/${maxKmsParam}/${pageParam}`}
+        url={`/vehicles/${markIdParam}/${modelIdParam}/${fuelTypeParam}/${minYearParam}/${maxYearParam}/${minPriceParam}/${maxPriceParam}/${minKmsParam}/${maxKmsParam}/${orderByParam}/${orderParam}/${pageParam}`}
         type={NavLinkType.VEHICLES}
         page={
           vehicle &&

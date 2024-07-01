@@ -150,7 +150,11 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
             label="Observações"
             multiline
             rows={4}
-            value={vehicle.observations}
+            value={
+              !vehicle.observations || vehicle.observations === ""
+                ? " "
+                : vehicle.observations
+            }
             InputProps={InputLabelStyle}
             InputLabelProps={InputLabelStyle}
           />
