@@ -72,11 +72,9 @@ function Opportunity() {
                 } text-left p-4 text-md font-semibold hover:bg-custom-orange hover:text-white transition-all duration-300 ease-linear`}
                 onClick={() => setActiveVehicleId(vehicle.id)}
               >
-                {vehicle.model.mark.name +
-                  " " +
-                  vehicle.model.name +
-                  " " +
-                  vehicle.version}
+                {!vehicle.version
+                  ? `${vehicle.model.mark.name} ${vehicle.model.name}`
+                  : `${vehicle.model.mark.name} ${vehicle.model.name} ${vehicle.version}`}
               </button>
             ))}
           </div>
@@ -137,9 +135,7 @@ function Opportunity() {
                     Versão
                   </td>
                   <td className="border-2 border-dark-grey py-2 px-6 text-sm">
-                    {!vehicle.version || vehicle.version === ""
-                      ? " - "
-                      : vehicle.version}
+                    {!vehicle.version ? " - " : vehicle.version}
                   </td>
                 </tr>
                 <tr>

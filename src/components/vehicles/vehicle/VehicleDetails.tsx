@@ -45,14 +45,11 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
 
   const handleClose = () => setOpen(false);
 
-  const initialMessage = `Pretendo obter mais informações sobre o veículo ${
-    vehicle.model.mark.name +
-    " " +
-    vehicle.model.name +
-    " " +
-    (vehicle.version ?? " ")
-  } de ${vehicle.year}.`;
+  const initialMessage = !vehicle.version
+    ? `Pretendo obter mais informações sobre o veículo ${vehicle.model.mark.name} ${vehicle.model.name} de ${vehicle.year}.`
+    : `Pretendo obter mais informações sobre o veículo ${vehicle.model.mark.name} ${vehicle.model.name} ${vehicle.version} de ${vehicle.year}.`;
 
+  vehicle.observations = null;
   return (
     <>
       <AutoMoreiraInfoModal {...{initialMessage, open, handleClose}} />
@@ -71,11 +68,9 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
           >
             <Grid item>
               <Typography variant="h4">
-                {vehicle.model.mark.name +
-                  " " +
-                  vehicle.model.name +
-                  " " +
-                  (vehicle.version ?? " ")}
+                {!vehicle.version
+                  ? `${vehicle.model.mark.name} ${vehicle.model.name}`
+                  : `${vehicle.model.mark.name} ${vehicle.model.name} ${vehicle.version}`}
               </Typography>
             </Grid>
             <Grid item>
@@ -150,11 +145,7 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
             label="Observações"
             multiline
             rows={4}
-            value={
-              !vehicle.observations || vehicle.observations === ""
-                ? " "
-                : vehicle.observations
-            }
+            value={vehicle.observations ?? "Sem nenhuma observação."}
             InputProps={InputLabelStyle}
             InputLabelProps={InputLabelStyle}
           />

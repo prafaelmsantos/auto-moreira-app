@@ -73,7 +73,7 @@ export function convertToVehicle(vehicle: vehicles_vehicles_nodes): IVehicle {
     },
     year: vehicle.year,
     color: vehicle.color,
-    observations: vehicle?.observations ?? "",
+    observations: vehicle.observations,
     mileage: vehicle.mileage,
     price: vehicle.price,
     fuelType: FuelTypeGraphQLConverted(vehicle.fuelType),
