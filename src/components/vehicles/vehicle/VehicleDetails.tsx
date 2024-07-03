@@ -49,7 +49,6 @@ export default function VehicleDetails(props: {vehicle: IVehicle}) {
     ? `Pretendo obter mais informações sobre o veículo ${vehicle.model.mark.name} ${vehicle.model.name} de ${vehicle.year}.`
     : `Pretendo obter mais informações sobre o veículo ${vehicle.model.mark.name} ${vehicle.model.name} ${vehicle.version} de ${vehicle.year}.`;
 
-  vehicle.observations = null;
   return (
     <>
       <AutoMoreiraInfoModal {...{initialMessage, open, handleClose}} />

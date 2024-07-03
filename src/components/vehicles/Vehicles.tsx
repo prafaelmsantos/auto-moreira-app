@@ -193,7 +193,6 @@ function Vehicles() {
               );
               handleChange(value.orderBy, "orderBy");
               handleChange(value.order, "order");
-              console.log(value);
             }}
             renderInput={(params) => (
               <TextField {...params} label={"Ordenar por:"} />

@@ -154,8 +154,6 @@ export default function SearchVehicle({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilters]);
 
-  console.log(selectedFilters);
-
   return (
     <section id="booking">
       <div className="mx-8 my-16 p-6 lg:p-12 lg:mx-28 bg-white bg-book-bg rounded shadow-white-box space-y-8">
