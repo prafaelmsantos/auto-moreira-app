@@ -1,7 +1,7 @@
 name: CI/CD Pipeline
 
 env:
-  NODE_VERSION: '15'
+  NODE_VERSION: '20.x.x'
   DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
   DOCKER_IMAGE: 'auto-moreira-app'
@@ -28,10 +28,10 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
 
     - name: Install dependencies
-      run: npm install
+      run: yarn install
 
     - name: Build the application
-      run: npm run build
+      run: yarn build
 
   docker:
     needs: build
