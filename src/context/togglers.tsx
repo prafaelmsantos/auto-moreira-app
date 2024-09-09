@@ -1,8 +1,6 @@
 /** @format */
 
-"use client";
-
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from 'react';
 
 type TogglersContextType = {
   mobileNavbar: boolean;
@@ -15,12 +13,16 @@ const TogglersContext = React.createContext<TogglersContextType>({
   mobileNavbar: false,
   setMobileNavbar: () => {},
   goUp: false,
-  setGoUp: () => {},
+  setGoUp: () => {}
 });
 
 export const useTogglersContext = () => useContext(TogglersContext);
 
-export const TogglersProvider = ({children}: {children: React.ReactNode}) => {
+export const TogglersProvider = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [goUp, setGoUp] = useState(false);
 
@@ -30,7 +32,7 @@ export const TogglersProvider = ({children}: {children: React.ReactNode}) => {
         mobileNavbar,
         setMobileNavbar,
         goUp,
-        setGoUp,
+        setGoUp
       }}
     >
       {children}
